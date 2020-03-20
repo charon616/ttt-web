@@ -5,7 +5,8 @@ header.menu
   .menu__sns
     font-awesome-icon.icon(:icon="['fab', 'facebook']")
     font-awesome-icon.icon(:icon="['fab', 'twitter']")
-
+    p counter: {{ $store.state.counter }}
+    p counter: {{ $store.state.page }}
 </template>
 
 <script>
@@ -14,7 +15,7 @@ import jsonfile from '~/assets/projects.json';
 export default {
   asyncData () {
     return{
-      jsondata: jsonfile,
+      jsondata: jsonfile
     }
   }
 }

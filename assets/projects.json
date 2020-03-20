@@ -1,5 +1,7 @@
 {
   "projects_title": ["harvestx", "grubin", "syrinx", "genkan", "roboxer", "wearbo"],
+  "projects_real_title": ["HarvestX", "Grubin", "Syrinx", "GenKan", "Roboxer", "wearbo"],
+  "projects_titleForTest": ["ttt", "harvestx", "grubin", "syrinx", "genkan", "roboxer", "wearbo"],
   "harvestx": {
     "title": "HarvestX",
     "msg_en": "HARVESTX is an agritech project developing robots to grow and harvest strawberries.",

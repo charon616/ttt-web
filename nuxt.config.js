@@ -15,23 +15,24 @@ export default {
         content: "Todai to Texas 2020の特設サイトです。"
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
+    ],
   },
   /*
-   ** Customize the progress-bar color
-   */
+  ** Customize the progress-bar color
+  */
   loading: { color: "#fff" },
   /*
-   ** Global CSS
-   */
+  ** Global CSS
+  */
   css: [
-    // "~/assets/scss/main.scss"
     'swiper/dist/css/swiper.css',
-    'animate.css/animate.min.css'
+    'animate.css/animate.min.css',
   ],
   /*
-   ** Plugins to load before mounting the App
-   */
+  ** Plugins to load before mounting the App
+  */
   plugins: [
     {
       src: '~plugins/vue-awesome-swiper',
@@ -47,20 +48,20 @@ export default {
     }
   ],
   /*
-   ** Nuxt.js dev-modules
-   */
+  ** Nuxt.js dev-modules
+  */
   buildModules: [],
   /*
-   ** Nuxt.js modules
-   */
+  ** Nuxt.js modules
+  */
   modules: [
     "@nuxtjs/style-resources", 
     '@nuxtjs/device',
     "nuxt-fontawesome"
   ],
   /*
-   ** Fontawesome
-   */
+  ** Fontawesome
+  */
   fontawesome: {
     imports: [
       {
@@ -74,18 +75,18 @@ export default {
     ]
   },
   /*
-   ** Stylus settings
-   */
+  ** Stylus settings
+  */
   styleResources: {
     stylus: ["~assets/stylus/_variables.styl", "~assets/stylus/main.styl"]
   },
   /*
-   ** Build configuration
-   */
+  ** Build configuration
+  */
   build: {
     /*
-     ** You can extend webpack config here
-     */
+    ** You can extend webpack config here
+    */
     extend(config, ctx) {}
   }
 };

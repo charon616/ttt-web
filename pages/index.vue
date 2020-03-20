@@ -7,7 +7,9 @@
     swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
       ProjectSlider(:title="ttl" v-slot:detail)
         nuxt-link(:to="{ name: 'project', params: { project:ttl } }") DETAIL
-
+  .position-display 
+    button(@click="click") test
+    p(:key="selectedPos") No. {{ selectedPos }}  {{ selectedProject }}
   swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
     swiper-slide
       img(src="~assets/logo.svg")
@@ -49,23 +51,21 @@ export default {
         speed: 600,
         slidesPerView: 1,
         centeredSlides: true,
-        effect: 'fade'
+        effect: 'fade',
+        parallax: true,
+        passiveListeners: 'true',
+        init: function() {console.log("initialized")}
       },
       swiperOptionThumbs: {
       },
       width: window.innerWidth,
       height: window.innerHeight,
-      projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"]
+      projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
+      selectedProject: "",
+      selectedPos: "",
     }
   },
   asyncData (ctx) {
-    if(ctx.isMobile){
-      const slidesNum = 4
-      console.log("mobile")
-    }else{
-      const slidesNum = 6
-      console.log("nomobile")
-    }
     return { 
       swiperOptionThumbs: (ctx.isMobile) ? 
       {
@@ -97,6 +97,19 @@ export default {
       const h = document.getElementById('container');
       h.style.height = this.height;
       console.log(h.style.height);
+    },
+    click: function() {
+      var mySwiper = document.querySelector('.swiper-container').swiper
+      this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
+      this.selectedPos = mySwiper.realIndex
+      // mySwiper.slideToLoop(3)
+    },
+    slideChanged: function() {
+      console.log('slide changed')
+      // console.log(self.selectedPos)
+      // this.$store.commit("increment")
+      // this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
+      // this.selectedPos = mySwiper.realIndex
     }
   },
   mounted() {
@@ -106,11 +119,10 @@ export default {
       swiperTop.controller.control = swiperThumbs
       swiperThumbs.controller.control = swiperTop
     });
-    // window.addEventListener('resize', this.handleResize)
+
+    const mySwiper = document.querySelector('.swiper-container').swiper
+    mySwiper.on('slideChange', this.slideChange);
   },
-  beforeDestroy() {
-    // window.removeEventListener('resize', this.handleResize)
-  }
 }
 
 </script>
@@ -120,24 +132,22 @@ export default {
   width 100%
   height 100vh
 
+.position-display
+  text-align center
+  height 4%
+
 .swiper 
   background white
   .swiper-slide 
     background-size cover
     background-position center
-
   &.gallery-top 
-    height 90%
+    height 80%
     width 100%
   &.gallery-thumbs 
-    // position fixed
-    // bottom 8px
-    // left 50%
-    // transform translateX(-50%)
     width 100%
-    height 10%
+    height 16%
     box-sizing border-box
-    padding 8px 0 24px
     text-align center
     letter-spacing .2em
     font-size 1.2em
@@ -145,25 +155,42 @@ export default {
     cursor pointer
     +sp()
       font-size .8em
+    &::before 
+      content ''
+      position absolute
+      top 0
+      left 0
+      right 0
+      width 1px
+      height 12px
+      margin auto
+      background-color #000
   &.gallery-thumbs .swiper-slide 
     display flex
     justify-content center
     align-items center
     height 100%
-    transition all 2s main-transition
+    transition all .6s main-transition
     svg
+      transition all .6s main-transition
       fill black
       padding 4px
     img 
-      padding 4px
-      width 64px
+      transition all .6s main-transition
+      padding 8px
+      width 66px
       +sp()
         width 50px
     &:hover
-      font-size 1.3em
+      transition all .3s main-transition
+      transform scale(1.1)
       +sp()
         font-size 1em
   &.gallery-thumbs .swiper-slide-active 
+    // transform scale(1.4)
+    svg, img
+      transition all .6s main-transition
+      transform scale(1.4)
     .harvestx
       fill color1
     .grubin

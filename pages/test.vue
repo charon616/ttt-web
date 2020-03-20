@@ -7,18 +7,22 @@
       nuxt-link.link-button(:to="{ name: 'project', params: { project:target  } }") DETAIL
 
   .nav(style="text-align: center;")
-    button(v-for="(ttl, index) in jsondata.projects_title" :key="index" @click="movePosition(ttl)")
-      component.isActive(v-bind:is="projects[index]")
-
-  swiper.swiper.gallery(:options="swiperOptionThumbs")
-    swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
-      component(v-bind:is="projects[index]")
-
+    //- button(v-for="(ttl, index) in jsondata.projects_titleForTest" :key="index" @click="movePosition(ttl, index)")
+    //-   component(v-bind:is="projects[index]")
+    //- span.slide-line(v-bind:class="classObject")
+    ._test(v-for="(ttl, index) in jsondata.projects_titleForTest" :key="index" @click="movePosition(ttl, index)")
+      input(type="radio" name="nav" v-bind:id="['hoge-' + index]")
+      label(v-bind:for="['hoge-' + index]") 
+        component(v-bind:is="projects[index]" v-bind:id="ttl")
+    span.slide-line(v-bind:class="classObject")
 </template>
 <script>
+import {mapState, mapGetters, mapMutations} from 'vuex';
+import {TweenMax, Expo, Elastic} from 'gsap'
+import jsonfile from '~/assets/projects.json';
+
 import TTT from "~/components/ttt.vue";
 import ProjectSlider from '~/components/ProjectSlider.vue';
-
 import Pro0 from '~/components/Logo/ttt.vue';
 import Pro1 from '~/components/Logo/harvestx.vue';
 import Pro2 from '~/components/Logo/grubin.vue';
@@ -26,8 +30,6 @@ import Pro3 from '~/components/Logo/syrinx.vue';
 import Pro4 from '~/components/Logo/genkan.vue';
 import Pro5 from '~/components/Logo/roboxer.vue';
 import Pro6 from '~/components/Logo/wearbo.vue';
-
-import jsonfile from '~/assets/projects.json';
 
 export default {
   components: {
@@ -44,19 +46,8 @@ export default {
   data() {
     return {
       target: "harvestx",
-      projects: ["Pro0", "Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
-      swiperOptionThumbs: 
-      {
-        loop: true,
-        loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 0,
-        mousewheel: true,
-        centeredSlides: true,
-        slidesPerView: 6,
-        touchRatio: 0.2,
-        slideToClickedSlide: true,
-      }
-      
+      projects: ["Pro0", "Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],      
+      classObject: ""
     }
   },
   asyncData (ctx) {
@@ -65,9 +56,54 @@ export default {
     }
   },
   methods: {
-    movePosition(pro){
+    movePosition(pro, index){
       this.target = pro
+
+      this.classObject = "navItem" + index
+
+      this.$store.commit("increment")
+      this.$store.commit('updatePage', "navItem" + index)
+
     },
+    flash(){
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.animation, 0.05, { 
+          color: 'red',
+          scale: 1.3,
+          ease: Expo.easeIn,
+          repeat: 19,
+          yoyo: true
+        })
+      })
+    },
+    enter () { // `entered`が`true`になったとき発火
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.animation, 1, {
+          scaleX: 1,
+          ease: Expo.easeOut
+        })
+      })
+    },
+    leave () { // `entered`が`false`になったとき発火
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.animation, 1, {
+          scaleX: 0,
+          ease: Expo.easeOut
+        })
+      })
+    },
+    click(){
+      this.$store.commit("increment")
+      this.$store.commit('updatePage', this.$nuxt.$route.name)
+      console.log(this.$nuxt.$route.name)
+    }
+  },
+  watch: {
+    entered (val) { 
+      this.flash() 
+      val ? this.enter() : this.leave() 
+      console.log("animation")
+    }
   }
 
 }
@@ -75,6 +111,12 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+
+.box
+  width 100px
+  heigth 100px
+  background orange
+  padding 32px
 
 button
   background-color transparent
@@ -93,55 +135,48 @@ button
       height 100%
   .nav
     display flex
-    justify-content center
     align-items center
+    justify-content space-between
+    width 80%
+    margin 0 auto
+    position relative
     button
-      margin 8px 16px
+      // margin 8px 16px
       svg
         padding 4px
-      .isActive
-        fill pink
-
-.swiper 
-  background white
-  .swiper-slide 
-    background-size cover
-    background-position center
-
-  &.gallery 
-    // position fixed
-    // bottom 8px
-    // left 50%
-    // transform translateX(-50%)
-    width 100%
-    height 10%
-    box-sizing border-box
-    padding 10px 0
-    text-align center
-    letter-spacing .2em
-    font-size 1.2em
-    font-weight bold
-    cursor pointer
-    +sp()
-      font-size .8em
-  &.gallery .swiper-slide 
-    display flex
-    justify-content center
-    align-items center
-    height 100%
-    transition all 2s main-transition
-    svg
-      fill gray
-    img 
-      padding 4px
+    .slide-line
+      display block
+      position absolute
+      margin 0 auto
+      bottom 0
+      left 400px
       width 64px
-      +sp()
-        width 50px
-    &:hover
-      font-size 1.3em
-      +sp()
-        font-size 1em
-  &.gallery .swiper-slide-active 
+      height 1px
+      background-color black
+      transition all .3s main-transition
+      &.navItem0
+        left 0%
+      &.navItem1
+        left 14.3%
+        background-color color1
+      &.navItem2
+        left 31%
+        background-color color2
+      &.navItem3
+        left 42.8%
+        background-color color3
+      &.navItem4
+        left 57.1%
+        background-color color4
+      &.navItem5
+        left 71.4%
+        background-color color5
+      &.navItem6
+        left 85.7%
+        background-color color6
+input
+  display none
+  &:checked + label
     .harvestx
       fill color1
     .grubin
