@@ -1,0 +1,75 @@
+{
+  "projects_title": ["harvestx", "grubin", "syrinx", "genkan", "roboxer", "wearbo"],
+  "harvestx": {
+    "title": "HarvestX",
+    "msg_en": "HARVESTX is an agritech project developing robots to grow and harvest strawberries.",
+    "msg_jp": "HARVESTXは、イチゴを栽培および収穫するロボットを開発するアグリテックプロジェクトです。",
+    "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
+    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "main_img": "/harvestx.png",
+    "img": ["/harvestx.png", "/harvestx_fl.png"],
+    "link": ["https://harvestx.jp/en/"],
+    "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "color": "#d52c5b"
+  },
+  "grubin": {
+    "title": "Grubin",
+    "msg_en": "Reimagining Leftovers from Wasting to Feeding with Black Soldier Flies",
+    "msg_jp": "無駄遣いから摂食への残り物の再考ブラックソルジャーフライ",
+    "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
+    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "main_img": "grubin.png",
+    "img": ["/grubin.png", "/grubin_fl.png"],
+    "link": ["https://harvestx.jp/en/"],
+    "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "color": "#f9c124"
+  },
+  "genkan": {
+    "title": "GenKan",
+    "msg_en": "GenKan offers insights on pricing, profit/loss management, and productivity improvement for factory managers. It collects production data of factory workers and machines with GenKan IoT sensors. Such data will be automatically calculated and analyzed by GenKan SaaS with the principles of cost accounting.",
+    "msg_jp": "GenKanは、価格、利益/損失管理、および工場管理者の生産性向上に関する洞察を提供します。 GenKan IoTセンサーを使用して、工場労働者と機械の生産データを収集します。 このようなデータは、原価計算の原則に従ってGenKan SaaSによって自動的に計算および分析されます。",
+    "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
+    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "main_img": "/genkan.png",
+    "img": ["/genkan.png", "/genkan_fl.png"],
+    "link": ["https://harvestx.jp/en/"],
+    "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "color": "#0286fe"
+  },
+  "syrinx": {
+    "title": "Syrinx",
+    "msg_en": "HARVESTX is an agritech project developing robots to grow and harvest strawberries.",
+    "msg_jp": "HARVESTXは、イチゴを栽培および収穫するロボットを開発するアグリテックプロジェクトです。",
+    "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
+    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "main_img": "/syrinx.png",
+    "img": ["/syrinx.png", "/syrinx_fl.png"],
+    "link": ["https://harvestx.jp/en/"],
+    "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "color": "#00a8ba"
+  },
+  "roboxer": {
+    "title": "ROBOXER",
+    "msg_en": "HARVESTX is an agritech project developing robots to grow and harvest strawberries.",
+    "msg_jp": "HARVESTXは、イチゴを栽培および収穫するロボットを開発するアグリテックプロジェクトです。",
+    "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
+    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "main_img": "/roboxer.png",
+    "img": ["/roboxer.png", "/roboxer_fl.png"],
+    "link": ["https://harvestx.jp/en/"],
+    "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "color": "#ff1418"
+  },
+  "wearbo": {
+    "title": "wearbo",
+    "msg_en": "HARVESTX is an agritech project developing robots to grow and harvest strawberries.",
+    "msg_jp": "HARVESTXは、イチゴを栽培および収穫するロボットを開発するアグリテックプロジェクトです。",
+    "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
+    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "main_img": "/wearbo.png",
+    "img": ["/wearbo.png", "/wearbo_fl.png"],
+    "link": ["https://harvestx.jp/en/"],
+    "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "color": "#000000"
+  }
+}
