@@ -21,7 +21,7 @@ import {mapState, mapGetters, mapMutations} from 'vuex';
 import {TweenMax, Expo, Elastic} from 'gsap'
 import jsonfile from '~/assets/projects.json';
 
-import TTT from "~/components/ttt.vue";
+import TTT from "~/components/Main.vue";
 import ProjectSlider from '~/components/ProjectSlider.vue';
 import Pro0 from '~/components/Logo/ttt.vue';
 import Pro1 from '~/components/Logo/harvestx.vue';

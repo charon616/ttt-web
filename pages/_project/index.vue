@@ -34,9 +34,7 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-    background lightgray
     width 100vw
-    // height 100vh
     padding-bottom 80px
     .main-img
         width 100%
@@ -60,7 +58,7 @@ export default {
             object-fit cover
             margin 0 16px
         &__link
-            border 1px solid black
+            border 1px solid txt-color
             padding 16px
             margin 8px 0
             text-decoration none

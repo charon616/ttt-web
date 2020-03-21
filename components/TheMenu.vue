@@ -1,12 +1,13 @@
 <template lang="pug">
 header.menu
   nuxt-link.menu__logo(to="/")
-    img(src="~assets/logo0.svg")
+    img(src="~assets/logo_bl.png")
   .menu__sns
-    font-awesome-icon.icon(:icon="['fab', 'facebook']")
-    font-awesome-icon.icon(:icon="['fab', 'twitter']")
-    p counter: {{ $store.state.counter }}
-    p counter: {{ $store.state.page }}
+    //- font-awesome-icon.icon(:icon="['fab', 'facebook']")
+    span SHARE ON:
+    a(href="https://www.facebook.com/" target="_blank") FACEBOOK
+    //- font-awesome-icon.icon(:icon="['fab', 'twitter']") 
+    a(href="https://twitter.com/home?lang=ja" target="_blank") TWITTER
 </template>
 
 <script>
@@ -24,26 +25,34 @@ export default {
 
 <style scoped lang="stylus">
 .menu
-  background white
   &__logo
     position fixed
     top 0
     left 0
     z-index 100
     // padding 20px
-    background white
+    fill pink
     img
       width 120px
       height auto
       +sp()
         width 96px
   &__sns
+    background txt-color
+    font-family aktiv-grotesk, sans-serif
+    font-weight 800
     z-index 100
     position fixed
     top 0
     right 0
     padding 20px
-    background white
-    .icon 
-      margin 8px
+    span, a
+      color bg-color
+    span 
+      font-size .7rem
+      margin-right 4px
+    a
+      margin 8px 6px
+      &:hover
+        color lightgray
 </style>

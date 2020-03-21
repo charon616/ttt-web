@@ -37,5 +37,7 @@ export default {
   /* スタイルなどお好みで　*/
   .artwork{
     position: fixed;
+    top: 0;
+    left: 0;
   }
 </style>

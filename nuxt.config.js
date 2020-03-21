@@ -16,26 +16,24 @@ export default {
       }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
-    ],
+      { rel: "icon", type: "image/x-icon", href: "/icon2.ico" },
+      { rel: "stylesheet", href: "https://use.typekit.net/ugb1hsq.css" }
+    ]
   },
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: "#fff" },
   /*
-  ** Global CSS
-  */
-  css: [
-    'swiper/dist/css/swiper.css',
-    'animate.css/animate.min.css',
-  ],
+   ** Global CSS
+   */
+  css: ["swiper/dist/css/swiper.css", "animate.css/animate.min.css"],
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
     {
-      src: '~plugins/vue-awesome-swiper',
+      src: "~plugins/vue-awesome-swiper",
       ssr: false
     },
     {
@@ -45,23 +43,32 @@ export default {
     {
       src: "~/plugins/bg-color",
       ssr: false
+    },
+    {
+      src: "~/plugins/border-color",
+      ssr: false
+    },
+    {
+      src: "~/plugins/color",
+      ssr: false
     }
   ],
   /*
-  ** Nuxt.js dev-modules
-  */
+   ** Nuxt.js dev-modules
+   */
   buildModules: [],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
-    "@nuxtjs/style-resources", 
-    '@nuxtjs/device',
-    "nuxt-fontawesome"
+    "@nuxtjs/style-resources",
+    "@nuxtjs/device",
+    "nuxt-fontawesome",
+    "nuxt-webfontloader"
   ],
   /*
-  ** Fontawesome
-  */
+   ** Fontawesome
+   */
   fontawesome: {
     imports: [
       {
@@ -75,18 +82,26 @@ export default {
     ]
   },
   /*
-  ** Stylus settings
-  */
+   ** GoogleFonts
+   */
+  webfontloader: {
+    google: {
+      families: ["Work+Sans:400"]
+    }
+  },
+  /*
+   ** Stylus settings
+   */
   styleResources: {
     stylus: ["~assets/stylus/_variables.styl", "~assets/stylus/main.styl"]
   },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {}
   }
 };

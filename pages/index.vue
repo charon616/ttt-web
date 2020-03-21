@@ -1,26 +1,34 @@
 <template lang="pug">
-.container#container
-
-  swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop")
-    swiper-slide
-      //- Artwork
-    swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
-      ProjectSlider(:title="ttl" v-slot:detail)
-        nuxt-link(:to="{ name: 'project', params: { project:ttl } }") DETAIL
-  .position-display 
-    button(@click="click") test
-    p(:key="selectedPos") No. {{ selectedPos }}  {{ selectedProject }}
-  swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
-    swiper-slide
-      img(src="~assets/logo.svg")
-    swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
-      component(v-bind:is="projects[index]")
+.container
+  .main-gallery
+    .pos.pos__top
+      .no(v-if="selectedPos != 0")
+        p.main-font(:key="selectedPos") Project No.
+        transition(name="slide-fade" mode="out-in")
+          span.main-font(:key="selectedPos") {{ selectedPos }} 
+      .name(v-if="selectedPos != 0")
+        transition(name="slide-fade2" mode="out-in")
+          p.main-font(:key="selectedPos") {{ selectedProject }}
+    swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
+      swiper-slide
+        MainPage
+      swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
+        nuxt-link(:to="{ name: 'project', params: { project:ttl } }") 
+          ProjectSlider(:title="ttl" v-slot:detail)
+            nuxt-link.link-button(:to="{ name: 'project', params: { project:ttl } }") DETAIL
+  .project-nav
+    swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
+      swiper-slide
+        Pro0
+      swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
+        component(v-bind:is="projects[index]")
 
 </template>
 <script>
-import Artwork from "~/components/Artwork";
+import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
 
+import Pro0 from '~/components/Logo/ttt.vue';
 import Pro1 from '~/components/Logo/harvestx.vue';
 import Pro2 from '~/components/Logo/grubin.vue';
 import Pro3 from '~/components/Logo/syrinx.vue';
@@ -32,8 +40,9 @@ import jsonfile from '~/assets/projects.json';
 
 export default {
   components: {
-    Artwork,
+    MainPage,
     ProjectSlider,
+    Pro0,
     Pro1,
     Pro2,
     Pro3,
@@ -46,12 +55,13 @@ export default {
       swiperOptionTop: {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 0,
+        spaceBetween: 200,
         mousewheel: true,
         speed: 600,
         slidesPerView: 1,
         centeredSlides: true,
-        effect: 'fade',
+        // effect: 'fade',
+        direction: 'vertical',
         parallax: true,
         passiveListeners: 'true',
         init: function() {console.log("initialized")}
@@ -98,18 +108,13 @@ export default {
       h.style.height = this.height;
       console.log(h.style.height);
     },
-    click: function() {
-      var mySwiper = document.querySelector('.swiper-container').swiper
-      this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
-      this.selectedPos = mySwiper.realIndex
-      // mySwiper.slideToLoop(3)
-    },
     slideChanged: function() {
       console.log('slide changed')
-      // console.log(self.selectedPos)
+      console.log(self.selectedPos)
+      var mySwiper = document.querySelector('.swiper-container').swiper
       // this.$store.commit("increment")
-      // this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
-      // this.selectedPos = mySwiper.realIndex
+      this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
+      this.selectedPos = mySwiper.realIndex
     }
   },
   mounted() {
@@ -131,22 +136,34 @@ export default {
 .container
   width 100%
   height 100vh
-
-.position-display
-  text-align center
-  height 4%
+  // overflow hidden
+  .main-gallery
+    height 86%
+  .project-nav
+    height 14%
+  .pos
+    text-align center
+    font-weight 800
+    .no
+      display flex
+    .name
+      font-size 1.4em
+    &__top
+      display flex
+      justify-content center
+      align-items center
+      flex-direction column
+      height 10%
+      font-size .7rem
 
 .swiper 
-  background white
   .swiper-slide 
     background-size cover
     background-position center
   &.gallery-top 
-    height 80%
-    width 100%
+    height 90%
   &.gallery-thumbs 
-    width 100%
-    height 16%
+    height 100%
     box-sizing border-box
     text-align center
     letter-spacing .2em
@@ -161,7 +178,7 @@ export default {
       top 0
       left 0
       right 0
-      width 1px
+      width 2px
       height 12px
       margin auto
       background-color #000
@@ -169,26 +186,18 @@ export default {
     display flex
     justify-content center
     align-items center
-    height 100%
     transition all .6s main-transition
     svg
       transition all .6s main-transition
-      fill black
+      fill txt-color
       padding 4px
-    img 
-      transition all .6s main-transition
-      padding 8px
-      width 66px
-      +sp()
-        width 50px
     &:hover
       transition all .3s main-transition
       transform scale(1.1)
       +sp()
         font-size 1em
   &.gallery-thumbs .swiper-slide-active 
-    // transform scale(1.4)
-    svg, img
+    svg
       transition all .6s main-transition
       transform scale(1.4)
     .harvestx

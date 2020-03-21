@@ -46,4 +46,18 @@ html.index, html.index>body {
   box-sizing: border-box;
   margin: 0;
 }
+
+a{
+  text-decoration: none;
+}
+
+h1, .main-font{
+  font-family: aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+p{
+  font-family: Work Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 </style>
