@@ -6,16 +6,17 @@
         p.detail__msg {{jsondata[$route.params.project].msg_en}}
         p.detail__msg {{jsondata[$route.params.project].msg_jp}}
 
-        iframe.detail__video(width="100%" height="60%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+        .detail__video
+            iframe(width="100%" height="100%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
         p.detail__desc {{jsondata[$route.params.project].desc_en}}
         p.detail__desc {{jsondata[$route.params.project].desc_jp}}
 
-        .flex
+        .detail__picwrapper
             img.detail__pic(v-for="(url, index) in jsondata[$route.params.project].img" :key="index" :src="url")
                 //- img(:src="url")
 
-        a.detail__link(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") {{ link }}
+        a.detail__link(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") {{ link }} <font-awesome-icon icon="external-link-alt"/>
 
         nuxt-link.detail__back-button.link-button(to="/") ←BACK
 
@@ -50,15 +51,26 @@ export default {
         //     text-align center
         &__title, &__msg, &__video
             text-align center
+        &__video
+            position relative
+            width 100%
+            margin 24px 0
+            padding calc( 100vw * 0.8 * 9 / 16 ) 0 0
+            iframe
+                position absolute
+                top 0
+                left 0
+                width 100%
+                height 100%
         &__desc
-            padding 16px 
-        .flex
+            padding 16px 0 
+        &__picwrapper
             display flex
+            justify-content space-between
         &__pic
-            width 50%
+            width 48%
             height auto
             object-fit cover
-            margin 0 16px
         &__link
             border 1px solid black
             padding 16px
@@ -76,9 +88,13 @@ export default {
             &__pic
                 width 100%
                 margin 0
-            .flex
+            &__picwrapper
                 flex-direction column
+            &__pic
+                margin-bottom 16px
             &__link
                 margin 0
+            &__video
+                padding calc( (100vw - 32px) * 9 / 16 ) 0 0
 
 </style>
