@@ -37,7 +37,7 @@ export default {
       ssr: false
     },
     {
-      src: "~/plugins/vue2-touch-events",
+      src: "~/plugins/gsap",
       ssr: false
     },
     {

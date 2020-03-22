@@ -63,8 +63,7 @@ export default {
         // effect: 'fade',
         direction: 'vertical',
         parallax: true,
-        passiveListeners: 'true',
-        init: function() {console.log("initialized")}
+        passiveListeners: 'true'
       },
       swiperOptionThumbs: {
       },
@@ -110,7 +109,6 @@ export default {
     },
     slideChanged: function() {
       console.log('slide changed')
-      console.log(self.selectedPos)
       var mySwiper = document.querySelector('.swiper-container').swiper
       // this.$store.commit("increment")
       this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]

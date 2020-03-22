@@ -36,8 +36,11 @@ tb()
   // transform translateY(-10px) scale(.4)
   opacity 0
 
+/*                                      */
+/*   サイト全体のページ遷移のトランジション   */
+/*                                      */
 .page-enter-active, .page-leave-active 
-  transition opacity .5s
+  transition opacity 1s
 .page-enter, .page-leave-to 
   opacity 0
 
@@ -56,7 +59,9 @@ tb()
   border 3px solid txt-color
   padding 14px 22px
   margin-top 16px
+  display inline-block
   &:hover
     transition all .3s main-transition
     background rgba(0, 0, 0, 0)
     color txt-color
+    letter-spacing .2em

@@ -92,11 +92,8 @@ export default{
         &__msg-en
             margin 16px 0 0 0
         &__msg-jp
-            margin 12px 0 8px 0
+            margin 12px 0 4px 0
             font-size 1rem
-            margin-bottom 30px
-        &__button
-            margin 36px 0
         +tb()
             width 100%
             height 24%

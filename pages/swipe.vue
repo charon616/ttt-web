@@ -18,10 +18,15 @@
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
+    <button @click="click1">button1</button>
+    <button @click="click2">button2</button>
+    <p ref="title" class="title">ANIMATION</p>
+    <p class="link-button" ref="button" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave">CLICK</p>
 
   </div>
 </template>
-<script>
+<script> 
+import {TweenMax, Expo, Elastic} from 'gsap'
 
 export default {
   name: 'carrousel',
@@ -57,7 +62,41 @@ export default {
       // this.$store.commit("increment")
       // this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
       // this.selectedPos = mySwiper.realIndex
+    },
+    click1: function() {
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.title, 0.05, { // `this.$refs`でDOMにアクセス
+          color: 'red',
+          scale: 1.3,
+          ease: Expo.easeIn,
+          // repeat: 19,
+          yoyo: true
+        })
+      })
+    },
+    click2: function() {
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.title, 1, {
+          scaleX: 1,
+          ease: Expo.easeOut
+        })
+      })
+    },
+    mouseover: function() {
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.button, 0.25, {
+          backgroundColor: "white"
+        })
+      })
+    },
+    mouseleave: function() {
+      requestAnimationFrame(() => {
+        TweenMax.to(this.$refs.button, 0.25, {
+          backgroundColor: "black"
+        })
+      })
     }
+
   }
 
 }
@@ -67,4 +106,14 @@ export default {
   width 100vw
   height 90vh
   text-align center
+
+.title
+  color blue
+  padding 16px
+  font-size 2em
+  background yellow
+
+.link-button
+  display inline-block
+
 </style>
