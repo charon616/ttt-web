@@ -21,7 +21,7 @@
     <button @click="click1">button1</button>
     <button @click="click2">button2</button>
     <p ref="title" class="title">ANIMATION</p>
-    <p class="link-button" ref="button" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave">CLICK</p>
+    <p class="link-button" ref="button" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave" v-on:click="slideReset">CLICK</p>
 
   </div>
 </template>
@@ -95,6 +95,9 @@ export default {
           backgroundColor: "black"
         })
       })
+    },
+    slideReset: function() {
+      this.swiper.slideToLoop(0, 1000, false)
     }
 
   }

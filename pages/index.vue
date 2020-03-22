@@ -38,6 +38,8 @@ import Pro6 from '~/components/Logo/wearbo.vue';
 
 import jsonfile from '~/assets/projects.json';
 
+import { mapState } from 'vuex'
+
 export default {
   components: {
     MainPage,
@@ -81,6 +83,7 @@ export default {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
         spaceBetween: 0,
+        speed: 600,
         mousewheel: true,
         centeredSlides: true,
         slidesPerView: 4,
@@ -90,6 +93,7 @@ export default {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
         spaceBetween: 0,
+        speed: 600,
         mousewheel: true,
         centeredSlides: true,
         slidesPerView: 6,
@@ -108,23 +112,37 @@ export default {
       console.log(h.style.height);
     },
     slideChanged: function() {
-      console.log('slide changed')
-      var mySwiper = document.querySelector('.swiper-container').swiper
-      // this.$store.commit("increment")
+      let mySwiper = this.$refs.swiperTop.swiper
+      console.log('slide changed: ' + mySwiper.realIndex)
       this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
       this.selectedPos = mySwiper.realIndex
+
+      this.$store.commit("updateSwiperPos", mySwiper.realIndex)
+    },
+    returnToDefault: function() {
+      let mySwiper = this.$refs.swiperTop.swiper
+      mySwiper.slideToLoop(0, 1000, false)
     }
   },
+  watch: {
+    isSlideToDefault: function(val){
+      this.returnToDefault()
+    }
+  },
+  computed: mapState(['isSlideToDefault']),
   mounted() {
+    this.$store.commit("updatePage","index")
+
+    const swiperTop = this.$refs.swiperTop.swiper
+    const swiperThumbs = this.$refs.swiperThumbs.swiper
     this.$nextTick(() => {
-      const swiperTop = this.$refs.swiperTop.swiper
-      const swiperThumbs = this.$refs.swiperThumbs.swiper
       swiperTop.controller.control = swiperThumbs
       swiperThumbs.controller.control = swiperTop
     });
 
-    const mySwiper = document.querySelector('.swiper-container').swiper
-    mySwiper.on('slideChange', this.slideChange);
+    swiperTop.on('slideChange', this.slideChange);
+    swiperTop.slideToLoop(this.$store.state.swiperPos, 1000, false)
+    swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
   },
 }
 

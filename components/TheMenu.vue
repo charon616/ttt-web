@@ -1,6 +1,6 @@
 <template lang="pug">
 header.menu
-  nuxt-link.menu__logo(to="/")
+  nuxt-link.menu__logo(to="/" @click.native="resetSlide")
     img(src="~assets/logo_bl.png")
   .menu__sns
     //- font-awesome-icon.icon(:icon="['fab', 'facebook']")
@@ -18,6 +18,16 @@ export default {
     return{
       jsondata: jsonfile
     }
+  },
+  methods: {
+    resetSlide: function(){
+      if(this.$store.state.page != "index"){
+        this.$store.commit("updateSwiperPos", 0)
+      }else{
+        this.$store.commit("changeIsSlideToDefalutState")
+      }
+    }
+  
   }
 }
 

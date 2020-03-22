@@ -2,13 +2,19 @@
   .ttt
     //- Artwork 
     .message
-      h1 Todai To Texas
-      p 米国時間3月6日の発表で、アメリカ合衆国テキサス州オースティンにて開催予定でしたSXSW（サウス・バイ・サウスウエスト）2020が、新型コロナウイルスの影響により正式に中止となりました。
-      p これに伴い、Todai To Texas2020の出展も中止となりました。
-      p SXSW公式サイト
-      p オースティン市の公式サイト
-      p 今後に関しまして、Todai To Texasとしては、別途、お披露目の場などを設けられるように只今検討しております。
-      p 関係者の皆様には多大なご迷惑をお掛けいたしますが、ご理解賜りますようお願い申し上げます。
+      h1 Todai To Texas 2020
+      p There are 6 Awesome Projects.
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      p \ Get more details about 
+        span(style="font-weight: bold;") Todai To Texas 
+        | /
+      a.link-button(href="http://todaitotexas.com/" target="_blank") TTT WEB
 
 </template>
 <script>
@@ -23,7 +29,7 @@ export default {
 
 <style lang="stylus" scoped>
 .ttt
-  background white
+  // background white
   height 90%
   width 100%
   text-align center

@@ -28,6 +28,9 @@ export default {
         return{
             jsondata: jsonfile,
         }
+    },
+    mounted(){
+        this.$store.commit("updatePage","detail")
     }
 }
 </script>
