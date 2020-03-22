@@ -1,6 +1,7 @@
 <template lang="pug">
 .container
   .main-gallery
+    //- MainPage.mainpage(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
     .pos.pos__top
       .no(v-if="selectedPos != 0")
         p.main-font(:key="selectedPos") Project No.
@@ -174,6 +175,7 @@ export default {
   .project-nav
     height 14%
   .pos
+    background white
     text-align center
     font-weight 800
     .no
@@ -188,12 +190,19 @@ export default {
       height 10%
       font-size .7rem
 
+.blur
+  -ms-filter blur(8px)
+  filter blur(8px)
+
 .swiper 
   .swiper-slide 
     background-size cover
     background-position center
   &.gallery-top 
     height 90%
+    position fixed
+    top 10%
+    left 0
   &.gallery-thumbs 
     background bg-color
     height 100%

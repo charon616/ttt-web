@@ -31,8 +31,9 @@ export default{
 
 </script>
 <style scoped lang="stylus">
+// txt-color = white
 .container
-    background bg-color
+    // background bg-color
     display flex
     position relative
     +sp()
@@ -65,7 +66,7 @@ export default{
                 z-index 0
                 background txt-color
                 clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
-                // border 4px solid txt-color
+                border 4px solid txt-color
                 // transform skewY(-5deg)
                 .clip
                     width 100%
