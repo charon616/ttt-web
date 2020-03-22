@@ -112,16 +112,14 @@ export default {
       console.log(h.style.height);
     },
     slideChanged: function() {
-      let mySwiper = this.$refs.swiperTop.swiper
-      console.log('slide changed: ' + mySwiper.realIndex)
-      this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]
-      this.selectedPos = mySwiper.realIndex
+      console.log('slide changed: ' + this.swiper.realIndex)
+      this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
+      this.selectedPos = this.swiper.realIndex
 
-      this.$store.commit("updateSwiperPos", mySwiper.realIndex)
+      this.$store.commit("updateSwiperPos", this.swiper.realIndex)
     },
     returnToDefault: function() {
-      let mySwiper = this.$refs.swiperTop.swiper
-      mySwiper.slideToLoop(0, 1000, false)
+      this.swiper.slideToLoop(0, 1000, false)
     }
   },
   watch: {
@@ -129,19 +127,23 @@ export default {
       this.returnToDefault()
     }
   },
-  computed: mapState(['isSlideToDefault']),
+  computed: mapState({
+    isSlideToDefault: state => state.isSlideToDefault,
+    swiper(){
+      return this.$refs.swiperTop.swiper
+    }
+  }),
   mounted() {
     this.$store.commit("updatePage","index")
 
-    const swiperTop = this.$refs.swiperTop.swiper
     const swiperThumbs = this.$refs.swiperThumbs.swiper
     this.$nextTick(() => {
-      swiperTop.controller.control = swiperThumbs
-      swiperThumbs.controller.control = swiperTop
+      this.swiper.controller.control = swiperThumbs
+      swiperThumbs.controller.control = this.swiper
     });
 
-    swiperTop.on('slideChange', this.slideChange);
-    swiperTop.slideToLoop(this.$store.state.swiperPos, 1000, false)
+    this.swiper.on('slideChange', this.slideChange);
+    this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
     swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
   },
 }

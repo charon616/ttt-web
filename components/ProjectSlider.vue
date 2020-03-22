@@ -5,7 +5,8 @@
             img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.1")
 
         //- .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
-        .box-inner.color(v-border="jsondata[title].color" v-bind:key="title")
+        .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
+            .clip
 
     .textarea
         h1.textarea__title(v-bind:key="title" style="background: rgba(0, 0, 0, 0)" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
@@ -45,10 +46,10 @@ export default{
         height 100%
         z-index 0
         .box-inner
-            margin 6% 8% 
+            margin 4% 8% 
             width 50%
             height 60%
-            transform skewY(-5deg)
+            // transform skewY(-5deg)
             position relative
             z-index 1
             overflow hidden
@@ -56,12 +57,21 @@ export default{
                 width 100%
                 height auto
                 object-fit cover
-                transform skewY(5deg) scale(1.2)
+            &:nth-child(1)
+                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
             &:nth-child(2)
                 position absolute
                 margin-left 40%
                 z-index 0
-                border 4px solid txt-color
+                background txt-color
+                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+                // border 4px solid txt-color
+                // transform skewY(-5deg)
+                .clip
+                    width 100%
+                    height 100%
+                    background bg-color
+                    clip-path: polygon(4px calc(5% + 4px), calc(100% - 4px) 4px, calc(100% - 4px) calc(95% - 4px), 4px calc(100% - 4px));
             +tb()
                 width 80%
                 height 80%

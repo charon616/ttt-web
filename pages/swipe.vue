@@ -3,6 +3,7 @@
     <swiper :options="swiperOption" class="mySwiper" ref="mySwiper" @slide-change="slideChanged">
       <swiper-slide style="background: green;">
         <h1>スライド1</h1>  
+          <p style="background: pink; padding: 16px;">test</p>
       </swiper-slide>
       <swiper-slide style="background: orange;">
         <h1>スライド2</h1>  
@@ -22,6 +23,10 @@
     <button @click="click2">button2</button>
     <p ref="title" class="title">ANIMATION</p>
     <p class="link-button" ref="button" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave" v-on:click="slideReset">CLICK</p>
+
+    <div class="target">
+      <!-- <img src="genkan.png"> -->
+    </div>
 
   </div>
 </template>
@@ -53,7 +58,7 @@ export default {
   },
   mounted() {
     console.log('Current Swiper instance object', this.swiper)
-    this.swiper.slideTo(2, 1000, false)
+    // this.swiper.slideTo(2, 1000, false)
   },
   methods: {
     slideChanged: function() {
@@ -65,11 +70,11 @@ export default {
     },
     click1: function() {
       requestAnimationFrame(() => {
-        TweenMax.to(this.$refs.title, 0.05, { // `this.$refs`でDOMにアクセス
+        TweenMax.to(this.$refs.title, 0.5, { // `this.$refs`でDOMにアクセス
           color: 'red',
           scale: 1.3,
           ease: Expo.easeIn,
-          // repeat: 19,
+          repeat: 19,
           yoyo: true
         })
       })
@@ -118,5 +123,17 @@ export default {
 
 .link-button
   display inline-block
+
+.target
+  // clip-path: circle(160px at center);
+  width 300px
+  height 300px
+  margin 0 auto 200px
+  background-size: cover;
+  transition: 0.4s cubic-bezier(1, -1, 0, 2);
+  clip-path: polygon(50% 5%, 0% 100%, 100% 100%);
+  background: url("~assets/logo.png") 
+  &:hover
+    clip-path: polygon(50% 19%, 0 76%, 100% 76%);
 
 </style>
