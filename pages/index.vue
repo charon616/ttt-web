@@ -195,6 +195,7 @@ export default {
   &.gallery-top 
     height 90%
   &.gallery-thumbs 
+    background bg-color
     height 100%
     box-sizing border-box
     text-align center
