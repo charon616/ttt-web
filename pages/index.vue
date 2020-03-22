@@ -55,17 +55,6 @@ export default {
   data() {
     return {
       swiperOptionTop: {
-        loop: true,
-        loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 200,
-        mousewheel: true,
-        speed: 600,
-        slidesPerView: 1,
-        centeredSlides: true,
-        // effect: 'fade',
-        direction: 'vertical',
-        parallax: true,
-        passiveListeners: 'true'
       },
       swiperOptionThumbs: {
       },
@@ -78,6 +67,31 @@ export default {
   },
   asyncData (ctx) {
     return { 
+      swiperOptionTop: (ctx.isMobile) ? {
+        loop: true,
+        loopedSlides: 7, // looped slides should be the same
+        spaceBetween: 200,
+        mousewheel: true,
+        speed: 600,
+        slidesPerView: 1,
+        centeredSlides: true,
+        effect: 'fade',
+        direction: 'vertical',
+        // parallax: true,
+        passiveListeners: 'true'
+      } : {
+        loop: true,
+        loopedSlides: 7, // looped slides should be the same
+        spaceBetween: 200,
+        mousewheel: true,
+        speed: 600,
+        slidesPerView: 1,
+        centeredSlides: true,
+        // effect: 'fade',
+        direction: 'vertical',
+        parallax: true,
+        passiveListeners: 'true'
+      },
       swiperOptionThumbs: (ctx.isMobile) ? 
       {
         loop: true,

@@ -29,8 +29,8 @@ export default {
 
 <style lang="stylus" scoped>
 .ttt
-  // background white
-  height 90%
+  background white
+  height 100%
   width 100%
   text-align center
   margin 16px
