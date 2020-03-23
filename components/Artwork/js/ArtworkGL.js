@@ -9,6 +9,9 @@ export default class ArtworkGL {
 
     let timedelta = 0;
     let timetotal = 0;
+
+    this.mouse = new THREE.Vector2(0, 0);
+    this.pause = false;
   }
 
   init() {
@@ -26,30 +29,36 @@ export default class ArtworkGL {
     this.renderer.setPixelRatio(window.devicePixelRatio);
 
     // this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setClearColor(0x000000, 1);
+    this.renderer.setClearColor(0x111111, 1);
     this.renderer.setSize(this.size.windowW, this.size.windowH);
     // レンダラー：シャドウを有効にする
     this.renderer.shadowMap.enabled = true;
 
     // Camera
+    // 視野角をラジアンに変換
+    const fov = 45;
+    const fovRad = (fov / 2) * (Math.PI / 180);
+    const dist = (this.size.windowH / 2) / Math.tan(fovRad);
+
     this.camera = new THREE.PerspectiveCamera(
-      45,
+      fov,
       this.size.windowW / this.size.windowH,
       1, 
-      4000
+      dist * 2
     );
-    this.camera.fov = 90;
-    this.camera.position.set(0, 1, +10);
+    this.camera.position.set(0, 1, 10);
+    // this.camera.position.z = dist; // カメラを遠ざける
 
     // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
     // Object
-    const geometry = new THREE.BoxGeometry(300, 240, 400);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xFF0000
-    });
+    // const geometry = new THREE.BoxGeometry(300, 240, 400);
+    // const material = new THREE.MeshStandardMaterial({
+    //   color: 0xFF0000
+    // });
 
-    const mesh = new THREE.Mesh(geometry, material);
+    // const mesh = new THREE.Mesh(geometry, material);
+    // this.scene.add(mesh);
 
     const wrap = new THREE.Group();
     const images = ['roboxer.png', 'wearbo.png', 'genkan.png', 'grubin.png', 'syrinx.png', 'harvestx.png'];
@@ -111,29 +120,29 @@ export default class ArtworkGL {
     ambientLight.intensity = 0.1
     this.scene.add(ambientLight);
 
+    // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
+    const light = new THREE.PointLight(0xFFFFFF, .4, 50, 1.0);
+    this.scene.add(light);
+
+    this.light = light
+
     this.clock = new THREE.Clock();
     this.clock.start();
 
-    this.loop(mesh.rotation);
+    this.loop();
 
     this.add = 0.1;
     this.rot = 0;
   }
 
-  loop(rotation) {
+  loop() {
+    if(this.pause == true){
+      return;
+    }
+
     this.timedelta = this.clock.getDelta();
     this.timetotal += this.delta;
 
-    // this.rot += 0.5; // 毎フレーム角度を0.5度ずつ足していく
-    // // ラジアンに変換する
-    // const radian = (this.rot * Math.PI) / 180;
-    // // 角度に応じてカメラの位置を設定
-
-    // if (this.camera.position.x > 9 || this.camera.position.x < -9) {
-    //   this.add *= -1;
-    // }
-    // this.camera.position.x += this.add;
-    // this.camera.rotateY(0.01);
     if(this.rot == 360){
       this.rot = 0;
     }else{
@@ -145,13 +154,6 @@ export default class ArtworkGL {
     this.camera.position.x = 15 * Math.sin(radian);
     this.camera.position.z = 15 * Math.cos(radian);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-    // this.spot3.angle += 0.05;
-    // rotation.y += this.timedelta;
-    // this.camera.position.z = 1000 * Math.cos(radian);
-    // // 原点方向を見つめる
-    // this.camera.lookAt(this.scene.position);
-    // rotation.y += 0.01;
 
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(this.loop.bind(this));
@@ -199,5 +201,35 @@ export default class ArtworkGL {
     // plane.rotateZ(90);
     // plane.position.set(0, 0);
     wrap.add(plane);
+  }
+
+  mouseMoved(x, y) {
+    this.mouse.x = x - (this.size.windowW / 2); // 原点を中心に持ってくる
+    this.mouse.y = -y + (this.size.windowH / 2); // 軸を反転して原点を中心に持ってくる
+
+    // ライトの xy座標 をマウス位置にする
+    // this.light.position.x = this.camera.position.x + x;
+    // this.light.position.y = this.camera.position.z + y;
+
+    // this.light.position.x = this.mouse.x / 100;
+    // this.light.position.y = this.mouse.y / 100;
+  }
+
+  pause(){
+    this.pause = true;
+  }
+
+  resume(){
+    this.pause = false;
+  }
+
+  changeSize(w, h, ratio){
+    // レンダラーのサイズを調整する
+    this.renderer.setPixelRatio(ratio);
+    this.renderer.setSize(w, h);
+
+    // カメラのアスペクト比を正す
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
   }
 }

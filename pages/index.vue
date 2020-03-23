@@ -1,7 +1,6 @@
 <template lang="pug">
 .container
   .main-gallery
-    Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
     .pos.pos__top
       .no(v-if="selectedPos != 0")
         p.main-font(:key="selectedPos") Project No.
@@ -18,7 +17,7 @@
           ProjectSlider(:title="ttl" v-slot:detail)
             nuxt-link.link-button-wh(:to="{ name: 'project', params: { project:ttl } }") DETAIL
   .project-nav
-    swiper.swiper.gallery-thumbs(v-bg="{color: selectColor}" :options="swiperOptionThumbs" ref="swiperThumbs")
+    swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
       swiper-slide
         Pro0
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
@@ -126,7 +125,6 @@ export default {
       this.height = window.innerHeight;
       const h = document.getElementById('container');
       h.style.height = this.height;
-      console.log(h.style.height);
     },
     slideChanged: function() {
       console.log('slide changed: ' + this.swiper.realIndex)
@@ -181,8 +179,6 @@ export default {
   // overflow hidden
   .main-gallery
     height 86%
-    .artwork
-      transform scale(1.1)
   .project-nav
     height 14%
   .pos
@@ -206,10 +202,6 @@ export default {
 
       p, span
         color white
-
-.blur
-  -ms-filter blur(8px) brightness(80%);
-  filter blur(8px) brightness(80%);
 
 .swiper 
   .swiper-slide 
