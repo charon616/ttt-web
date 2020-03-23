@@ -6,7 +6,7 @@
         p.main-font(:key="selectedPos") Project No.
         transition(name="slide-fade" mode="out-in")
           span.main-font(:key="selectedPos") {{ selectedPos }} 
-      .name(v-if="selectedPos != 0")
+      .name(v-if="selectedPos != 0 && $device.isDesktop")
         transition(name="slide-fade2" mode="out-in")
           p.main-font(:key="selectedPos") {{ selectedProject }}
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
@@ -15,7 +15,7 @@
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
         nuxt-link(:to="{ name: 'project', params: { project:ttl } }") 
           ProjectSlider(:title="ttl" v-slot:detail)
-            nuxt-link.link-button-wh(:to="{ name: 'project', params: { project:ttl } }") DETAIL
+            nuxt-link(v-bind:class="[$device.isDesktop ? 'link-button-wh' : 'link-button']" :to="{ name: 'project', params: { project:ttl } }") DETAIL
   .project-nav
     swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
       swiper-slide
@@ -177,6 +177,7 @@ export default {
   width 100%
   height 100vh
   // overflow hidden
+  // background bg-color
   .main-gallery
     height 86%
   .project-nav
@@ -201,17 +202,24 @@ export default {
       font-size .7rem
 
       p, span
-        color white
+        color bg-color
+        +tb()
+          color black
+
 
 .swiper 
   .swiper-slide 
     background-size cover
     background-position center
+    +tb()
+      background bg-color
   &.gallery-top 
     height 90%
     position fixed
     top 10%
     left 0
+    +tb()
+      height 80%
   &.gallery-thumbs 
     // background bg-color
     height 100%
@@ -242,6 +250,8 @@ export default {
       transition all .6s main-transition
       fill bg-color
       padding 4px
+      +tb()
+        fill txt-color
     &:hover
       transition all .3s main-transition
       transform scale(1.1)
@@ -265,4 +275,9 @@ export default {
       fill color5
     .wearbo
       fill color6
+
++tb()
+  .link-button
+    margin-top 4px
+
 </style>

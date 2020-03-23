@@ -41,10 +41,11 @@ export default{
 </script>
 <style scoped lang="stylus">
 txt-color = white
+
 .container
-    // background bg-color
     display flex
     position relative
+    
     +sp()
         flex-direction column
     .box-outer
@@ -55,6 +56,7 @@ txt-color = white
         width 100%
         height 100%
         z-index 0
+
         .box-inner
             margin 6% 10% 
             width 45%
@@ -62,35 +64,39 @@ txt-color = white
             position relative
             z-index 1
             overflow hidden
+            clip-path polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
             img
                 width 100%
                 height auto
                 object-fit cover
-            &:nth-child(1)
-                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
             &:nth-child(2)
                 position absolute
                 margin-left 45%
                 z-index 0
                 background txt-color
                 opacity .6
-                clip-path polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
                 // clip-path: polygon(0 5%, 0% 100%, 3% 97%, 3% 8%, 97% 3%, 97% 92%, 3% 97%, 0 100%, 100% 95%, 100% 0%);
                 // border 4px solid txt-color
                 // .clip
                 //     width 100%
                 //     height 100%
                 //     clip-path polygon(4px calc(5% + 4px), calc(100% - 4px) 4px, calc(100% - 4px) calc(95% - 4px), 4px calc(100% - 4px))
-            +tb()
-                width 80%
-                height 80%
+        +tb()
+            .box-inner
+                width 100%
+                height 100%
+                margin 0 10%
+                &:nth-child(1)
+                    height 60%
                 img
+                    width 100%
                     height 100%
-                    width auto
+                    overflow hidden
                 &:nth-child(2)
-                    margin-left 14%
-                    margin-top 10%
-
+                    height 60%
+                    width 80%
+                    margin 0 10% 0 10%
+                    transform translateX(16px) translateY(16px) 
     .textarea
         z-index 1
         width 45%
@@ -115,17 +121,26 @@ txt-color = white
             margin 12px 0 4px 0
             font-size 1rem
         +tb()
+            // background pink
             width 100%
-            height 24%
-            margin 80% 0 0 0
+            height 100%
             text-align center
+            padding 0 20%
+            margin 100% 0 0 0
+            padding 0 6%
             &__title
-                color txt-color
-                font-size 1.6rem
+                margin-top 0%
+                color black
+                font-size 1.8rem
             &__msg
-                color txt-color
-                font-size .8rem
+                color black
+                font-size .9rem
+                letter-spacing 0
+            &__msg-en
+                margin 0
             &__msg-jp
                 display none
+            &__button
+                transform scale(0.8)
 
 </style>

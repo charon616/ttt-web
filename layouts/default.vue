@@ -1,7 +1,7 @@
 <template lang="pug">
   .default
     Menu 
-    Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
+    Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }" v-if="$device.isDesktop")
     nuxt 
 </template>
 

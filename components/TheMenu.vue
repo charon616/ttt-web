@@ -2,7 +2,7 @@
 header.menu
   nuxt-link.menu__logo(to="/" @click.native="resetSlide")
     img(src="~assets/logo_bl.png")
-  .menu__sns
+  .menu__sns(v-if="$device.isDesktop")
     //- font-awesome-icon.icon(:icon="['fab', 'facebook']")
     span SHARE ON:
     a(href="https://www.facebook.com/" target="_blank") FACEBOOK
@@ -46,7 +46,7 @@ export default {
       width 120px
       height auto
       +sp()
-        width 96px
+        width 80px
   &__sns
     // background bg-color
     font-family aktiv-grotesk, sans-serif
@@ -65,4 +65,6 @@ export default {
       margin 8px 6px
       &:hover
         color lightgray
+    +tb()
+      background txt-color
 </style>

@@ -9,7 +9,7 @@
       p \ Get more details about 
         span(style="font-weight: bold;") Todai To Texas 
         | /
-      a.link-button-wh(href="http://todaitotexas.com/" target="_blank") TTT WEB
+      a(v-bind:class="[$device.isDesktop ? 'link-button-wh' : 'link-button']" href="http://todaitotexas.com/" target="_blank") TTT WEB
 
 </template>
 <script>
@@ -41,6 +41,13 @@ txt-color = white
       color txt-color
       span
         color txt-color
+  +tb()
+    margin 10% 0 0 0
+    .message
+      h1, p
+        color black
+        span
+          color black
 
 .gradient 
   color white
