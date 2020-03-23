@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   .main-gallery
-    //- MainPage.mainpage(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
+    Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
     .pos.pos__top
       .no(v-if="selectedPos != 0")
         p.main-font(:key="selectedPos") Project No.
@@ -16,9 +16,9 @@
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
         nuxt-link(:to="{ name: 'project', params: { project:ttl } }") 
           ProjectSlider(:title="ttl" v-slot:detail)
-            nuxt-link.link-button(:to="{ name: 'project', params: { project:ttl } }") DETAIL
+            nuxt-link.link-button-wh(:to="{ name: 'project', params: { project:ttl } }") DETAIL
   .project-nav
-    swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
+    swiper.swiper.gallery-thumbs(v-bg="{color: selectColor}" :options="swiperOptionThumbs" ref="swiperThumbs")
       swiper-slide
         Pro0
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
@@ -26,6 +26,7 @@
 
 </template>
 <script>
+import Artwork from "~/components/Artwork";
 import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
 
@@ -43,6 +44,7 @@ import { mapState } from 'vuex'
 
 export default {
   components: {
+    Artwork,
     MainPage,
     ProjectSlider,
     Pro0,
@@ -63,7 +65,7 @@ export default {
       height: window.innerHeight,
       projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
       selectedProject: "",
-      selectedPos: "",
+      selectedPos: ""
     }
   },
   asyncData (ctx) {
@@ -132,9 +134,16 @@ export default {
       this.selectedPos = this.swiper.realIndex
 
       this.$store.commit("updateSwiperPos", this.swiper.realIndex)
+
+      // const swiperThumbs = this.$refs.swiperThumbs
+      // swiperThumbs.style.backgroundColor = "pink"
+
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
+    },
+    selectColor: function() {
+
     }
   },
   watch: {
@@ -172,10 +181,11 @@ export default {
   // overflow hidden
   .main-gallery
     height 86%
+    .artwork
+      transform scale(1.1)
   .project-nav
     height 14%
   .pos
-    background white
     text-align center
     font-weight 800
     .no
@@ -183,16 +193,23 @@ export default {
     .name
       font-size 1.4em
     &__top
+      position fixed
+      height 10%
+      top 0
+      left 50%
+      transform translateX(-50%)
       display flex
       justify-content center
       align-items center
       flex-direction column
-      height 10%
       font-size .7rem
 
+      p, span
+        color white
+
 .blur
-  -ms-filter blur(8px)
-  filter blur(8px)
+  -ms-filter blur(8px) brightness(80%);
+  filter blur(8px) brightness(80%);
 
 .swiper 
   .swiper-slide 
@@ -204,7 +221,7 @@ export default {
     top 10%
     left 0
   &.gallery-thumbs 
-    background bg-color
+    // background bg-color
     height 100%
     box-sizing border-box
     text-align center
@@ -220,10 +237,10 @@ export default {
       top 0
       left 0
       right 0
-      width 2px
+      width 1px
       height 12px
       margin auto
-      background-color #000
+      background-color bg-color
   &.gallery-thumbs .swiper-slide 
     display flex
     justify-content center
@@ -231,7 +248,7 @@ export default {
     transition all .6s main-transition
     svg
       transition all .6s main-transition
-      fill txt-color
+      fill bg-color
       padding 4px
     &:hover
       transition all .3s main-transition
@@ -242,6 +259,8 @@ export default {
     svg
       transition all .6s main-transition
       transform scale(1.4)
+    .ttt
+      fill #231815
     .harvestx
       fill color1
     .grubin

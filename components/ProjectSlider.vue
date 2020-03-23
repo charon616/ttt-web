@@ -1,27 +1,36 @@
 <template lang="pug">
-.container
+kinesis-container.container
     .box-outer
-        .box-inner
-            img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.1")
+        kinesis-element(:strength="5" type="depth").box-inner
+            img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.8")
 
-        //- .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
         .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
-            .clip
+            .clip    
 
     .textarea
-        h1.textarea__title(v-bind:key="title" style="background: rgba(0, 0, 0, 0)" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
-        p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550") {{jsondata[title].msg_en}}
-        p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}}
+        kinesis-element(:strength="6" type="depth")
+            h1.textarea__title(v-bind:key="title" style="background: rgba(0, 0, 0, 0)" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
+        kinesis-element(:strength="4" type="depth")
+            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550") {{jsondata[title].msg_en}}
+        kinesis-element(:strength="4" type="depth")
+            p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}}
+        
+        kinesis-element(:strength="5" type="depth")
+            .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
+                slot(name="detail")
 
-        .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-            slot(name="detail")
 
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
+import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 
 export default{
     props: ['title'],
+    components: {
+        KinesisContainer,
+        KinesisElement
+    },
     data() {
         return{
             jsondata: jsonfile, 
@@ -31,7 +40,7 @@ export default{
 
 </script>
 <style scoped lang="stylus">
-// txt-color = white
+txt-color = white
 .container
     // background bg-color
     display flex
@@ -47,10 +56,9 @@ export default{
         height 100%
         z-index 0
         .box-inner
-            margin 4% 8% 
-            width 50%
-            height 60%
-            // transform skewY(-5deg)
+            margin 6% 10% 
+            width 45%
+            height 55%
             position relative
             z-index 1
             overflow hidden
@@ -59,20 +67,20 @@ export default{
                 height auto
                 object-fit cover
             &:nth-child(1)
-                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
             &:nth-child(2)
                 position absolute
-                margin-left 40%
+                margin-left 45%
                 z-index 0
                 background txt-color
-                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
-                border 4px solid txt-color
-                // transform skewY(-5deg)
-                .clip
-                    width 100%
-                    height 100%
-                    background bg-color
-                    clip-path: polygon(4px calc(5% + 4px), calc(100% - 4px) 4px, calc(100% - 4px) calc(95% - 4px), 4px calc(100% - 4px));
+                opacity .6
+                clip-path polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
+                // clip-path: polygon(0 5%, 0% 100%, 3% 97%, 3% 8%, 97% 3%, 97% 92%, 3% 97%, 0 100%, 100% 95%, 100% 0%);
+                // border 4px solid txt-color
+                // .clip
+                //     width 100%
+                //     height 100%
+                //     clip-path polygon(4px calc(5% + 4px), calc(100% - 4px) 4px, calc(100% - 4px) calc(95% - 4px), 4px calc(100% - 4px))
             +tb()
                 width 80%
                 height 80%
@@ -85,10 +93,9 @@ export default{
 
     .textarea
         z-index 1
-        width 42%
-        margin-left 58%
+        width 45%
+        margin-left 55%
         padding 140px 180px 40px 40px
-        // background blue
 
         &__title, &__msg
             color txt-color
@@ -99,6 +106,8 @@ export default{
         &__msg
             font-weight 400
             font-size 1.2rem
+            line-height 1.4em
+            letter-spacing .1em
             // text-align: justify;
         &__msg-en
             margin 16px 0 0 0

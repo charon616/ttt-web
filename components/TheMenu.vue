@@ -48,7 +48,7 @@ export default {
       +sp()
         width 96px
   &__sns
-    background txt-color
+    // background bg-color
     font-family aktiv-grotesk, sans-serif
     font-weight 800
     z-index 100

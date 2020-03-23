@@ -23,6 +23,10 @@ export default {
      this.artworkGL = new ArtworkGL({
        $canvas: this.$refs.canvas
      });
+
+     window.addEventListener('mousemove', e => {
+      canvas.mouseMoved(e.clientX, e.clientY);
+    });
   },
   destroyed() {
     // canvasを作ったり壊したりする前提の場合はここに処理停止する処理を書く（今回省略）。

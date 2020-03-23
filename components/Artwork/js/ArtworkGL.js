@@ -62,7 +62,14 @@ export default class ArtworkGL {
     this.camera.lookAt(wrap.position);
     this.wrap = wrap;
 
-    const geo = new THREE.PlaneGeometry(100, 100, 1);
+    // const project = wrap.position.project(this.camera);
+    // const sx = this.size.windowW / 2 * (+project.x + 1.0);
+    // const sy = this.size.windowH / 2 * (-project.y + 1.0);
+
+    // // スクリーン座標
+    // console.log(sx, sy);
+
+    const geo = new THREE.PlaneGeometry(1000, 1000, 1);
     // const mat = new THREE.MeshLambertMaterial({
     //   color: 0xFFFFFF
     // });
@@ -71,28 +78,10 @@ export default class ArtworkGL {
       roughness: 0.5
     });
     const plane = new THREE.Mesh(geo, mat);
-    plane.position.y = -2;
+    plane.position.y = -1.8;
     plane.rotation.set(-Math.PI / 2, 0, 0);
     plane.receiveShadow = true;
     this.scene.add(plane);
-
-    const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-    const boxMaterial = new THREE.MeshLambertMaterial({
-      color: 0xFFFFFF
-    });
-    const box = new THREE.Mesh(boxGeometry, boxMaterial);
-    box.position.x = 0;
-    box.position.y = 10;
-    box.position.z = 10;
-    box.castShadow = true;
-    this.scene.add(box);
-
-    const torusGeometry = new THREE.TorusGeometry(1, 3, 16, 1);
-    const torusMaterial = new THREE.MeshLambertMaterial({
-      color: 0x6699FF
-    });
-    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-    this.scene.add(torus);
 
     // Lighting
     // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.6);
@@ -120,7 +109,6 @@ export default class ArtworkGL {
     const ambientLight = new THREE.AmbientLight(0xFFFFFF);
     ambientLight.position.set(800, 800, 800);
     ambientLight.intensity = 0.1
-    ambientLight.castShadow = true;
     this.scene.add(ambientLight);
 
     this.clock = new THREE.Clock();
@@ -154,8 +142,8 @@ export default class ArtworkGL {
     // ラジアンに変換する
     const radian = (this.rot * Math.PI) / 180;
     // 角度に応じてカメラの位置を設定
-    this.camera.position.x = 20 * Math.sin(radian);
-    this.camera.position.z = 20 * Math.cos(radian);
+    this.camera.position.x = 15 * Math.sin(radian);
+    this.camera.position.z = 15 * Math.cos(radian);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     // this.spot3.angle += 0.05;
