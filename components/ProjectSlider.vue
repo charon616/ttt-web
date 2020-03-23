@@ -4,7 +4,7 @@ kinesis-container.container
         kinesis-element(:strength="5" type="depth").box-inner
             img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.8")
 
-        .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
+        .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
             .clip    
 
     .textarea
