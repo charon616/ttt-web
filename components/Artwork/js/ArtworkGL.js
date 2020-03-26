@@ -61,8 +61,8 @@ export default class ArtworkGL {
     // this.scene.add(mesh);
 
     const wrap = new THREE.Group();
-    const images = ['roboxer.png', 'wearbo.png', 'genkan.png', 'grubin.png', 'syrinx.png', 'harvestx.png'];
-    const images_fl = ['roboxer_fl.png', 'wearbo_fl.png', 'genkan_fl.png', 'grubin_fl.png', 'syrinx_fl.png', 'harvestx_fl.png'];
+    const images = ['roboxer.jpg', 'wearbo.jpg', 'genkan.jpg', 'grubin.jpg', 'syrinx.jpg', 'harvestx.jpg'];
+    const images_fl = ['roboxer_fl.jpg', 'wearbo_fl.jpg', 'genkan_fl.jpg', 'grubin_fl.jpg', 'syrinx_fl.jpg', 'harvestx_fl.jpg'];
     for(let i = 0; i<images.length;i++){
       this.makeWall(wrap, images[i], (i-2)*3-1.5, 0);
       this.makeFloor(wrap, images_fl[i], (i-2)*3-1.5, 0);
