@@ -5,16 +5,16 @@
         h1.detail__title {{jsondata[$route.params.project].title}}
         p.detail__msg {{jsondata[$route.params.project].msg_en}}
         p.detail__msg {{jsondata[$route.params.project].msg_jp}}
-        
+
+
         //- video on PC and tablet
-        .detail__videobutton.link-button#link-button(v-on:click = "vbuttonClicked") VIDEO
+        .detail__videobutton.link-button#link-button(v-on:click = "vbuttonClicked" v-if="videotrue") VIDEO
 
         .detail__modal-wrapper#modal-wrapper(v-on:click = "modalClicked" v-if="active")
             youtube(:video-id="videoId")
-                //- iframe(width="100%" height="100%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
         //- video on mobile
-        .detail__video
+        .detail__video(v-if="videotrue")
             iframe(width="100%" height="100%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
         p.detail__desc {{jsondata[$route.params.project].desc_en}}
@@ -30,24 +30,6 @@
 
 </template>
 <script>
-//     // IFrame Player API の読み込み
-//     var tag = document.createElement('script');
-//     tag.src = "https://www.youtube.com/iframe_api";
-//     var firstScriptTag = document.getElementsByTagName('script')[0];
-//     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-//     function onYouTubeIframeAPIReady() {
-//         ytPlayer = new YT.Player(
-//             'modal-video', // 埋め込む場所の指定
-//             {
-//                 width: 640, // プレーヤーの幅
-//                 height: 390, // プレーヤーの高さ
-//                 videoId: 'cB7Il-HaLpY' // YouTubeのID
-//             }
-//         );
-//     }
-// };
-
 import jsonfile from '~/assets/projects.json';
 
 export default {
@@ -55,11 +37,13 @@ export default {
         return{
             jsondata: jsonfile,
             active: false,
+            videotrue: false,
             videoId: 'cB7Il-HaLpY'
         }
     },
     mounted(){
         this.$store.commit("updatePage","detail")
+        this.checkvideo()
     },
 
     methods:{
@@ -68,8 +52,12 @@ export default {
         },
         modalClicked: function(){
             this.active = false;
+        },
+        checkvideo: function(){
+            if (this.jsondata[this.$route.params.project].video){
+                this.videotrue = true;
+            }
         }
-
     } 
 }
 
@@ -154,6 +142,8 @@ export default {
                 margin-bottom 16px
             &__link
                 margin 0
+            &__videobutton
+                display none
             &__video
                 display block
                 position relative

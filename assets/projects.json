@@ -12,6 +12,7 @@
     "img": ["/harvestx.png", "/harvestx_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "videoID": "cB7Il-HaLpY",
     "color": "#d52c5b"
   },
   "grubin": {
@@ -24,6 +25,7 @@
     "img": ["/grubin.png", "/grubin_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "videoID": "cB7Il-HaLpY",
     "color": "#f9c124"
   },
   "genkan": {
@@ -36,6 +38,7 @@
     "img": ["/genkan.png", "/genkan_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "videoID": "cB7Il-HaLpY",
     "color": "#0286fe"
   },
   "syrinx": {
@@ -48,6 +51,7 @@
     "img": ["/syrinx.png", "/syrinx_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "videoID": "cB7Il-HaLpY",
     "color": "#00a8ba"
   },
   "roboxer": {
@@ -60,6 +64,7 @@
     "img": ["/roboxer.png", "/roboxer_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "videoID": "cB7Il-HaLpY",
     "color": "#ff1418"
   },
   "wearbo": {
@@ -72,6 +77,7 @@
     "img": ["/wearbo.png", "/wearbo_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
+    "videoID": "cB7Il-HaLpY",
     "color": "#000000"
   }
 }
