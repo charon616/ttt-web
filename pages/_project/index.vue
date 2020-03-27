@@ -11,7 +11,7 @@
         .detail__videobutton.link-button#link-button(v-on:click = "vbuttonClicked" v-if="videotrue") VIDEO
 
         .detail__modal-wrapper#modal-wrapper(v-on:click = "modalClicked" v-if="active")
-            youtube(:video-id="videoId")
+            youtube(:video-id="jsondata[$route.params.project].videoID")
 
         //- video on mobile
         .detail__video(v-if="videotrue")
