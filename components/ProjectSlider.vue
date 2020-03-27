@@ -5,7 +5,7 @@
             img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.1")
 
         //- .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
-        .box-inner.color(v-bg="jsondata[title].color" v-bind:key="title")
+        .box-inner.color(v-border="jsondata[title].color" v-bind:key="title")
             .clip
 
     .textarea
