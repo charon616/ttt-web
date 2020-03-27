@@ -57,6 +57,10 @@ export default {
     {
       src: "~/plugins/color",
       ssr: false
+    },
+    {
+      src: "~/plugins/vue-youtube",
+      ssr: false
     }
   ],
   /*
