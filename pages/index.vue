@@ -1,7 +1,6 @@
 <template lang="pug">
 .container
   .main-gallery
-    //- MainPage.mainpage(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
     .pos.pos__top
       .no(v-if="selectedPos != 0")
         p.main-font(:key="selectedPos") Project No.
@@ -183,11 +182,15 @@ export default {
     .name
       font-size 1.4em
     &__top
+      position fixed
+      height 10%
+      top 0
+      left 50%
+      transform translateX(-50%)
       display flex
       justify-content center
       align-items center
       flex-direction column
-      height 10%
       font-size .7rem
 
 .blur
@@ -198,13 +201,17 @@ export default {
   .swiper-slide 
     background-size cover
     background-position center
+    +tb()
+      background bg-color
   &.gallery-top 
     height 90%
     position fixed
     top 10%
     left 0
+    +tb()
+      height 80%
   &.gallery-thumbs 
-    background bg-color
+    // background bg-color
     height 100%
     box-sizing border-box
     text-align center
@@ -220,10 +227,10 @@ export default {
       top 0
       left 0
       right 0
-      width 2px
+      width  1px
       height 12px
       margin auto
-      background-color #000
+      background-color bg-color
   &.gallery-thumbs .swiper-slide 
     display flex
     justify-content center
