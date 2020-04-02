@@ -3,8 +3,11 @@ kinesis-container.container
     .all
         nuxt-link(:to="{ name: 'project', params: { project:title } }")
             .box-outer
-                kinesis-element(:strength="8" type="depth").box-inner
+                kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
+                .box-inner(v-else)
+                    img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
+
                 .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
             h1.textarea__title(v-bind:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}

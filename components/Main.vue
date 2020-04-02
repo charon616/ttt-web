@@ -1,10 +1,15 @@
 <template lang="pug">
 kinesis-container.ttt
-  .title
+  .title(v-if="$device.isDesktop")
     kinesis-element.title-element(:strength="8") Todai 
     kinesis-element.title-element(:strength="16") To 
     kinesis-element.title-element(:strength="4") Texas 
     kinesis-element.title-element(:strength="-8") 2020
+  .title(v-else)
+    .title-element Todai 
+    .title-element To 
+    .title-element Texas 
+    .title-element 2020
   .message
     h2 There are 6 Awesome Projects.
     p Get more details about Todai To Texas↓
@@ -22,6 +27,11 @@ export default {
     Artwork,
     KinesisContainer,
     KinesisElement
+  },
+  asyncData (ctx) {
+    return { 
+      strength: (ctx.isDesktop) ? 8 : 0
+    }
   }
 }
 </script>
