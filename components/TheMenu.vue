@@ -56,10 +56,16 @@ export default {
 
     left 50%
     transform translateX(-50%)
+    +tb()
+      left 0
+      transform initial
+
     img
       // width 120px
       width 80px
       height auto
+      +tb()
+        width 120px
       +sp()
         width 80px
   &__sns

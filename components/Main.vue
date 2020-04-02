@@ -66,6 +66,7 @@ export default {
 //     font-size 1rem
 
 border = 8px
+
 .ttt
   height 100%
   width 100%
@@ -78,6 +79,10 @@ border = 8px
     position absolute 
     left 120px
     top 16px
+    +tb()
+      position initial
+      margin 40px auto
+      width 50%
     .title-element
       // margin-top 16px
       margin-bottom 8px
@@ -88,6 +93,10 @@ border = 8px
       color txt-color
       opacity 1
       position relative
+      +tb()
+        font-size calc(100vw/5)
+        line-height calc(100vw/5 * 0.7)
+
       &::after
         content ''
         width 100%
@@ -116,17 +125,26 @@ border = 8px
     position absolute 
     right 0
     bottom 0
-    // background rgba(0, 0, 0, .4)
     +tb()
       background rgba(0, 0, 0, 0)
-      width 100%
-      height 60%
-      padding 32px
+      padding 0
+      bottom 32px
+      width 70%
+      left 50%
+      transform translateX(-50%)
       border none
-    p, h2
+      text-align center
+      h2
+        // font-size 1.2rem
+        color black
+    h2, p
       color bg-color
-      // font-size 2rem
-      // line-height 3rem
+      +tb()
+        color txt-color
+    h2
+      +tb()
+        font-size 1rem
+
   
   .guide
     text-align center
@@ -137,5 +155,8 @@ border = 8px
   font-size 1rem
   &:hover
     background rgba(0, 0, 0, 0)
+  +tb()
+    background txt-color
+    color bg-color
 
 </style>

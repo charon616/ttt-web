@@ -57,10 +57,10 @@ export default {
   width 100vw
   height 100vh
   z-index -1
-  +tb()
-    background linear-gradient(45deg, #00a460, #e45441, #00a7f1, #f4c550)
-    background-size 800% 800%
-    animation gradation 15s ease infinite
+  // +tb()
+  //   background linear-gradient(45deg, #00a460, #e45441, #00a7f1, #f4c550)
+  //   background-size 800% 800%
+  //   animation gradation 15s ease infinite
   &__canvas
     z-index -2
 
@@ -77,10 +77,10 @@ export default {
   mix-blend-mode overlay
   filter blur(16px)
 
-@keyframes gradation {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+// @keyframes gradation {
+//   0%{background-position:0% 50%}
+//   50%{background-position:100% 50%}
+//   100%{background-position:0% 50%}
+// }
 
 </style>
