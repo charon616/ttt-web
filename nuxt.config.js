@@ -22,8 +22,12 @@ export default {
       { hid: 'og:image', property: 'og:image', content: '/ogp.png' }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/icon2.ico" },
-      { rel: "stylesheet", href: "https://use.typekit.net/ugb1hsq.css" }
+      { rel: "icon", type: "image/x-icon", href: "/icon2.ico" }
+    ],
+    script: [
+      {
+        src: 'https://use.typekit.net/dhy3jso.js'
+      }
     ]
   },
   /*

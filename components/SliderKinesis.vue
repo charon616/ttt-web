@@ -2,15 +2,33 @@
 kinesis-container.container
     .all
         .box-outer
-            kinesis-element(:strength="10" type="depth").box-inner
+            kinesis-element(:strength="5" type="depth").box-inner
                 img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.8")
             .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
-            h1.textarea__title(v-bind:key="title" style="background: rgba(0, 0, 0, 0)" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
-            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550") {{jsondata[title].msg_en}}
-            p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}} 
-            .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                slot(name="detail")
+            kinesis-element(:strength="6" type="depth")
+                h1.textarea__title(v-bind:key="title" style="background: rgba(0, 0, 0, 0)" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
+            kinesis-element(:strength="4" type="depth")
+                p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550") {{jsondata[title].msg_en}}
+            kinesis-element(:strength="4" type="depth")
+                p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}}
+            
+            kinesis-element(:strength="5" type="depth")
+                .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
+                    slot(name="detail")
+
+
+        //- .box-outer
+        //-     .box-inner
+        //-         img(:src="jsondata[title].main_img" v-bind:key="title" data-swiper-parallax-scale="0.8")
+        //-     .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
+        //- .textarea
+        //-     h1.textarea__title(v-bind:key="title" style="background: rgba(0, 0, 0, 0)" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
+        //-         p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550") {{jsondata[title].msg_en}}
+        //-         p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}}
+            
+        //-         .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
+        //-             slot(name="detail")
 
 
 </template>
@@ -83,7 +101,7 @@ border = 8px
                 top 0 
                 left 'calc(%s * 0.4)' % content-width
                 z-index -1
-                // background txt-color
+                background txt-color
                 clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)
                 +tb()
                     width 'calc(100% - %s)' % 160px
@@ -137,5 +155,8 @@ border = 8px
                     margin 0
                 &__msg-jp
                     margin 4px 0 
+                &__button
+                    transform scale(0.8)
+
 
 </style>

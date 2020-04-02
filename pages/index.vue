@@ -1,14 +1,15 @@
 <template lang="pug">
 .container
   .main-gallery
-    .pos.pos__top
-      .no(v-if="selectedPos != 0")
-        p.main-font(:key="selectedPos") Project No.
-        transition(name="slide-fade" mode="out-in")
-          span.main-font(:key="selectedPos") {{ selectedPos }} 
-      .name(v-if="selectedPos != 0")
-        transition(name="slide-fade2" mode="out-in")
-          p.main-font(:key="selectedPos") {{ selectedProject }}
+    .pos
+      .no
+        //- p.main-font(:key="selectedPos") Project No.
+      //-   transition(name="slide-fade" mode="out-in")
+      //-     span.main-font(:key="selectedPos") {{ selectedPos }} 
+      //- .name(v-if="selectedPos != 0")
+      //-   transition(name="slide-fade2" mode="out-in")
+      //-     p.main-font(:key="selectedPos") {{ selectedProject }}
+    
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
         MainPage
@@ -16,6 +17,7 @@
         nuxt-link(:to="{ name: 'project', params: { project:ttl } }") 
           ProjectSlider(:title="ttl" v-slot:detail)
             nuxt-link.link-button(:to="{ name: 'project', params: { project:ttl } }") DETAIL
+
   .project-nav
     swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
       swiper-slide
@@ -25,6 +27,7 @@
 
 </template>
 <script>
+import Artwork from "~/components/Artwork";
 import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
 
@@ -42,6 +45,7 @@ import { mapState } from 'vuex'
 
 export default {
   components: {
+    Artwork,
     MainPage,
     ProjectSlider,
     Pro0,
@@ -61,8 +65,9 @@ export default {
       width: window.innerWidth,
       height: window.innerHeight,
       projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
+      selected: "",
       selectedProject: "",
-      selectedPos: "",
+      selectedPos: ""
     }
   },
   asyncData (ctx) {
@@ -70,14 +75,14 @@ export default {
       swiperOptionTop: (ctx.isMobile) ? {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 200,
+        spaceBetween: 100,
         mousewheel: true,
         speed: 600,
         slidesPerView: 1,
         centeredSlides: true,
-        effect: 'fade',
-        direction: 'vertical',
-        // parallax: true,
+        // effect: 'fade',
+        direction: 'horizontal',
+        parallax: true,
         passiveListeners: 'true'
       } : {
         loop: true,
@@ -123,17 +128,22 @@ export default {
       this.height = window.innerHeight;
       const h = document.getElementById('container');
       h.style.height = this.height;
-      console.log(h.style.height);
     },
     slideChanged: function() {
-      console.log('slide changed: ' + this.swiper.realIndex)
+      this.selected = this.jsondata.projects_title[this.swiper.realIndex-1]
       this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
       this.selectedPos = this.swiper.realIndex
-
       this.$store.commit("updateSwiperPos", this.swiper.realIndex)
+
+      // const swiperThumbs = this.$refs.swiperThumbs
+      // swiperThumbs.style.backgroundColor = "pink"
+
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
+    },
+    selectColor: function() {
+
     }
   },
   watch: {
@@ -165,53 +175,58 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+.div
+  background pink 
+  width 1px
+  height 16px
+  margin 0 auto
+
+
 .container
   width 100%
   height 100vh
   // overflow hidden
+  // background bg-color
   .main-gallery
     height 86%
+    +tb()
+      height 90%
   .project-nav
     height 14%
+    +tb()
+      height 10%
   .pos
-    background white
     text-align center
     font-weight 800
+    width 100%
+    height 10%
+    display flex
+    justify-content center
+    align-items center
+    flex-direction column
+    font-size .7rem
+    +tb()
+      height 8%
     .no
       display flex
     .name
       font-size 1.4em
-    &__top
-      position fixed
-      height 10%
-      top 0
-      left 50%
-      transform translateX(-50%)
-      display flex
-      justify-content center
-      align-items center
-      flex-direction column
-      font-size .7rem
+    p, span
+      // color bg-color
 
-.blur
-  -ms-filter blur(8px)
-  filter blur(8px)
 
 .swiper 
   .swiper-slide 
     background-size cover
     background-position center
-    +tb()
-      background bg-color
-  &.gallery-top 
-    height 90%
-    position fixed
-    top 10%
-    left 0
-    +tb()
-      height 80%
-  &.gallery-thumbs 
     // background bg-color
+  &.gallery-top 
+    width 100%
+    height 90%
+    display block
+    +tb()
+      height 92%
+  &.gallery-thumbs 
     height 100%
     box-sizing border-box
     text-align center
@@ -227,10 +242,13 @@ export default {
       top 0
       left 0
       right 0
-      width  1px
+      width 1px
       height 12px
       margin auto
-      background-color bg-color
+      background-color txt-color
+      +sp()
+        height 8px
+
   &.gallery-thumbs .swiper-slide 
     display flex
     justify-content center
@@ -240,6 +258,8 @@ export default {
       transition all .6s main-transition
       fill txt-color
       padding 4px
+      +tb()
+        fill txt-color
     &:hover
       transition all .3s main-transition
       transform scale(1.1)
@@ -249,6 +269,8 @@ export default {
     svg
       transition all .6s main-transition
       transform scale(1.4)
+    .ttt
+      fill #231815
     .harvestx
       fill color1
     .grubin
@@ -261,4 +283,11 @@ export default {
       fill color5
     .wearbo
       fill color6
+
++tb()
+  .link-button
+    margin-top 8px
+    padding 8px 16px
+    font-size 1rem
+
 </style>

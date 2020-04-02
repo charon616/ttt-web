@@ -1,13 +1,8 @@
 <template lang="pug">
   .ttt
-    Artwork.artwork
     .message
       h1 Todai To Texas 2020
       p There are 6 Awesome Projects.
-      <br>
-      <br>
-      <br>
-      <br>
       <br>
       <br>
       <br>
@@ -28,13 +23,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+// txt-color = white
 .ttt
-  // background white
-  color white
   height 100%
   width 100%
   text-align center
-  margin 16px
+  margin 160px 16px 16px 16px
   .artwork
     z-index -1
   .message
@@ -42,7 +36,18 @@ export default {
     margin 0 auto
     z-index 0
     h1 
-      margin-bottom 32px
+      margin-bottom 20px
+    h1, p
+      color txt-color
+      span
+        color txt-color
+  +tb()
+    margin 10% 0 0 0
+    .message
+      h1, p
+        color black
+        span
+          color black
 
 .gradient 
   color white

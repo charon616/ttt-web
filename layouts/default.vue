@@ -1,17 +1,29 @@
-<template>
-  <div>
-    <Menu />
-    <nuxt />
-  </div>
+<template lang="pug">
+  .default
+    Menu 
+    //- Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }" v-if="$device.isDesktop")
+    nuxt 
 </template>
 
 <script>
 import Menu from '~/components/TheMenu.vue';
+import Artwork from "~/components/Artwork";
 export default {
   components: {
-    Menu
+    Menu,
+    Artwork
+  },
+  watch: {
+     // routeが変わるときにシーンを変えるなどなにか処理する
+    '$route.name': function(_new, _old){
+      // console.log(_new)
+     }
+  },
+  mounted() {
+    Typekit.load({async: true})
   }
 }
+
 </script>
 
 <style>
@@ -76,7 +88,16 @@ h1, .main-font{
 }
 
 p{
-  font-family: Work Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  font-family: a-otf-gothic-bbb-pr6n, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.artwork{
+  transform: scale(1.1);
+}
+
+.blur{
+  -ms-filter: blur(8px) brightness(80%);
+  filter: blur(8px) brightness(80%);
 }
 </style>

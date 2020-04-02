@@ -1,9 +1,7 @@
 <template>
 
   <div class="swipe">
-    <!-- <Artwork /> -->
-    <MainPage />
-    <!-- <swiper :options="swiperOption" class="mySwiper" ref="mySwiper" @slide-change="slideChanged">
+    <swiper :options="swiperOption" class="mySwiper" ref="mySwiper" @slide-change="slideChanged">
       <swiper-slide style="background: green;">
         <h1>スライド1</h1>  
           <p style="background: pink; padding: 16px;">test</p>
@@ -31,18 +29,32 @@
     <p class="link-button my-button2" ref="button" v-on:click="slideReset">CLICK</p>
 
     <div class="target">
-      <!-- <img src="genkan.png"> -->
-    <!-- </div>  -->
+      <img src="genkan.png">
+    </div> 
+
+    <kinesis-container>
+      Here, you can put
+      <kinesis-element :strength="10" type="depth">
+        <p>whatever</p>
+        
+      </kinesis-element>
+      <kinesis-element :strength="20" type="depth">
+        <p>content!</p>
+      </kinesis-element>
+    </kinesis-container>
 
   </div>
 </template>
 <script> 
 import {TweenMax, Expo, Elastic} from 'gsap'
 import MainPage from '~/components/Main.vue';
+import { KinesisContainer, KinesisElement} from 'vue-kinesis';
 
 export default {
   components: {
-    MainPage
+    MainPage,
+    KinesisContainer,
+    KinesisElement
   },
   name: 'carrousel',
   data() {

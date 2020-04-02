@@ -67,6 +67,7 @@ export default {
 .container
     width 100vw
     padding-bottom 80px
+    background bg-color
     .main-img
         width 100%
         height 400px

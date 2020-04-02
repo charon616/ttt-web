@@ -6,35 +6,36 @@ tb()
   @media screen and (max-width: 1024px) 
     {block}
 
-*
-  color txt-color
+*::selection
+  background rgba(228, 84, 65, 1)
+  color bg-color
 
 .fade-enter-active, .fade-leave-active 
   transition all .3s
 .fade-enter, .fade-leave-to 
   opacity 0
 
-.slide-fade-enter-active 
-  transition all .3s ease
-.slide-fade-leave-active 
-  transition all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+.slide-fade-enter-active, .slide-fade-leave-active 
+  transition all .3s main-transition
+  webkit-clip-path: inset(0);
+  clip-path: inset(0);
 .slide-fade-enter
-  // transform translateY(10px) scale(.4)
-  opacity 0
+  -webkit-clip-path: inset(100% 0 0 0);
+  clip-path: inset(100% 0 0 0);
 .slide-fade-leave-to
-  // transform translateY(-10px) scale(.4)
-  opacity 0
+  -webkit-clip-path: inset(0 0 100% 0);
+  clip-path: inset(0 0 100% 0);
 
-.slide-fade2-enter-active 
-  transition all .3s .1s ease
-.slide-fade2-leave-active 
-  transition all .5s .1s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+.slide-fade2-enter-active, .slide2-fade-leave-active 
+  transition all .3s .1s main-transition
+  webkit-clip-path: inset(0);
+  clip-path: inset(0);
 .slide-fade2-enter
-  // transform translateY(10px) scale(.4)
-  opacity 0
+  -webkit-clip-path: inset(100% 0 0 0);
+  clip-path: inset(100% 0 0 0);
 .slide-fade2-leave-to
-  // transform translateY(-10px) scale(.4)
-  opacity 0
+  -webkit-clip-path: inset(0 0 100% 0);
+  clip-path: inset(0 0 100% 0);
 
 /*                                      */
 /*   サイト全体のページ遷移のトランジション   */
