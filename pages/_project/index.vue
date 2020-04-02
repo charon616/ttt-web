@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-    img.main-img(:src="jsondata[$route.params.project].main_img")
+    img.main-img(:src="image")
     .detail
         h1.detail__title {{jsondata[$route.params.project].title}}
         p.detail__msg {{jsondata[$route.params.project].msg_en}}
@@ -40,6 +40,11 @@ export default {
             videotrue: false,
             videoId: 'cB7Il-HaLpY'
         }
+    },
+    computed: {
+        image: function(){
+            return require("~/assets/project" + this.jsondata[this.$route.params.project].main_img)
+        }   
     },
     mounted(){
         this.$store.commit("updatePage","detail")

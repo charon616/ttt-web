@@ -5,14 +5,7 @@ export const state = () => ({
   isSlideToDefault: false
 })
 
-// export const getters = {
-//   add ({commit}){
-//     commit('increment')
-//   }
-// }
-
 export const getters = {
-  // swiperPos: state => state.swiperPos,
   isSlideToDefault: state => state.isSlideToDefault,
   page: state => state.page
 }

@@ -1,62 +1,141 @@
 <template lang="pug">
-  .ttt
-    .message
-      h1 Todai To Texas 2020
-      p There are 6 Awesome Projects.
-      <br>
-      <br>
-      <br>
-      p \ Get more details about 
-        span(style="font-weight: bold;") Todai To Texas 
-        | /
-      a.link-button(href="http://todaitotexas.com/" target="_blank") TTT WEB
+kinesis-container.ttt
+  .title
+    kinesis-element.title-element(:strength="8") Todai 
+    kinesis-element.title-element(:strength="16") To 
+    kinesis-element.title-element(:strength="4") Texas 
+    kinesis-element.title-element(:strength="-8") 2020
+  .message
+    h2 There are 6 Awesome Projects.
+    p Get more details about Todai To Texas↓
+    a.link-button-wh(href="http://todaitotexas.com/" target="_blank") TTT WEB
+  .guide
+    p scroll
 
 </template>
 <script>
 import Artwork from "~/components/Artwork";
+import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 
 export default {
   components: {
-    Artwork
+    Artwork,
+    KinesisContainer,
+    KinesisElement
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-// txt-color = white
+// .ttt
+//   height 100%
+//   width 100%
+//   display flex
+//   justify-content center
+//   align-items center
+//   +tb()
+//     display initial
+//   .message
+//     text-align center
+//     width 400px
+//     height 400px
+//     padding 40px
+//     z-index 0
+//     background rgba(0, 0, 0, .4)
+//     border 4px solid bg-color
+//     +tb()
+//       background rgba(0, 0, 0, 0)
+//       width 100%
+//       height 60%
+//       padding 32px
+//       border none
+//     h1 
+//       margin-top 32px
+//       margin-bottom 20px
+//       font-weight 800
+//       position relative
+//     h1, p
+//       color bg-color
+
+// .link-button-wh
+//   &:hover
+//     background rgba(0, 0, 0, 0)
+//   +tb()
+//     margin-top 8px
+//     padding 8px 16px
+//     font-size 1rem
+
+border = 8px
 .ttt
   height 100%
   width 100%
-  text-align center
-  margin 160px 16px 16px 16px
-  .artwork
-    z-index -1
-  .message
-    width 80%
-    margin 0 auto
-    z-index 0
-    h1 
-      margin-bottom 20px
-    h1, p
-      color txt-color
-      span
-        color txt-color
+  display flex
+  justify-content center
+  align-items center
   +tb()
-    margin 10% 0 0 0
-    .message
-      h1, p
-        color black
-        span
-          color black
+    display initial
+  .title
+    position absolute 
+    left 120px
+    top 16px
+    .title-element
+      // margin-top 16px
+      margin-bottom 8px
+      font-weight 800
+      font-size calc(100vh/4 * 0.8)
+      line-height calc(100vh/4 * 0.7)
+      text-align left
+      color txt-color
+      opacity 1
+      position relative
+      &::after
+        content ''
+        width 100%
+        height 100%
+        position absolute
+        left 0
+        top 0
+        z-index -1
+        background sxsw1
+        clip-path polygon(0 16px, 100% 0, 100% calc(100% - 16px), 0% 100%)
+        // clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)
+      &:nth-child(2)
+        &::after
+          background sxsw2
+      &:nth-child(3)
+        &::after
+          background sxsw3
+      &:nth-child(4)
+        &::after
+          background sxsw4
+  .message
+    text-align right 
+    z-index 0
+    background txt-color
+    padding 32px
+    position absolute 
+    right 0
+    bottom 0
+    // background rgba(0, 0, 0, .4)
+    +tb()
+      background rgba(0, 0, 0, 0)
+      width 100%
+      height 60%
+      padding 32px
+      border none
+    p, h2
+      color bg-color
+      // font-size 2rem
+      // line-height 3rem
+  
+  .guide
+    text-align center
 
-.gradient 
-  color white
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  left: -50px;
-  top: -50px;
-  background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.9) 100%);
-  opacity: 1;
-  transition: opacity 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+.link-button-wh
+  margin-top 8px
+  padding 8px 16px
+  font-size 1rem
+  &:hover
+    background rgba(0, 0, 0, 0)
+
 </style>

@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     slideChanged: function() {
-      console.log('slide changed')
       // console.log(self.selectedPos)
       // this.$store.commit("increment")
       // this.selectedProject = this.jsondata.projects_real_title[mySwiper.realIndex-1]

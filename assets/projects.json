@@ -19,7 +19,7 @@
     "msg_jp": "無駄遣いから摂食への残り物の再考ブラックソルジャーフライ",
     "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
     "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
-    "main_img": "grubin.jpg",
+    "main_img": "/grubin.jpg",
     "img": ["/grubin.jpg", "/grubin_fl.jpg"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",

@@ -28,14 +28,13 @@ export default class ArtworkGL {
 
     this.renderer.setPixelRatio(window.devicePixelRatio);
 
-    // this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setClearColor(0x111111, 1);
+    // this.renderer.setClearColor(0x111111, 1);
+    this.renderer.setClearColor(0xFFFFFF, 1);
     this.renderer.setSize(this.size.windowW, this.size.windowH);
     // レンダラー：シャドウを有効にする
-    this.renderer.shadowMap.enabled = true;
+    // this.renderer.shadowMap.enabled = true;
 
     // Camera
-    // 視野角をラジアンに変換
     const fov = 45;
     const fovRad = (fov / 2) * (Math.PI / 180);
     const dist = (this.size.windowH / 2) / Math.tan(fovRad);
@@ -51,15 +50,6 @@ export default class ArtworkGL {
 
     // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-    // Object
-    // const geometry = new THREE.BoxGeometry(300, 240, 400);
-    // const material = new THREE.MeshStandardMaterial({
-    //   color: 0xFF0000
-    // });
-
-    // const mesh = new THREE.Mesh(geometry, material);
-    // this.scene.add(mesh);
-
     const wrap = new THREE.Group();
     const images = ['roboxer.jpg', 'wearbo.jpg', 'genkan.jpg', 'grubin.jpg', 'syrinx.jpg', 'harvestx.jpg'];
     const images_fl = ['roboxer_fl.jpg', 'wearbo_fl.png', 'genkan_fl.jpg', 'grubin_fl.jpg', 'syrinx_fl.png', 'harvestx_fl.png'];
@@ -71,17 +61,8 @@ export default class ArtworkGL {
     this.camera.lookAt(wrap.position);
     this.wrap = wrap;
 
-    // const project = wrap.position.project(this.camera);
-    // const sx = this.size.windowW / 2 * (+project.x + 1.0);
-    // const sy = this.size.windowH / 2 * (-project.y + 1.0);
-
-    // // スクリーン座標
-    // console.log(sx, sy);
-
     const geo = new THREE.PlaneGeometry(1000, 1000, 1);
-    // const mat = new THREE.MeshLambertMaterial({
-    //   color: 0xFFFFFF
-    // });
+
     const mat = new THREE.MeshStandardMaterial({
       color: 0xFFFFFF,
       roughness: 0.5
@@ -93,38 +74,32 @@ export default class ArtworkGL {
     this.scene.add(plane);
 
     // Lighting
-    // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.6);
-    // directionalLight.position.set(0, 10, 3);
-    // directionalLight.intensity = 1.0;
+    const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.6);
+    directionalLight.position.set(0, 10, 3);
+    directionalLight.intensity = 0.8;
     // directionalLight.castShadow = true;
-    // this.scene.add(directionalLight);
+    this.scene.add(directionalLight);
 
     const ambient = new THREE.AmbientLight(0xFFFFFF, 0.2);
     this.scene.add(ambient);
 
     // スポットライト光源を作成
-    const spot = new THREE.SpotLight(0xFFFFFF, 1, 30, Math.PI / 6, 1, 0.5);
-    spot.position.set(0, 8, 6);
-    this.scene.add(spot);
+    // const spot = new THREE.SpotLight(0xFFFFFF, 1, 30, Math.PI / 6, 1, 0.5);
+    // spot.position.set(0, 8, 6);
+    // this.scene.add(spot);
 
-    const spot2 = new THREE.SpotLight(0xFFFF00, 1, 30, Math.PI / 6, 1, 0.5);
-    spot2.position.set(10, 8, 6);
-    this.scene.add(spot2);
+    // const spot2 = new THREE.SpotLight(0xFFFF00, 1, 30, Math.PI / 6, 1, 0.5);
+    // spot2.position.set(10, 8, 6);
+    // this.scene.add(spot2);
 
-    const spot3 = new THREE.SpotLight(0x0000FF, 1, 30, Math.PI / 6, 1, 0.5);
-    spot3.position.set(-10, 8, 6);
-    this.scene.add(spot3);
+    // const spot3 = new THREE.SpotLight(0x0000FF, 1, 30, Math.PI / 6, 1, 0.5);
+    // spot3.position.set(-10, 8, 6);
+    // this.scene.add(spot3);
 
     const ambientLight = new THREE.AmbientLight(0xFFFFFF);
     ambientLight.position.set(800, 800, 800);
     ambientLight.intensity = 0.1
     this.scene.add(ambientLight);
-
-    // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
-    const light = new THREE.PointLight(0xFFFFFF, .4, 50, 1.0);
-    this.scene.add(light);
-
-    this.light = light
 
     this.clock = new THREE.Clock();
     this.clock.start();
@@ -198,21 +173,12 @@ export default class ArtworkGL {
     plane.position.z = 0.5;
     plane.rotation.set(-Math.PI / 2, 0, 0);
     plane.castShadow = true;
-    // plane.rotateZ(90);
-    // plane.position.set(0, 0);
     wrap.add(plane);
   }
 
   mouseMoved(x, y) {
     this.mouse.x = x - (this.size.windowW / 2); // 原点を中心に持ってくる
     this.mouse.y = -y + (this.size.windowH / 2); // 軸を反転して原点を中心に持ってくる
-
-    // ライトの xy座標 をマウス位置にする
-    // this.light.position.x = this.camera.position.x + x;
-    // this.light.position.y = this.camera.position.z + y;
-
-    // this.light.position.x = this.mouse.x / 100;
-    // this.light.position.y = this.mouse.y / 100;
   }
 
   pause(){

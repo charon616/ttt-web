@@ -1,7 +1,7 @@
 <template>
   <section class="artwork">
-    <canvas class="artwork__canvas" ref="canvas"></canvas>
-    <div v-if="this.$store.state.swiperPos == 0" class="lighting" id="lighting" ref="lighting"></div>
+    <canvas class="artwork__canvas" ref="canvas" v-if="$device.isDesktop"></canvas>
+    <div v-if="this.$store.state.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting"></div>
   </section>
 </template>
 
@@ -12,18 +12,11 @@ export default {
   name: 'artwork',
   components: {},
   props: [],
-  data () {
-    // 基本的にはここにthree.jsのオブジェクトを追加しない。
-    return {
-    }
-  },
   computed: mapState({
     page: state => state.page,
   }),
   watch: {
     page: function(newVal, oldVal){
-      console.log(newVal)
-
       if(newVal == "index"){
         this.artworkGL.resume;
       }else{
@@ -32,13 +25,15 @@ export default {
     }
   },
   mounted () {
-    // canvas要素を渡す。
     this.artworkGL = new ArtworkGL({
       $canvas: this.$refs.canvas
     });
 
     window.addEventListener('mousemove', e => {
       this.artworkGL.mouseMoved(e.clientX, e.clientY);
+      if(this.$store.state.swiperPos != 0){
+        return;
+      }
       let lighting = document.getElementById('lighting');
       lighting.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
     });
@@ -46,11 +41,7 @@ export default {
     window.addEventListener('resize', this.onResize);
 
   },
-  destroyed() {
-    // canvasを作ったり壊したりする前提の場合はここに処理停止する処理を書く（今回省略）。
-  },
   methods: {
-    // この中にthree.jsの処理をばりばり書かない。
     onResize: function() {
       this.artworkGL.changeSize(window.innerWidth, window.innerHeight, window.devicePixelRatio)
     }
@@ -59,7 +50,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-/* スタイルなどお好みで　*/
 .artwork
   position fixed
   top 0
@@ -67,6 +57,10 @@ export default {
   width 100vw
   height 100vh
   z-index -1
+  +tb()
+    background linear-gradient(45deg, #00a460, #e45441, #00a7f1, #f4c550)
+    background-size 800% 800%
+    animation gradation 15s ease infinite
   &__canvas
     z-index -2
 
@@ -82,7 +76,11 @@ export default {
   background radial-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
   mix-blend-mode overlay
   filter blur(16px)
-  // background-image: -webkit-radial-gradient(#ddd, #333);
-  // background-image: radial-gradient(#ddd, #333);
+
+@keyframes gradation {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
 </style>

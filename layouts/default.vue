@@ -2,6 +2,7 @@
   .default
     Menu 
     //- Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }" v-if="$device.isDesktop")
+    Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
     nuxt 
 </template>
 
@@ -12,12 +13,6 @@ export default {
   components: {
     Menu,
     Artwork
-  },
-  watch: {
-     // routeが変わるときにシーンを変えるなどなにか処理する
-    '$route.name': function(_new, _old){
-      // console.log(_new)
-     }
   },
   mounted() {
     Typekit.load({async: true})
@@ -53,24 +48,6 @@ html.index, html.index>body {
   overflow: hidden;
 }
 
-/* body{
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-      background-position: 0% 50%;
-  }
-  50% {
-      background-position: 100% 50%;
-  }
-  100% {
-      background-position: 0% 50%;
-  }
-} */
-
 *,
 *:before,
 *:after {
@@ -97,7 +74,8 @@ p{
 }
 
 .blur{
-  -ms-filter: blur(8px) brightness(80%);
-  filter: blur(8px) brightness(80%);
+  /* -ms-filter: blur(8px) brightness(80%);
+  filter: blur(8px) brightness(80%); */
+  display: none;
 }
 </style>

@@ -1,22 +1,20 @@
 <template lang="pug">
-.container
+.container(v-bind:class="{ white: this.$store.state.swiperPos != 0 }")
   .main-gallery
     .pos
-      .no
-        //- p.main-font(:key="selectedPos") Project No.
-      //-   transition(name="slide-fade" mode="out-in")
-      //-     span.main-font(:key="selectedPos") {{ selectedPos }} 
-      //- .name(v-if="selectedPos != 0")
-      //-   transition(name="slide-fade2" mode="out-in")
-      //-     p.main-font(:key="selectedPos") {{ selectedProject }}
+      .no(v-if="selectedPos != 0")
+        p.main-font(:key="selectedPos") Project No.
+        transition(name="slide-fade" mode="out-in")
+          span.main-font(:key="selectedPos") {{ selectedPos }} 
+      .name(v-if="selectedPos != 0 && $device.isDesktop")
+        transition(name="slide-fade2" mode="out-in")
+          p.main-font(:key="selectedPos") {{ selectedProject }}
     
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
         MainPage
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
-        nuxt-link(:to="{ name: 'project', params: { project:ttl } }") 
-          ProjectSlider(:title="ttl" v-slot:detail)
-            nuxt-link.link-button(:to="{ name: 'project', params: { project:ttl } }") DETAIL
+        ProjectSlider(:title="ttl" v-slot:detail)
 
   .project-nav
     swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
@@ -75,15 +73,18 @@ export default {
       swiperOptionTop: (ctx.isMobile) ? {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 100,
+        spaceBetween: 200,
+        resistanceRatio: 0.3,
+        // freeMode: true,
+        // effect: 'fade',
         mousewheel: true,
-        speed: 600,
+        speed: 800,
         slidesPerView: 1,
         centeredSlides: true,
-        // effect: 'fade',
-        direction: 'horizontal',
-        parallax: true,
-        passiveListeners: 'true'
+        touchAngle: 90,
+        direction: 'vertical',
+        lazyLoading: true,
+        preloadImages: false
       } : {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
@@ -92,10 +93,8 @@ export default {
         speed: 600,
         slidesPerView: 1,
         centeredSlides: true,
-        // effect: 'fade',
         direction: 'vertical',
-        parallax: true,
-        passiveListeners: 'true'
+        parallax: true
       },
       swiperOptionThumbs: (ctx.isMobile) ? 
       {
@@ -134,10 +133,6 @@ export default {
       this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
       this.selectedPos = this.swiper.realIndex
       this.$store.commit("updateSwiperPos", this.swiper.realIndex)
-
-      // const swiperThumbs = this.$refs.swiperThumbs
-      // swiperThumbs.style.backgroundColor = "pink"
-
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
@@ -159,13 +154,11 @@ export default {
   }),
   mounted() {
     this.$store.commit("updatePage","index")
-
     const swiperThumbs = this.$refs.swiperThumbs.swiper
     this.$nextTick(() => {
       this.swiper.controller.control = swiperThumbs
       swiperThumbs.controller.control = this.swiper
     });
-
     this.swiper.on('slideChange', this.slideChange);
     this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
     swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
@@ -175,18 +168,15 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.div
-  background pink 
-  width 1px
-  height 16px
-  margin 0 auto
-
+.white
+  background white
 
 .container
   width 100%
   height 100vh
-  // overflow hidden
-  // background bg-color
+  transition background .4s main-transition
+  // background rgba(0, 0, 0, 0)
+
   .main-gallery
     height 86%
     +tb()
@@ -219,7 +209,6 @@ export default {
   .swiper-slide 
     background-size cover
     background-position center
-    // background bg-color
   &.gallery-top 
     width 100%
     height 90%
@@ -283,11 +272,5 @@ export default {
       fill color5
     .wearbo
       fill color6
-
-+tb()
-  .link-button
-    margin-top 8px
-    padding 8px 16px
-    font-size 1rem
 
 </style>
