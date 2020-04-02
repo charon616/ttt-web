@@ -14,8 +14,8 @@ kinesis-container.ttt
     h2 There are 6 Awesome Projects.
     p Get more details about Todai To Texas↓
     a.link-button-wh(href="http://todaitotexas.com/" target="_blank") TTT WEB
-  .guide
-    p scroll
+  //- .guide
+  //-   p scroll
 
 </template>
 <script>

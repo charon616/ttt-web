@@ -3,9 +3,11 @@
   .main-gallery
     .pos
       .no(v-if="selectedPos != 0")
-        p.main-font(:key="selectedPos") Project No.
-        transition(name="slide-fade" mode="out-in")
-          span.main-font(:key="selectedPos") {{ selectedPos }} 
+        p.main-font(:key="selectedPos") Project 
+        .number
+          p.main-font(:key="selectedPos") No.
+          transition(name="slide-fade" mode="out-in")
+            span.main-font(:key="selectedPos") {{ selectedPos }} 
       .name(v-if="selectedPos != 0 && $device.isDesktop")
         transition(name="slide-fade2" mode="out-in")
           p.main-font(:key="selectedPos") {{ selectedProject }}
@@ -194,13 +196,50 @@ export default {
     justify-content center
     align-items center
     flex-direction column
-    font-size .7rem
+    // font-size .7rem
     +tb()
       height 8%
     .no
-      display flex
+      text-align right
+      position fixed
+      right 0
+      top 50%
+      padding 20px
+      transform translateY(-50%)
+      +tb()
+        text-align center
+        position initial
+        padding 0
+        transform initial
+        display flex
+      & > p
+        display none
+        +tb()
+          display initial
+
+      .number
+        display flex
+        justify-content flex-end
+        align-items center
+        flex-direction column
+        +tb()
+          justify-content center
+          flex-direction row
+          margin-left 8px
+        span
+          border 1px solid txt-color
+          width 36px
+          height 36px
+          text-align center
+          line-height 34px
+          +tb()
+            border none
+            width initial
+            height initial
+            line-height initial
     .name
       font-size 1.4em
+      display none
     p, span
       // color bg-color
 

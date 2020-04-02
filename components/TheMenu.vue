@@ -94,7 +94,7 @@ export default {
           color lightgray 
      
     // +tb()
-    top 40%
+    top 50%
     left 0
     display flex
     flex-direction column
@@ -102,6 +102,7 @@ export default {
     background initial
     padding 0 0 0 8px
     transition all .6s main-transition
+    transform translateY(-50%)
     
     .min 
       display none
@@ -113,6 +114,9 @@ export default {
       height 36px
       position relative
       margin 8px
+      &:hover
+        .icon
+          color lightgray 
       .icon
         color bg-color
         vertical-align middle
