@@ -1,5 +1,4 @@
 export const state = () => ({
-  counter: 10,
   page: 'index',
   swiperPos: 0,
   isSlideToDefault: false
@@ -11,9 +10,6 @@ export const getters = {
 }
 
 export const mutations = {
-  increment(state) {
-    state.counter++
-  },
   updatePage(state, pageName){
     state.page = pageName
   },

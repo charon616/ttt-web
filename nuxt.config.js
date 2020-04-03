@@ -47,19 +47,7 @@ export default {
       ssr: false
     },
     {
-      src: "~/plugins/gsap",
-      ssr: false
-    },
-    {
       src: "~/plugins/bg-color",
-      ssr: false
-    },
-    {
-      src: "~/plugins/border-color",
-      ssr: false
-    },
-    {
-      src: "~/plugins/color",
       ssr: false
     },
     {
@@ -94,14 +82,6 @@ export default {
         icons: ["fab"]
       }
     ]
-  },
-  /*
-   ** GoogleFonts
-   */
-  webfontloader: {
-    google: {
-      families: ["Work+Sans:400"]
-    }
   },
   /*
    ** Stylus settings

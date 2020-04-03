@@ -1,10 +1,10 @@
 <template lang="pug">
 kinesis-container.ttt
   .title(v-if="$device.isDesktop")
-    kinesis-element.title-element(:strength="8") Todai 
-    kinesis-element.title-element(:strength="16") To 
-    kinesis-element.title-element(:strength="4") Texas 
-    kinesis-element.title-element(:strength="-8") 2020
+    kinesis-element.title-element.animated.slideInUp(:strength="8") Todai 
+    kinesis-element.title-element.animated.slideInUp(:strength="16") To 
+    kinesis-element.title-element.animated.slideInUp(:strength="4") Texas 
+    kinesis-element.title-element.animated.slideInUp(:strength="-8") 2020
   .title(v-else)
     .title-element Todai 
     .title-element To 
@@ -83,18 +83,11 @@ border = 8px
   display flex
   justify-content center
   align-items center
-  +tb()
-    display initial
   .title
     position absolute 
     left 120px
     top 16px
-    +tb()
-      position initial
-      margin 40px auto
-      width 50%
     .title-element
-      // margin-top 16px
       margin-bottom 8px
       font-weight 800
       font-size calc(100vh/4 * 0.8)
@@ -103,10 +96,7 @@ border = 8px
       color txt-color
       opacity 1
       position relative
-      +tb()
-        font-size calc(100vw/5)
-        line-height calc(100vw/5 * 0.7)
-
+      animation-delay 0s 
       &::after
         content ''
         width 100%
@@ -119,12 +109,15 @@ border = 8px
         clip-path polygon(0 16px, 100% 0, 100% calc(100% - 16px), 0% 100%)
         // clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)
       &:nth-child(2)
+        animation-delay .2s 
         &::after
           background sxsw2
       &:nth-child(3)
+        animation-delay .4s 
         &::after
           background sxsw3
       &:nth-child(4)
+        animation-delay .6s 
         &::after
           background sxsw4
   .message
@@ -135,27 +128,8 @@ border = 8px
     position absolute 
     right 0
     bottom 0
-    +tb()
-      background rgba(0, 0, 0, 0)
-      padding 0
-      bottom 32px
-      width 70%
-      left 50%
-      transform translateX(-50%)
-      border none
-      text-align center
-      h2
-        // font-size 1.2rem
-        color black
     h2, p
       color bg-color
-      +tb()
-        color txt-color
-    h2
-      +tb()
-        font-size 1rem
-
-  
   .guide
     text-align center
 
@@ -168,5 +142,31 @@ border = 8px
   +tb()
     background txt-color
     color bg-color
+
++tb()
+  .ttt
+    display initial
+    .title
+      position initial
+      margin 40px auto
+      width 50%
+      .title-element
+        font-size calc(100vw/5)
+        line-height calc(100vw/5 * 0.7)
+    .message
+      background rgba(0, 0, 0, 0)
+      padding 0
+      bottom 32px
+      width 70%
+      left 50%
+      transform translateX(-50%)
+      border none
+      text-align center
+      h2
+        color black
+        font-size 1rem
+      h2, p
+        color txt-color
+
 
 </style>

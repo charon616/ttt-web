@@ -1,7 +1,7 @@
-<template lang="html">
-  <div class="loading-page" v-if="loading">
-    <div class="spinner"></div>
-  </div>
+<template lang="pug">
+.loading-page(v-if="loading")
+  .spinner
+  img(src="~assets/logo_bl.png")
 </template>
 
 <script>
@@ -33,23 +33,30 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
-  /* background: rgba(255, 255, 255, 0.8); */
+  background-color: white;
   text-align: center;
   padding-top: 200px;
   font-size: 30px;
   font-family: sans-serif;
-  z-index: 9999;
+  z-index: 999;
 }
 
-
 .spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
   width: 100px;
   height: 100px;
   margin: 200px auto;
-  background-color: #fff;
+  background-color: txt-color;
   border-radius: 100%;
   animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+img{
+  width: 200px;
+  height: auto;
 }
 /* ローディングアニメーション */
 @keyframes sk-scaleout {

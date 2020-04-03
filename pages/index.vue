@@ -1,14 +1,14 @@
 <template lang="pug">
-.container(v-bind:class="{ white: this.$store.state.swiperPos != 0 }")
+.container#container(v-bind:class="{ white: this.$store.state.swiperPos != 0 }")
   .main-gallery
     .pos
       .no(v-if="selectedPos != 0")
-        p.main-font(:key="selectedPos") Project 
+        p.main-font(:key="selectedPos") Project
         .number
           p.main-font(:key="selectedPos") No.
           transition(name="slide-fade" mode="out-in")
             span.main-font(:key="selectedPos") {{ selectedPos }} 
-      .name(v-if="selectedPos != 0 && $device.isDesktop")
+      .name(v-if="selectedPos != 0")
         transition(name="slide-fade2" mode="out-in")
           p.main-font(:key="selectedPos") {{ selectedProject }}
     
@@ -24,6 +24,7 @@
         Pro0
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
         component(v-bind:is="projects[index]")
+  //- .load(v-if="loading")
 
 </template>
 <script>
@@ -40,7 +41,6 @@ import Pro5 from '~/components/Logo/roboxer.vue';
 import Pro6 from '~/components/Logo/wearbo.vue';
 
 import jsonfile from '~/assets/projects.json';
-
 import { mapState } from 'vuex'
 
 export default {
@@ -62,12 +62,12 @@ export default {
       },
       swiperOptionThumbs: {
       },
-      width: window.innerWidth,
       height: window.innerHeight,
       projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
       selected: "",
       selectedProject: "",
-      selectedPos: ""
+      selectedPos: "",
+      loading: true
     }
   },
   asyncData (ctx) {
@@ -77,8 +77,6 @@ export default {
         loopedSlides: 7, // looped slides should be the same
         spaceBetween: 200,
         resistanceRatio: 0.3,
-        // freeMode: true,
-        // effect: 'fade',
         mousewheel: true,
         speed: 800,
         slidesPerView: 1,
@@ -116,7 +114,7 @@ export default {
         speed: 600,
         mousewheel: true,
         centeredSlides: true,
-        slidesPerView: 6,
+        slidesPerView: 7,
         touchRatio: 0.2,
         slideToClickedSlide: true
       },
@@ -125,10 +123,9 @@ export default {
   },
   methods: {
     handleResize: function() {
-      this.width = window.innerWidth;
       this.height = window.innerHeight;
-      const h = document.getElementById('container');
-      h.style.height = this.height;
+      let h = document.getElementById('container');
+      h.style.height = this.height + 'px';
     },
     slideChanged: function() {
       this.selected = this.jsondata.projects_title[this.swiper.realIndex-1]
@@ -139,8 +136,8 @@ export default {
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
     },
-    selectColor: function() {
-
+    push: function() {
+      this.loading = false;
     }
   },
   watch: {
@@ -164,6 +161,17 @@ export default {
     this.swiper.on('slideChange', this.slideChange);
     this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
     swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
+
+    this.height = window.innerHeight;
+    let h = document.getElementById('container');
+    h.style.height = this.height + 'px';
+    window.addEventListener('resize', this.handleResize);
+
+
+    // window.onload = function(){
+    //   this.loading = false
+    //   // setTimeout(() => alert("test"), 3000)
+    // };
   },
 }
 
@@ -173,20 +181,65 @@ export default {
 .white
   background white
 
+.load
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background txt-color
+  z-index 9999
+  animation byeShutter 3s forwards
+  &::before
+    content ''
+    position absolute
+    top 0
+    left 0
+    bottom 0
+    margin auto
+    background-color bg-color
+    width 0
+    height 2px
+    animation shutterOpen 3s forwards
+
+@keyframes byeShutter {
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    z-index: -1;
+  }
+}
+
+@keyframes shutterOpen {
+  0% {
+    width: 0;
+    height: 2px;
+  }
+  50% {
+    width: 100%;
+    height: 2px;
+  }
+  90% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .container
   width 100%
   height 100vh
   transition background .4s main-transition
-  // background rgba(0, 0, 0, 0)
-
   .main-gallery
     height 86%
-    +tb()
-      height 90%
   .project-nav
     height 14%
-    +tb()
-      height 10%
   .pos
     text-align center
     font-weight 800
@@ -196,9 +249,6 @@ export default {
     justify-content center
     align-items center
     flex-direction column
-    // font-size .7rem
-    +tb()
-      height 8%
     .no
       text-align right
       position fixed
@@ -206,43 +256,22 @@ export default {
       top 50%
       padding 20px
       transform translateY(-50%)
-      +tb()
-        text-align center
-        position initial
-        padding 0
-        transform initial
-        display flex
       & > p
         display none
-        +tb()
-          display initial
-
       .number
         display flex
         justify-content flex-end
         align-items center
         flex-direction column
-        +tb()
-          justify-content center
-          flex-direction row
-          margin-left 8px
         span
           border 1px solid txt-color
           width 36px
           height 36px
           text-align center
           line-height 34px
-          +tb()
-            border none
-            width initial
-            height initial
-            line-height initial
     .name
       font-size 1.4em
       display none
-    p, span
-      // color bg-color
-
 
 .swiper 
   .swiper-slide 
@@ -252,18 +281,15 @@ export default {
     width 100%
     height 90%
     display block
-    +tb()
-      height 92%
   &.gallery-thumbs 
     height 100%
+    width 50%
     box-sizing border-box
     text-align center
     letter-spacing .2em
     font-size 1.2em
     font-weight bold
     cursor pointer
-    +sp()
-      font-size .8em
     &::before 
       content ''
       position absolute
@@ -274,29 +300,21 @@ export default {
       height 12px
       margin auto
       background-color txt-color
-      +sp()
-        height 8px
-
   &.gallery-thumbs .swiper-slide 
     display flex
     justify-content center
     align-items center
     transition all .6s main-transition
     svg
-      transition all .6s main-transition
+      transition transform .6s main-transition
       fill txt-color
       padding 4px
-      +tb()
-        fill txt-color
     &:hover
-      transition all .3s main-transition
-      transform scale(1.1)
-      +sp()
-        font-size 1em
+      svg
+        fill lightgray
   &.gallery-thumbs .swiper-slide-active 
     svg
-      transition all .6s main-transition
-      transform scale(1.4)
+      // transform scale(1.2)
     .ttt
       fill #231815
     .harvestx
@@ -311,5 +329,53 @@ export default {
       fill color5
     .wearbo
       fill color6
+
++tb()
+  .container
+    .main-gallery
+      height 90%
+    .project-nav
+      height 10%
+    .pos
+      .no
+        text-align center
+        position initial
+        padding 0
+        transform initial
+        display flex
+        font-size .8rem
+        & > p
+          display initial
+        .number
+          justify-content center
+          flex-direction row
+          margin-left 8px
+          span
+            border none
+            width initial
+            height initial
+            line-height initial
+      .name
+        display initial
+        font-size 1rem
+  .swiper 
+    &.gallery-thumbs 
+      width 100%
+    &.gallery-thumbs .swiper-slide-active 
+      svg
+        transform scale(1.2)
+
++sp()
+  .swiper 
+    &.gallery-thumbs 
+      font-size .8em
+      &::before 
+        height 8px
+    &.gallery-thumbs .swiper-slide 
+      &:hover
+        font-size 1em
+
+
+
 
 </style>

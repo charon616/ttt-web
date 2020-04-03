@@ -3,7 +3,7 @@
 </template>
 <style scoped lang="stylus">
 svg
-  width 50px
+  width 46px
   height auto
   +sp()
     width 38px
