@@ -1,7 +1,7 @@
 <template lang="pug">
 kinesis-container.container
     .all
-        nuxt-link(:to="{ name: 'project', params: { project:title } }")
+        nuxt-link(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
@@ -11,9 +11,9 @@ kinesis-container.container
         .textarea
             h1.textarea__title(v-bind:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
             p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550") {{jsondata[title].msg_en}}
-            p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}} 
+            p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600") {{jsondata[title].msg_jp}}
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                nuxt-link.link-button(:to="{ name: 'project', params: { project:title } }") DETAIL
+                nuxt-link.link-button(@click.native="animateOn" :to="{ name: 'project', params: { project:title } }") DETAIL
 
 
 </template>
@@ -36,6 +36,11 @@ export default{
         image: function(){
             return require("~/assets/project" + this.jsondata[this.title].main_img)
         }   
+    },
+    methods: {
+        animateOn: function(){
+            this.$store.commit("changeAnimateStatus");
+        }
     }
 }
 
@@ -46,7 +51,7 @@ border = 8px
 .container
     position relative
     color txt-color
-    backdrop-filter blur(8px) brightness(200%)
+    // backdrop-filter blur(8px) brightness(200%)
     .all
         width content-width
         height calc(86% * 0.9)

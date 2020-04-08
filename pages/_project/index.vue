@@ -26,7 +26,7 @@
 
         a.detail__link.link-button-wh(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
-        nuxt-link.detail__back-button.link-button(to="/") ←BACK
+        nuxt-link.detail__back-button.link-button(@click.native="animateOn" to="/") ←BACK
 
 </template>
 <script>
@@ -62,6 +62,9 @@ export default {
             if (this.jsondata[this.$route.params.project].video){
                 this.videotrue = true;
             }
+        },
+        animateOn: function(){
+            this.$store.commit("changeAnimateStatus");
         }
     } 
 }

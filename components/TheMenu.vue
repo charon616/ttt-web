@@ -1,6 +1,6 @@
 <template lang="pug">
 .menus
-  //- header.menu(v-bind:class="{ black: animate }")
+  .mask(v-bind:class="{ black: animateMenu }")
   header.menu
     nuxt-link.menu__logo(to="/" @click.native="resetSlide")
       img(src="~assets/logo_bl.svg" )
@@ -34,7 +34,7 @@ export default {
   data(){
     return{
       isHide: false,
-      animate: false,
+      animateMenu: false,
       selectedProject: "",
       selectedPos: "",
       jsondata: jsonfile
@@ -47,17 +47,22 @@ export default {
   },
   watch: {
     page: function(val){ 
-      this.animate = true
-      setTimeout(() => this.animate = false, 2000)
+      // this.animateMenu = true
+      // setTimeout(() => this.animateMenu = false, 2000)
     },
     swiperPos: function(val){
       this.selectedProject = this.jsondata.projects_real_title[val-1]
       this.selectedPos = val
+    },
+    animate: function(val){
+      this.animateMenu = true
+      setTimeout(() => this.animateMenu = false, 1000)
     }
   },
   computed: mapState({
     page: state => state.page,
-    swiperPos: state => state.swiperPos
+    swiperPos: state => state.swiperPos,
+    animate: state => state.animate
   }),
   methods: {
     resetSlide: function(){
@@ -69,19 +74,25 @@ export default {
     },
     onclick: function(){
       this.isHide = !this.isHide
-    },
-    test: function(){
-      console.log("hey")
     }
-  },
-  mounted() {
-    // window.addEventListener('beforeunload', this.test);
   }
 }
 
 </script>
 
 <style scoped lang="stylus">
+.mask
+  width 100%
+  height 0%
+  background txt-color
+  position fixed
+  top 0
+  left 0
+  z-index 99
+  transition .6s all main-transition
+  &.black
+    height 100%
+
 .menu
   width 80px
   height 80px
@@ -91,15 +102,11 @@ export default {
   transform translateX(-50%)
   z-index 100
   transition .6s all main-transition
-  // background txt-color
   text-align center
   &__logo
     img
       width 96px
       height auto
-  &.black
-    width 100%
-    height 100%
   &__sns
     z-index 80
     position fixed
