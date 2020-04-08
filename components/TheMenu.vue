@@ -14,19 +14,15 @@
       font-awesome-icon.icon.icon-twitter(:icon="['fab', 'twitter']") 
       span TWITTER 
 
-  //- .pos
-  //-   .no(v-if="selectedPos != 0")
-  //-     .number
-  //-       //- p.main-font(:key="selectedPos") No.
-  //-       p.main-font No.
-  //-       transition(name="slide-fade" mode="out-in")
-  //-         //- span.main-font(:key="selectedPos") {{ selectedPos }} 
-  //-         span.main-font(:key="selectedPos") 1
-  //-   .name
-  //-   .name(v-if="selectedPos != 0")
-  //-     transition(name="slide-fade2" mode="out-in")
-  //-       //- p.main-font(:key="selectedPos") {{ selectedProject }}
-  //-       p.main-font(:key="selectedPos") test
+  .pos
+    .no(v-if="selectedPos != 0")
+      .number
+        p.main-font(:key="selectedPos") No.
+        transition(name="slide-fade" mode="out-in")
+          span.main-font(:key="selectedPos") {{ selectedPos }} 
+    .name(v-if="selectedPos != 0")
+      transition(name="slide-fade2" mode="out-in")
+        p.main-font(:key="selectedPos") {{ selectedProject }}
 
 </template>
 
@@ -38,7 +34,10 @@ export default {
   data(){
     return{
       isHide: false,
-      animate: false
+      animate: false,
+      selectedProject: "",
+      selectedPos: "",
+      jsondata: jsonfile
     }
   },
   asyncData () {
@@ -50,10 +49,15 @@ export default {
     page: function(val){ 
       this.animate = true
       setTimeout(() => this.animate = false, 2000)
+    },
+    swiperPos: function(val){
+      this.selectedProject = this.jsondata.projects_real_title[val-1]
+      this.selectedPos = val
     }
   },
   computed: mapState({
-    page: state => state.page
+    page: state => state.page,
+    swiperPos: state => state.swiperPos
   }),
   methods: {
     resetSlide: function(){
@@ -78,40 +82,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.pos
-    text-align center
-    font-weight 800
-    width 100%
-    height 10%
-    display flex
-    justify-content center
-    align-items center
-    flex-direction column
-    z-index 100
-    .no
-      text-align right
-      position fixed
-      right 0
-      top 50%
-      padding 20px
-      transform translateY(-50%)
-      & > p
-        // display none
-      .number
-        display flex
-        justify-content flex-end
-        align-items center
-        flex-direction column
-        span
-          border 1px solid txt-color
-          width 36px
-          height 36px
-          text-align center
-          line-height 34px
-    .name
-      font-size 1.4em
-      // display none
-
 .menu
   width 80px
   height 80px
@@ -131,7 +101,7 @@ export default {
     width 100%
     height 100%
   &__sns
-    z-index 100
+    z-index 80
     position fixed
     top 50%
     left 0
@@ -166,9 +136,44 @@ export default {
         &:hover
           color lightgray
 
+.pos
+  text-align center
+  font-weight 800
+  display flex
+  justify-content center
+  align-items center
+  flex-direction column
+  z-index 100
+  position fixed
+  top 50%
+  right 0
+  z-index 70
+  .no
+    text-align right
+    position fixed
+    right 0
+    top 50%
+    padding 20px
+    transform translateY(-50%)
+    .number
+      display flex
+      justify-content flex-end
+      align-items center
+      flex-direction column
+      span
+        border 1px solid txt-color
+        width 36px
+        height 36px
+        text-align center
+        line-height 34px
+  .name
+    font-size 1.4em
+    display none
+
+
 +tb()
   .menu
-    width 100%
+    width 120px
     height 120px
     left 0
     transform initial
@@ -188,15 +193,45 @@ export default {
       right 0
       left initial
       width 120px
-      height 8%
+      height 10%
       .link
         margin auto
         width 120px
         height 60px
+  .pos
+    width 200px
+    height 10%
+    top 0
+    left 50%
+    transform translateX(-50%)
+    .no
+      text-align center
+      position initial
+      padding 0
+      transform initial
+      display flex
+      font-size .8rem
+      & > p
+        display initial
+      .number
+        justify-content center
+        flex-direction row
+        margin-left 8px
+        span
+          border none
+          width initial
+          height initial
+          line-height initial
+    .name
+      display initial
+      font-size 1rem
+    // p, span 
+    //   display none
 
 +sp()
   .menu
     height 80px
+    width 80px
     &__logo
       img
         width 80px
@@ -205,5 +240,7 @@ export default {
       .link
         width 80px
         height 40px
+  .pos
+    width 120px
 
 </style>

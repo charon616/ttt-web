@@ -1,17 +1,6 @@
 <template lang="pug">
 .container#container
-  .main-gallery
-    .pos
-      .no(v-if="selectedPos != 0")
-        //- p.main-font(:key="selectedPos") Project
-        .number
-          p.main-font(:key="selectedPos") No.
-          transition(name="slide-fade" mode="out-in")
-            span.main-font(:key="selectedPos") {{ selectedPos }} 
-      .name(v-if="selectedPos != 0")
-        transition(name="slide-fade2" mode="out-in")
-          p.main-font(:key="selectedPos") {{ selectedProject }}
-    
+  .main-gallery    
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
         MainPage
@@ -235,41 +224,9 @@ export default {
     height 86%
   .project-nav
     height 14%
-  .pos
-    text-align center
-    font-weight 800
-    width 100%
-    height 10%
-    display flex
-    justify-content center
-    align-items center
-    flex-direction column
-    z-index 1000
-    .no
-      text-align right
-      position fixed
-      right 0
-      top 50%
-      padding 20px
-      transform translateY(-50%)
-      & > p
-        display none
-      .number
-        display flex
-        justify-content flex-end
-        align-items center
-        flex-direction column
-        span
-          border 1px solid txt-color
-          width 36px
-          height 36px
-          text-align center
-          line-height 34px
-    .name
-      font-size 1.4em
-      display none
 
 .swiper
+  // margin-top 10%
   .swiper-slide 
     background-size cover
     background-position center
@@ -277,6 +234,7 @@ export default {
     width 100%
     height 90%
     display block
+    top 10%
   &.gallery-thumbs 
     height 100%
     width 50%
@@ -309,10 +267,15 @@ export default {
       svg
         fill lightgray
   &.gallery-thumbs .swiper-slide-active 
+    .st0
+      fill blue
     svg
       // transform scale(1.2)
     .ttt
-      fill #231815
+      fill bg-color
+      background txt-color
+    .rect
+      fill purple
     .harvestx
       fill color1
     .grubin
@@ -332,30 +295,6 @@ export default {
       height 90%
     .project-nav
       height 10%
-    .pos
-      .no
-        text-align center
-        position initial
-        padding 0
-        transform initial
-        display flex
-        font-size .8rem
-        & > p
-          display initial
-        .number
-          justify-content center
-          flex-direction row
-          margin-left 8px
-          span
-            border none
-            width initial
-            height initial
-            line-height initial
-      .name
-        display initial
-        font-size 1rem
-      p, span 
-        display none
   .swiper 
     &.gallery-thumbs 
       width 100%

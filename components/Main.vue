@@ -14,10 +14,9 @@ kinesis-container.ttt
     h2 There are 6 Awesome Projects.
     p Get more details about Todai To Texas↓
     a.link-button-wh(href="http://todaitotexas.com/" target="_blank") TTT WEB
-  //- .guide
-  //-   svg(width="100" height="100")
-  //-     polyline(points="0, 0 100, 100 30, 30" stroke="black" stroke-width="2")
-  //-   p scroll
+  .guide
+    .icon-scroll 
+    //- span Scroll
 
 </template>
 <script>
@@ -134,8 +133,42 @@ border = 8px
       color bg-color
   .guide
     text-align center
-    background pink 
     padding 32px
+    position relative
+    position absolute 
+    left 50%
+    top 50%
+    transform translateX(-50%)
+    .icon-scroll
+      width 40px
+      height 70px
+      margin-top -35px
+      box-shadow inset 0 0 0 2px bg-color
+      border-radius 25px
+      background rgba(0, 0, 0, .2)
+      color deeppink
+    .icon-scroll:before
+      content: ''
+      position absolute
+      width 8px
+      height 8px
+      background bg-color
+      margin-left -4px
+      top 8px
+      border-radius 4px
+      animation-duration 3s
+      animation-iteration-count infinite
+      animation-name scroll
+
+@keyframes scroll
+  0%
+    opacity: 1
+  60%
+    opacity: 0
+    transform: translateY(46px)
+  100%
+    opacity: 0
+    transform: translateY(46px)
 
 .link-button-wh
   margin-top 8px
@@ -160,7 +193,7 @@ border = 8px
     .message
       background rgba(0, 0, 0, 0)
       padding 0
-      bottom 32px
+      bottom 64px
       width 70%
       left 50%
       transform translateX(-50%)
@@ -171,6 +204,8 @@ border = 8px
         font-size 1rem
       h2, p
         color txt-color
+    .guide
+      display none
 
 
 </style>
