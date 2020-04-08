@@ -1,9 +1,9 @@
 <template lang="pug">
-.container#container(v-bind:class="{ white: this.$store.state.swiperPos != 0 }")
+.container#container
   .main-gallery
     .pos
       .no(v-if="selectedPos != 0")
-        p.main-font(:key="selectedPos") Project
+        //- p.main-font(:key="selectedPos") Project
         .number
           p.main-font(:key="selectedPos") No.
           transition(name="slide-fade" mode="out-in")
@@ -64,7 +64,6 @@ export default {
       },
       height: window.innerHeight,
       projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
-      selected: "",
       selectedProject: "",
       selectedPos: "",
       loading: true
@@ -88,7 +87,7 @@ export default {
       } : {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 200,
+        spaceBetween: 0,
         mousewheel: true,
         speed: 600,
         slidesPerView: 1,
@@ -116,7 +115,9 @@ export default {
         centeredSlides: true,
         slidesPerView: 7,
         touchRatio: 0.2,
-        slideToClickedSlide: true
+        slideToClickedSlide: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
       },
       jsondata: jsonfile
     }
@@ -128,7 +129,6 @@ export default {
       h.style.height = this.height + 'px';
     },
     slideChanged: function() {
-      this.selected = this.jsondata.projects_title[this.swiper.realIndex-1]
       this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
       this.selectedPos = this.swiper.realIndex
       this.$store.commit("updateSwiperPos", this.swiper.realIndex)
@@ -158,7 +158,8 @@ export default {
       this.swiper.controller.control = swiperThumbs
       swiperThumbs.controller.control = this.swiper
     });
-    this.swiper.on('slideChange', this.slideChange);
+
+    this.swiper.on('slideChangeTransitionEnd', this.slideChange);
     this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
     swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
 
@@ -166,12 +167,6 @@ export default {
     let h = document.getElementById('container');
     h.style.height = this.height + 'px';
     window.addEventListener('resize', this.handleResize);
-
-
-    // window.onload = function(){
-    //   this.loading = false
-    //   // setTimeout(() => alert("test"), 3000)
-    // };
   },
 }
 
@@ -249,6 +244,7 @@ export default {
     justify-content center
     align-items center
     flex-direction column
+    z-index 1000
     .no
       text-align right
       position fixed
@@ -273,7 +269,7 @@ export default {
       font-size 1.4em
       display none
 
-.swiper 
+.swiper
   .swiper-slide 
     background-size cover
     background-position center
@@ -358,12 +354,14 @@ export default {
       .name
         display initial
         font-size 1rem
+      p, span 
+        display none
   .swiper 
     &.gallery-thumbs 
       width 100%
     &.gallery-thumbs .swiper-slide-active 
       svg
-        transform scale(1.2)
+        // transform scale(1.2)
 
 +sp()
   .swiper 

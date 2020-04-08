@@ -15,6 +15,8 @@ kinesis-container.ttt
     p Get more details about Todai To Texas↓
     a.link-button-wh(href="http://todaitotexas.com/" target="_blank") TTT WEB
   //- .guide
+  //-   svg(width="100" height="100")
+  //-     polyline(points="0, 0 100, 100 30, 30" stroke="black" stroke-width="2")
   //-   p scroll
 
 </template>
@@ -127,11 +129,13 @@ border = 8px
     padding 32px
     position absolute 
     right 0
-    bottom 0
+    bottom 24px
     h2, p
       color bg-color
   .guide
     text-align center
+    background pink 
+    padding 32px
 
 .link-button-wh
   margin-top 8px

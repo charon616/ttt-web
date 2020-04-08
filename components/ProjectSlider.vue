@@ -7,7 +7,6 @@ kinesis-container.container
                     img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
                 .box-inner(v-else)
                     img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
-
                 .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
             h1.textarea__title(v-bind:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500") {{jsondata[title].title}}
@@ -47,6 +46,7 @@ border = 8px
 .container
     position relative
     color txt-color
+    backdrop-filter blur(8px) brightness(200%)
     .all
         width content-width
         height calc(86% * 0.9)
@@ -76,7 +76,7 @@ border = 8px
                 top 0 
                 left 'calc(%s * 0.4)' % content-width
                 z-index -1
-                clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)        
+                clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)  
         .textarea
             z-index 1
             width 40%
@@ -101,8 +101,9 @@ border = 8px
             height 100%
             .box-outer
                 width 100%
-                height 67%
+                height 60%
                 padding 16px 80px
+                margin-bottom 16px
                 .box-inner
                     width 100%
                     height 100%
@@ -114,7 +115,7 @@ border = 8px
                     left 'calc(80px + %s)' % 16px
                     top 'calc(16px + %s)' % 16px
             .textarea
-                height 33%
+                height 'calc(40% - %s)' % 16px
                 width 100%
                 padding 0 80px
                 text-align center
