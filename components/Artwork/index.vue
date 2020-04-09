@@ -29,22 +29,26 @@ export default {
       $canvas: this.$refs.canvas
     });
 
-    window.addEventListener('mousemove', e => {
-      this.artworkGL.mouseMoved(e.clientX, e.clientY);
-      if(this.$store.state.swiperPos != 0){
-        return;
-      }
-      let lighting = document.getElementById('lighting');
-      lighting.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
-    });
-
+    window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('resize', this.onResize);
 
   },
   methods: {
     onResize: function() {
       this.artworkGL.changeSize(window.innerWidth, window.innerHeight, window.devicePixelRatio)
+    },
+    onMouseMove: function(e){
+      this.artworkGL.mouseMoved(e.clientX, e.clientY);
+      if(this.$store.state.swiperPos != 0){
+        return;
+      }
+      let lighting = document.getElementById('lighting');
+      lighting.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
     }
+  },
+  destroyed() {
+    window.removeEventListener('mousemove', this.onMouseMove)
+    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>

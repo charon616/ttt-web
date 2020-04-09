@@ -157,6 +157,9 @@ export default {
     h.style.height = this.height + 'px';
     window.addEventListener('resize', this.handleResize);
   },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize);
+  }
 }
 
 </script>
