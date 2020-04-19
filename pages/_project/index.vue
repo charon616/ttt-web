@@ -3,8 +3,8 @@
     img.main-img(:src="image")
     .detail
         h1.detail__title {{jsondata[$route.params.project].title}}
-        p.detail__msg {{jsondata[$route.params.project].msg_en}}
-        p.detail__msg {{jsondata[$route.params.project].msg_jp}}
+        p.detail__msg(v-html="jsondata[$route.params.project].msg_en")
+        p.detail__msg(v-html="jsondata[$route.params.project].msg_jp")
 
 
         //- video on PC and tablet
@@ -17,16 +17,18 @@
         .detail__video(v-if="videotrue")
             iframe(width="100%" height="100%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
-        p.detail__desc {{jsondata[$route.params.project].desc_en}}
-        p.detail__desc {{jsondata[$route.params.project].desc_jp}}
-
+        p.detail__desc(v-html="jsondata[$route.params.project].desc_en")
+        p.detail__desc(v-html="jsondata[$route.params.project].desc_jp")
+        
+        h3.detail__picheader Gallery
         .detail__picwrapper
+
             img.detail__pic(v-for="(url, index) in jsondata[$route.params.project].img" :key="index" :src="url")
                 //- img(:src="url")
 
-        a.detail__link.link-button-wh(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
+        a.detail__link.link-button(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
-        nuxt-link.detail__back-button.link-button(@click.native="animateOn" to="/") ←BACK
+        nuxt-link.detail__back-button(@click.native="animateOn" to="/") ← BACK TO TOP
 
 </template>
 <script>
@@ -38,7 +40,6 @@ export default {
             jsondata: jsonfile,
             active: false,
             videotrue: false,
-            videoId: 'cB7Il-HaLpY'
         }
     },
     computed: {
@@ -78,20 +79,33 @@ export default {
     background bg-color
     .main-img
         width 100%
-        height 400px
+        height 320px
         object-fit cover
+        text-align center
     .detail
         width 80%
+        max-width 960px
         margin 0 auto
         padding 16px
         // h1 
         //     text-align center
         &__title, &__msg, &__video
             text-align center
+        &__title
+            font-size 40px
+            margin-top 16px
+            letter-spacing .05em
+            margin-bottom 32px
+            line-height 40px
+        &__msg
+            font-size 16px
+            margin-bottom 24px
+            line-height 30px
         &__videobutton
-            display block
             text-align center
-
+            display block
+            width 240px
+            margin 48px auto 32px
         &__modal
             &-wrapper
                 display flex
@@ -123,34 +137,63 @@ export default {
             display none
         &__desc
             padding 16px 0 
+            letter-spacing .1em
+            line-height 24px
+        &__picheader
+            text-align center
+            margin 24px 0 32px
+            letter-spacing .05em
         &__picwrapper
-            display flex
-            justify-content space-between
+            display grid
+            grid-template-columns 1fr 1fr
+            column-gap 48px
+            row-gap 48px
         &__pic
-            width 48%
-            height auto
-            object-fit cover
+            padding 32px
+            width 100%
+            object-fit contain
         &__link
             text-align center
-            border 3px solid txt-color
             display block
+            width 240px
+            margin 48px auto 0
         &__back-button
+            transition all .4s main-transition
+            margin-top 32px
             text-align center
             display block
+            color txt-color
+            text-text-decoration none
+            font-weight bold
+            font-size 1.2em
+            letter-spacing .1em
+
+            &:hover
+                color lightgray
+                letter-spacing .15em
+
++tb()
+    .container
+        .detail
+            width 90%
+            max-width 700px
+            &__picwrapper
+                gap 32px
+            &__pic
+                padding 0
 
 +sp()
     .container
         .detail
             width 100%
+            padding 16px 24px
             &__pic
                 width 100%
                 margin 0
             &__picwrapper
-                flex-direction column
-            &__pic
-                margin-bottom 16px
-            &__link
-                margin 0
+                grid-template-columns 1fr
+            // &__link
+            //     margin 0 auto
             &__videobutton
                 display none
             &__video

@@ -6,12 +6,13 @@
     "msg_en": "HARVESTX is an agritech project developing robots to grow and harvest strawberries.",
     "msg_jp": "HARVESTXは、イチゴを栽培および収穫するロボットを開発するアグリテックプロジェクトです。",
     "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future. We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
-    "desc_jp": "植物工場向けのロボットを研究開発して、完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。現在、 私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。 これは現在、 農家にとって大きな負担となっています。 ",
+    "desc_jp": "植物工場向けのロボットを研究開発して完全自動化された果物栽培を実現し、将来の食糧供給と労働力不足の問題を解決します。<br>現在、私たちはイチゴに焦点を当てており、 受粉と収穫をサポートするロボットを開発しています。<br>これは現在、 農家にとって大きな負担となっています。",
     "main_img": "/harvestx.jpg",
     "img": ["/harvestx.jpg", "/harvestx_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
-    "color": "#d52c5b"
+    "color": "#d52c5b",
+    "videoID": "cB7Il-HaLpY"
   },
   "grubin": {
     "title": "Grubin",
@@ -23,7 +24,8 @@
     "img": ["/grubin.jpg", "/grubin_fl.jpg"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
-    "color": "#f9c124"
+    "color": "#f9c124",
+    "videoID": "cB7Il-HaLpY"
   },
   "genkan": {
     "title": "GenKan",
@@ -35,7 +37,8 @@
     "img": ["/genkan.jpg", "/genkan_fl.jpg"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
-    "color": "#0286fe"
+    "color": "#0286fe",
+    "videoID": "cB7Il-HaLpY"
   },
   "syrinx": {
     "title": "Syrinx",
@@ -47,7 +50,8 @@
     "img": ["/syrinx.jpg", "/syrinx_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
-    "color": "#00a8ba"
+    "color": "#00a8ba",
+    "videoID": "cB7Il-HaLpY"
   },
   "roboxer": {
     "title": "ROBOXER",
@@ -59,7 +63,8 @@
     "img": ["/roboxer.jpg", "/roboxer_fl.jpg"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
-    "color": "#ff1418"
+    "color": "#ff1418",
+    "videoID": "cB7Il-HaLpY"
   },
   "wearbo": {
     "title": "wearbo",
@@ -71,6 +76,7 @@
     "img": ["/wearbo.jpg", "/wearbo_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
-    "color": "#000000"
+    "color": "#000000",
+    "videoID": "cB7Il-HaLpY"
   }
 }
