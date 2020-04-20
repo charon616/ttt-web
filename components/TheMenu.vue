@@ -2,7 +2,7 @@
 .menus
   .mask(v-bind:class="{ black: animateMenu }")
   header.menu
-    nuxt-link.menu__logo(to="/" @click.native="resetSlide")
+    nuxt-link.menu__logo(to="/" @click.native="resetSlide(); animateOn()")
       img(src="~assets/logo_bl.svg" )
   .menu__sns(v-bind:class="{ hide: isHide }")
     //- span.min \SHARE/
@@ -74,6 +74,11 @@ export default {
     },
     onclick: function(){
       this.isHide = !this.isHide
+    },
+    animateOn: function(){
+      if(this.$store.state.page != "index"){
+        this.$store.commit("changeAnimateStatus");
+      }
     }
   }
 }
