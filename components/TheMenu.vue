@@ -94,7 +94,7 @@ export default {
     height 100%
 
 .menu
-  width 80px
+  // width 80px
   height 80px
   position fixed
   top 0
