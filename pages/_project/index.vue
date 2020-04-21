@@ -44,7 +44,7 @@ export default {
     },
     computed: {
         image: function(){
-            return require("~/assets/project" + this.jsondata[this.$route.params.project].main_img)
+            return require("~/assets/project/detail" + this.jsondata[this.$route.params.project].main_img)
         }   
     },
     mounted(){

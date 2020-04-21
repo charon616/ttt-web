@@ -1,25 +1,23 @@
 <template lang="pug">
 .menus
   .mask(v-bind:class="{ black: animateMenu }")
+    img(src="~assets/logo_wh.svg")
   header.menu
     nuxt-link.menu__logo(to="/" @click.native="resetSlide(); animateOn()")
       img(src="~assets/logo_bl.svg" )
   .menu__sns(v-bind:class="{ hide: isHide }")
-    //- span.min \SHARE/
-
-    a(href="https://www.facebook.com/" target="_blank").link
+    span.main-font SHARE ON: FACEBOOK / TWITTER
+    a.fb-share-button.link(data-href="https://2020.todaitotexas.com/" data-layout="button" data-size="small" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F2020.todaitotexas.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
       font-awesome-icon.icon.icon-facebook(:icon="['fab', 'facebook-f']")
-      span FACEBOOK
-    a(href="https://twitter.com/home?lang=ja" target="_blank").link
+    a.tw-share-button.link(href="http://twitter.com/share?url=https://2020.todaitotexas.com/&text=Todai To Texas 2020 special site&hashtags=SXSW" target="_blank")
       font-awesome-icon.icon.icon-twitter(:icon="['fab', 'twitter']") 
-      span TWITTER 
 
   .pos
     .no(v-if="selectedPos != 0")
-      .number
-        p.main-font(:key="selectedPos") No.
-        transition(name="slide-fade" mode="out-in")
-          span.main-font(:key="selectedPos") {{ selectedPos }} 
+      transition(name="slide-fade" mode="out-in")
+        span.num(:key="selectedPos") No.{{ selectedPos }}
+      .line  
+      span.all 6
     .name(v-if="selectedPos != 0")
       transition(name="slide-fade2" mode="out-in")
         p.main-font(:key="selectedPos") {{ selectedProject }}
@@ -90,13 +88,34 @@ export default {
   width 100%
   height 0%
   background txt-color
+  background bg-color
   position fixed
   top 0
   left 0
   z-index 99
   transition .6s all main-transition
+  border-bottom 1px solid txt-color
+  margin 0 auto
+  display flex
+  justify-content center
+  align-items center
+  img 
+    position fixed
+    top 50vh
+    left 50%
+    transition .6s all main-transition
+    transform translateX(-50%) translateY(-50%)
+    width 600px
+    height 600px
+    display none
+    margin 0 auto
+    opacity 0
   &.black
     height 100%
+    img 
+      opacity 1
+      display initial
+      transition .6s all main-transition
 
 .menu
   // width 80px
@@ -119,24 +138,31 @@ export default {
     left 0
     display flex
     flex-direction column
-    width 20%
-    padding 0 0 0 8px
+    width 64px
+    height 100%
+    // padding 0 0 0 8px
     transition all .6s main-transition
     transform translateY(-50%)
-    // .min 
-    //   margin-left 8px
-    //   font-size .8rem
+    border-right 1px solid txt-color
+    span 
+      font-weight 800
+      writing-mode vertical-rl
+      line-height 64px
+      font-size 2em
+      
     .link
       padding 16px
-      width 36px
-      height 36px
+      width 48px
+      height 48px
       position relative
       margin 0 8px
+      background txt-color
+      border 1px solid bg-color
       &:hover
         .icon
           color lightgray 
       .icon
-        color txt-color
+        color bg-color
         vertical-align middle
         display table-cell
         position absolute
@@ -163,21 +189,38 @@ export default {
   .no
     text-align right
     position fixed
-    right 0
+    right 16px
     top 50%
-    padding 20px
     transform translateY(-50%)
-    .number
-      display flex
-      justify-content flex-end
-      align-items center
-      flex-direction column
-      span
-        border 1px solid txt-color
-        width 36px
-        height 36px
-        text-align center
-        line-height 34px
+    width 96px
+    height 96px
+    .num
+      text-align left
+      position absolute
+      top 16px
+      left 16px
+    .line
+      width 100%
+      height 100%
+      top 0 
+      right 0
+      position absolute
+      &::after
+        content ""
+        display block
+        width 100%
+        height 1px
+        background txt-color
+        position absolute
+        top calc(14% - 5px)
+        right 14%
+        transform rotate(-45deg)
+        transform-origin 100% 50%
+    .all
+      text-align right
+      position absolute
+      right 16px
+      bottom 16px
   .name
     font-size 1.4em
     display none
