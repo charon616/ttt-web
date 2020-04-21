@@ -104,8 +104,8 @@ export default {
     left 50%
     transition .6s all main-transition
     transform translateX(-50%) translateY(-50%)
-    width 500px
-    height 500px
+    width 420px
+    height 420px
     display none
     margin 0 auto
     opacity 0

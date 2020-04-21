@@ -126,8 +126,9 @@ border = 8px
     width 720px
     padding 0
     z-index 1
-    background bg-color
     border 1px solid txt-color
+    backdrop-filter blur(8px) brightness(150%)
+    background rgba(255, 255, 255, .5) 
     &__content
       margin 32px 108px 32px 32px
       h2 
@@ -135,8 +136,8 @@ border = 8px
         margin-bottom 20px
         font-weight 800
         position relative
+        font-size 1.2em
       h2, p
-        color bg-color
         color txt-color
       p
         text-align justify
@@ -177,6 +178,7 @@ border = 8px
       width auto
       background rgba(0, 0, 0, 0)
       border none
+      backdrop-filter none
       .message__content
         margin 0
         .link-button
@@ -230,14 +232,15 @@ border = 8px
 
 +tb()
   .ttt
+    margin 0 auto
     .title
       position initial
-      margin 40px auto
-      width 50%
+      margin 32px auto
       height auto
+      width 55%
       .title-element
         font-size calc(100vw/5)
-        line-height calc(100vw/5 * 0.7)
+        line-height calc(100vw/5 * 0.8)
         &:after
           background sxsw1
         &:nth-child(2)
@@ -252,17 +255,17 @@ border = 8px
     .message-bg
       display none
     .message
-      padding 0
-      transform translateX(-50%)
-      padding 32px 40px 108px 40px
+      transform translateX(-50%) translateY(-50%)
+      padding 32px 80px 108px 80px
       left 50%
-      top 0
+      top 50%
       text-align center
+      width calc(100% - 160px)
       &__content
         margin 0
       &.close
         right initial
-        bottom 32px
+        bottom 0
         left 50%
       .close-button
         right 50%
@@ -275,18 +278,22 @@ border = 8px
 +sp()
   .ttt
     .message
-      position fixed
-      top 0
-      left 50%
+      padding 8px 32px 16px
       width 100%
       height 100%
-      // max-width 100%
-      // max-height 50vh
-      overflow scroll
+      top 0
+      transform translateX(-50%)
+      border none
+      &.close
+        position relative
       &__content
         p 
           font-size 12px
           line-height 18px
-          // letter-spacing 0
+        h2
+          margin 8px 0
+          font-size 1.2em
+        a.link-button
+          display none
 
 </style>

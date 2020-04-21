@@ -51,7 +51,6 @@ border = 8px
 .container
     position relative
     color txt-color
-    // backdrop-filter blur(8px) brightness(200%)
     .all
         width content-width
         height calc(86% * 0.9)
