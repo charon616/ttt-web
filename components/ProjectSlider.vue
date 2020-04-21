@@ -4,12 +4,12 @@ kinesis-container.container
         nuxt-link(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
-                    img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
+                    img(:src="image" :key="title" data-swiper-parallax-scale="0.8")
                 .box-inner(v-else)
-                    img(:src="image" v-bind:key="title" data-swiper-parallax-scale="0.8")
+                    img(:src="image" :key="title" data-swiper-parallax-scale="0.8")
                 .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
-            h1.textarea__title(v-bind:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
+            h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
             p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="jsondata[title].msg_en")
             p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")

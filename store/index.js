@@ -3,7 +3,8 @@ export const state = () => ({
   swiperPos: 0,
   isSlideToDefault: false,
   animate: false,
-  isClose: false
+  isClose: false,
+  loading: true
 })
 
 export const getters = {
@@ -11,7 +12,8 @@ export const getters = {
   page: state => state.page,
   swiperPos: state => state.swiperPos,
   animate: state => state.animate,
-  isClose: state => state.isClose
+  isClose: state => state.isClose,
+  loading: state => state.loading
 }
 
 export const mutations = {
@@ -29,5 +31,8 @@ export const mutations = {
   },
   changeIsCloseStatus(state) {
     state.isClose = !state.isClose
+  },
+  changeLoadingStatus(state) {
+    state.loading = false
   }
 }

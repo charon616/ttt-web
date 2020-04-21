@@ -13,7 +13,7 @@
         Pro0
       swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
         component(v-bind:is="projects[index]")
-  //- .load(v-if="loading")
+  .load(v-if="loading")
 
 </template>
 <script>
@@ -48,54 +48,26 @@ export default {
   data() {
     return {
       swiperOptionTop: {
+        loop: true,
+        loopedSlides: 7, // looped slides should be the same
+        spaceBetween: 0,
+        mousewheel: true,
+        speed: 600,
+        slidesPerView: 1,
+        centeredSlides: true,
+        direction: 'vertical',
+        parallax: true,
+        breakpoints: {
+          1024: {
+            spaceBetween: 200,
+            resistanceRatio: 0.3,
+            speed: 800,
+            touchAngle: 90,
+            preloadImages: false
+          }
+        }
       },
       swiperOptionThumbs: {
-      },
-      height: window.innerHeight,
-      projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
-      selectedProject: "",
-      selectedPos: "",
-      loading: true
-    }
-  },
-  asyncData (ctx) {
-    return { 
-      swiperOptionTop: (ctx.isMobile) ? {
-        loop: true,
-        loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 200,
-        resistanceRatio: 0.3,
-        mousewheel: true,
-        speed: 800,
-        slidesPerView: 1,
-        centeredSlides: true,
-        touchAngle: 90,
-        direction: 'vertical',
-        lazyLoading: true,
-        preloadImages: false
-      } : {
-        loop: true,
-        loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 0,
-        mousewheel: true,
-        speed: 600,
-        slidesPerView: 1,
-        centeredSlides: true,
-        direction: 'vertical',
-        parallax: true
-      },
-      swiperOptionThumbs: (ctx.isMobile) ? 
-      {
-        loop: true,
-        loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 0,
-        speed: 600,
-        mousewheel: true,
-        centeredSlides: true,
-        slidesPerView: 4,
-        touchRatio: 0.2,
-        slideToClickedSlide: true
-      } : {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
         spaceBetween: 0,
@@ -107,7 +79,20 @@ export default {
         slideToClickedSlide: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
+        breakpoints: {
+          1024: {
+            slidesPerView: 4,
+          }
+        }
       },
+      height: window.innerHeight,
+      projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
+      selectedProject: "",
+      selectedPos: ""
+    }
+  },
+  asyncData (ctx) {
+    return { 
       jsondata: jsonfile
     }
   },
@@ -116,6 +101,9 @@ export default {
       this.height = window.innerHeight;
       let h = document.getElementById('container');
       h.style.height = this.height + 'px';
+
+      this.swiper.update()
+      this.swiperThumbs.update()
     },
     slideChanged: function() {
       this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
@@ -124,9 +112,6 @@ export default {
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
-    },
-    push: function() {
-      this.loading = false;
     }
   },
   watch: {
@@ -136,26 +121,31 @@ export default {
   },
   computed: mapState({
     isSlideToDefault: state => state.isSlideToDefault,
+    loading: state => state.loading,
     swiper(){
       return this.$refs.swiperTop.swiper
+    },
+    swiperThumbs(){
+      return this.$refs.swiperThumbs.swiper
     }
   }),
   mounted() {
     this.$store.commit("updatePage","index")
-    const swiperThumbs = this.$refs.swiperThumbs.swiper
     this.$nextTick(() => {
-      this.swiper.controller.control = swiperThumbs
-      swiperThumbs.controller.control = this.swiper
+      this.swiper.controller.control = this.swiperThumbs
+      this.swiperThumbs.controller.control = this.swiper
     });
 
     this.swiper.on('slideChangeTransitionEnd', this.slideChange);
     this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
-    swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
+    this.swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
 
     this.height = window.innerHeight;
     let h = document.getElementById('container');
     h.style.height = this.height + 'px';
     window.addEventListener('resize', this.handleResize);
+
+    setTimeout(() => this.$store.commit("changeLoadingStatus"), 3000)
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);
