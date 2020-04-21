@@ -74,7 +74,7 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-    width 100vw
+    width 100%
     padding-bottom 80px
     background bg-color
     .main-img

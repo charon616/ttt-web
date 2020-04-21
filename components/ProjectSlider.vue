@@ -131,23 +131,14 @@ border = 8px
                     display none
                 &__msg
                     letter-spacing 0
-                    // text-align center
-                    // line-height 1.2rem
-                    font-size .9rem
+                    text-align center
+                    font-size 16px
                 &__msg-en
                     font-weight 800
                     margin 8px 0 0 0
-                    font-size 1.2rem
                     font-family: aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
                 &__msg-jp
                     margin 8px 0 
-
-    .link-button
-        margin-top 8px
-        padding 8px 16px
-        font-size 1rem
-        background white
-        color black
 
 +sp()
     .container
