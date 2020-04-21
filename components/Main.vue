@@ -79,7 +79,7 @@ border = 8px
   .title
     position absolute
     padding 8px
-    width 480px
+    width 'calc(%s * 0.4)' % content-width
     height 100%
     right calc(50% + 120px)
     z-index -2
@@ -101,12 +101,9 @@ border = 8px
         top 0
         z-index -1
         clip-path polygon(0 16px, 100% 0, 100% calc(100% - 16px), 0% 100%)
-      &:nth-child(2)
-        animation-delay .2s 
-      &:nth-child(3)
-        animation-delay .4s 
-      &:nth-child(4)
-        animation-delay .6s 
+      for num in (2..4)
+        &:nth-child({num})
+          animation-delay num * .2s 
   .message-bg
     z-index -1
     position fixed
@@ -114,9 +111,7 @@ border = 8px
     left 0
     width 100%
     height 100%
-    display flex
-    justify-content center
-    align-items center
+    {flex-center}
   .message
     position absolute
     left calc(50% - 120px)
@@ -124,11 +119,12 @@ border = 8px
     transform translateY(-50%)
     text-align left
     width 720px
+    width 'calc(%s * 0.6)' % content-width
     padding 0
     z-index 1
     border 1px solid txt-color
     backdrop-filter blur(8px) brightness(150%)
-    background rgba(255, 255, 255, .5) 
+    background alpha(bg-color, .5)
     &__content
       margin 32px 108px 32px 32px
       h2 
@@ -176,7 +172,7 @@ border = 8px
       top initial
       left initial
       width auto
-      background rgba(0, 0, 0, 0)
+      background alpha(txt-color, 0)
       border none
       backdrop-filter none
       .message__content
@@ -206,7 +202,7 @@ border = 8px
       margin-top -35px
       box-shadow inset 0 0 0 2px bg-color
       border-radius 25px
-      background rgba(0, 0, 0, .2)
+      background alpha(txt-color, .2)
     .icon-scroll:before
       content: ''
       position absolute
@@ -241,32 +237,29 @@ border = 8px
       .title-element
         font-size calc(100vw/5)
         line-height calc(100vw/5 * 0.8)
-        &:after
-          background sxsw1
-        &:nth-child(2)
-          &::after
-            background sxsw2
-        &:nth-child(3)
-          &::after
-            background sxsw3
-        &:nth-child(4)
-          &::after
-            background sxsw4
+        for num in (1..4)
+          &:nth-child({num})
+            &::after
+              background sxsw[ num - 1]
     .message-bg
       display none
     .message
       transform translateX(-50%) translateY(-50%)
-      padding 32px 80px 108px 80px
+      padding 16px 40px 108px 40px
       left 50%
-      top 50%
+      top calc(50% - 32px)
       text-align center
       width calc(100% - 160px)
+      height 100%
       &__content
         margin 0
       &.close
-        right initial
-        bottom 0
-        left 50%
+        padding 0
+        transform translateX(0) translateY(0)
+        left 0
+        top initial
+        bottom 108px
+        height auto
       .close-button
         right 50%
         top initial 
@@ -280,12 +273,7 @@ border = 8px
     .message
       padding 8px 32px 16px
       width 100%
-      height 100%
-      top 0
-      transform translateX(-50%)
       border none
-      &.close
-        position relative
       &__content
         p 
           font-size 12px

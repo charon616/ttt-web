@@ -17,25 +17,25 @@ tb()
 
 .slide-fade-enter-active, .slide-fade-leave-active 
   transition all .3s main-transition
-  webkit-clip-path: inset(0);
-  clip-path: inset(0);
+  webkit-clip-path inset(0)
+  clip-path inset(0)
 .slide-fade-enter
-  -webkit-clip-path: inset(100% 0 0 0);
-  clip-path: inset(100% 0 0 0);
+  -webkit-clip-path inset(100% 0 0 0)
+  clip-path inset(100% 0 0 0)
 .slide-fade-leave-to
-  -webkit-clip-path: inset(0 0 100% 0);
-  clip-path: inset(0 0 100% 0);
+  -webkit-clip-path inset(0 0 100% 0)
+  clip-path inset(0 0 100% 0)
 
 .slide-fade2-enter-active, .slide2-fade-leave-active 
   transition all .3s .1s main-transition
-  webkit-clip-path: inset(0);
-  clip-path: inset(0);
+  webkit-clip-path inset(0)
+  clip-path inset(0)
 .slide-fade2-enter
-  -webkit-clip-path: inset(100% 0 0 0);
-  clip-path: inset(100% 0 0 0);
+  -webkit-clip-path inset(100% 0 0 0)
+  clip-path inset(100% 0 0 0)
 .slide-fade2-leave-to
-  -webkit-clip-path: inset(0 0 100% 0);
-  clip-path: inset(0 0 100% 0);
+  -webkit-clip-path inset(0 0 100% 0)
+  clip-path inset(0 0 100% 0)
 
 /*                                      */
 /*   サイト全体のページ遷移のトランジション   */
@@ -56,32 +56,30 @@ tb()
   font-weight bold
   font-size 1.2em
   letter-spacing .1em
-  // border 3px solid txt-color
   border 1px solid txt-color
   padding 14px 22px
   margin-top 16px
   display inline-block
   &:hover
     transition all .3s main-transition
-    background rgba(0, 0, 0, 0)
+    background alpha(txt-color, 0)
     color txt-color
     letter-spacing .2em
 
 .link-button-wh
-  transition all .4s main-transition
+  @extend .link-button
   color txt-color
   background bg-color
-  text-decoration none
-  font-weight bold
-  font-size 1.2em
-  letter-spacing .1em
-  // border 3px solid bg-color
   border 1px solid bg-color
-  padding 14px 22px
-  margin-top 16px
-  display inline-block
   &:hover
-    transition all .3s main-transition
-    background rgba(0, 0, 0, 1)
+    background alpha(txt-color, 1)
     color bg-color
-    letter-spacing .2em
+
+/*                                      */
+/*           上下左右中央揃え              */
+/*                                      */
+flex-center = @block {
+  display flex
+  justify-content center
+  align-items center
+}

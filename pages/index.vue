@@ -179,35 +179,27 @@ export default {
     height 2px
     animation shutterOpen 3s forwards
 
-@keyframes byeShutter {
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    display: none;
-    z-index: -1;
-  }
-}
+@keyframes byeShutter 
+  60% 
+    opacity 1
+  100% 
+    opacity 0
+    display none
+    z-index -1
 
-@keyframes shutterOpen {
-  0% {
-    width: 0;
-    height: 2px;
-  }
-  50% {
-    width: 100%;
-    height: 2px;
-  }
-  90% {
-    width: 100%;
-    height: 100%;
-  }
-  100% {
-    width: 100%;
-    height: 100%;
-  }
-}
+@keyframes shutterOpen 
+  0% 
+    width 0
+    height 2px
+  50% 
+    width 100%
+    height 2px
+  90% 
+    width 100%
+    height 100%
+  100% 
+    width 100%
+    height 100%
 
 .container
   width 100%
@@ -219,7 +211,6 @@ export default {
     height 14%
 
 .swiper
-  // margin-top 10%
   .swiper-slide 
     background-size cover
     background-position center
@@ -248,9 +239,7 @@ export default {
       margin auto
       background-color txt-color
   &.gallery-thumbs .swiper-slide 
-    display flex
-    justify-content center
-    align-items center
+    {flex-center}
     transition all .6s main-transition
     svg
       transition transform .6s main-transition
@@ -260,27 +249,12 @@ export default {
       svg
         fill lightgray
   &.gallery-thumbs .swiper-slide-active 
-    .st0
-      fill blue
-    svg
-      // transform scale(1.2)
     .ttt
       fill bg-color
       background txt-color
-    .rect
-      fill purple
-    .harvestx
-      fill color1
-    .grubin
-      fill color2
-    .syrinx
-      fill color3
-    .genkan
-      fill color4
-    .roboxer
-      fill color5
-    .wearbo
-      fill color6
+    for num in (0..5)
+      .{array[num]}
+        fill colors[num]
 
 +tb()
   .container
@@ -291,9 +265,6 @@ export default {
   .swiper 
     &.gallery-thumbs 
       width 100%
-    &.gallery-thumbs .swiper-slide-active 
-      svg
-        // transform scale(1.2)
 
 +sp()
   .swiper 
@@ -304,8 +275,5 @@ export default {
     &.gallery-thumbs .swiper-slide 
       &:hover
         font-size 1em
-
-
-
 
 </style>

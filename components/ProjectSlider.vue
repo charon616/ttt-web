@@ -1,7 +1,7 @@
 <template lang="pug">
 kinesis-container.container
     .all
-        nuxt-link(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
+        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     img(:src="image" :key="title" data-swiper-parallax-scale="0.8")
@@ -14,8 +14,6 @@ kinesis-container.container
             p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
                 nuxt-link.link-button(@click.native="animateOn" :to="{ name: 'project', params: { project:title } }") DETAIL
-
-
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
@@ -55,32 +53,31 @@ border = 8px
         width content-width
         height calc(86% * 0.9)
         margin 0 auto
-        display flex
-        align-items center
-        justify-content center
-        .box-outer
-            z-index 0
+        {flex-center}
+        .box
             width 60%
-            position relative
-            z-index -1
-            .box-inner
-                width 'calc(%s * 0.6)' % content-width
-                height 'calc(%s * 0.6 * 0.67)' % content-width
-                z-index 1
-                clip-path polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
-                img
-                    width 100%
-                    height auto
-                    object-fit cover
-            .color
-                width 'calc(%s * 0.6)' % content-width
-                height 'calc(%s * 0.6 * 0.67)' % content-width
-                z-index 1
-                position absolute
-                top 0 
-                left 'calc(%s * 0.4)' % content-width
+            .box-outer
+                width 100%
+                position relative
                 z-index -1
-                clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)  
+                .box-inner
+                    width 'calc(%s * 0.6)' % content-width
+                    height 'calc(%s * 0.6 * 0.67)' % content-width
+                    z-index 1
+                    clip-path polygon(0 5%, 100% 0, 100% 95%, 0% 100%)
+                    img
+                        width 100%
+                        height auto
+                        object-fit cover
+                .color
+                    width 'calc(%s * 0.6)' % content-width
+                    height 'calc(%s * 0.6 * 0.67)' % content-width
+                    z-index 1
+                    position absolute
+                    top 0 
+                    left 'calc(%s * 0.4)' % content-width
+                    z-index -1
+                    clip-path polygon(0 5%, 0% 100%, border 'calc(100% - %s)' % border, border 'calc(5% + %s)' % border, 'calc(100% - %s)' % border border, 'calc(100% - %s)' % border 'calc(95% - %s)' % border, border 'calc(100% - %s)' % border, 0 100%, 100% 95%, 100% 0)  
         .textarea
             z-index 1
             width 40%
@@ -103,23 +100,24 @@ border = 8px
             display block
             width 100%
             height 100%
-            .box-outer
-                width 100%
-                height 60%
-                padding 16px 80px
-                margin-bottom 16px
-                .box-inner
+            .box
+                .box-outer
                     width 100%
-                    height 100%
-                    img
+                    height 60%
+                    padding 16px 80px
+                    margin-bottom 16px
+                    .box-inner
+                        width 100%
                         height 100%
-                .color
-                    width 'calc(100% - %s)' % 160px
-                    height 'calc(100% - %s)' % 32px
-                    left 'calc(80px + %s)' % 16px
-                    top 'calc(16px + %s)' % 16px
+                        img
+                            height 100%
+                    .color
+                        width calc(100% - 160px)
+                        height calc(100% - 32px)
+                        left 96px
+                        top 32px
             .textarea
-                height 'calc(40% - %s)' % 16px
+                height calc(40% - 16px)
                 width 100%
                 padding 0 80px
                 text-align center
@@ -142,14 +140,15 @@ border = 8px
 +sp()
     .container
         .all
-            .box-outer
-                padding 0 32px
-                height 40%
-                .color
-                    width 'calc(100% - %s)' % 64px
-                    height 100%
-                    left 'calc(32px + %s)' % 16px
-                    top 16px
+            .box
+                .box-outer
+                    padding 0 32px
+                    height 40%
+                    .color
+                        width calc(100% - 64px)
+                        height 100%
+                        left 48px
+                        top 16px
             .textarea
                 padding 32px
                 height 60%
@@ -157,6 +156,5 @@ border = 8px
                     margin 0
                 &__msg-jp
                     margin 4px 0
-
 
 </style>

@@ -24,21 +24,15 @@ export default {
       }
     }
   },
-  asyncData (ctx) {
-    return {
-      isMousemove: (ctx.isMobile) ? false : true
-    }
-  },
   mounted () {
     this.artworkGL = new ArtworkGL({
       $canvas: this.$refs.canvas
     });
 
-    if(this.isMousemove){
+    if(window.innerWidth > 1024){
       window.addEventListener('mousemove', this.onMouseMove);
     }
     window.addEventListener('resize', this.onResize);
-
   },
   methods: {
     onResize: function() {
