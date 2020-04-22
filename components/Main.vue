@@ -146,7 +146,7 @@ border = 8px
       transform translateY(-50%)
       width 80px
       height 80px
-      cursor pointer
+      // cursor pointer
       &:hover
         &::before, &::after
           background lightgray
@@ -180,7 +180,7 @@ border = 8px
         .link-button
           color bg-color
           margin 0 
-          cursor pointer
+          // cursor pointer
           &:hover
             color txt-color
             border-right none

@@ -149,7 +149,7 @@ export default {
   &__pos
     {flex-center}
     font-weight 800
-    z-index 100
+    z-index 90
     flex-direction column
     position fixed
     top 50%

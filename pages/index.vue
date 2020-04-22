@@ -117,7 +117,7 @@ export default {
   watch: {
     isSlideToDefault: function(val){
       this.returnToDefault()
-    },
+    }
     // isClose: function(val){
     //   this.swiper.allowTouchMove = val;
     //   this.swiperThumbs.allowTouchMove = val;
@@ -256,6 +256,7 @@ export default {
       fill txt-color
       padding 4px
     &:hover
+      cursor pointer
       svg
         fill lightgray
   &.gallery-thumbs .swiper-slide-active 
