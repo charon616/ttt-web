@@ -57,6 +57,7 @@ html.index, html.index>body {
 
 a{
   text-decoration: none;
+  cursor: pointer;
 }
 
 h1, .main-font{
@@ -74,8 +75,6 @@ p{
 }
 
 .blur{
-  /* -ms-filter: blur(8px) brightness(80%);
-  filter: blur(8px) brightness(80%); */
   display: none;
 }
 </style>
