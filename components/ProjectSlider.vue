@@ -37,7 +37,7 @@ export default{
     },
     methods: {
         animateOn: function(){
-            this.$store.commit("changeAnimateStatus");
+            this.$store.commit("changeAnimateStatus", true);
         }
     }
 }

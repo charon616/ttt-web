@@ -26,8 +26,8 @@ export const mutations = {
   changeIsSlideToDefalutState(state) {
     state.isSlideToDefault = !state.isSlideToDefault
   },
-  changeAnimateStatus(state){
-    state.animate = !state.animate
+  changeAnimateStatus(state, val){
+    state.animate = val
   },
   changeIsCloseStatus(state) {
     state.isClose = !state.isClose

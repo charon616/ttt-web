@@ -127,18 +127,20 @@ export default {
     isSlideToDefault: state => state.isSlideToDefault,
     loading: state => state.loading,
     isClose: state => state.isClose,
+    animate: state => state.animate,
     swiper(){
       return this.$refs.swiperTop.swiper
     },
     swiperThumbs(){
       return this.$refs.swiperThumbs.swiper
-    },
+    }
   }),
   mounted() {
     this.$store.commit("updatePage","index")
     this.$nextTick(() => {
       this.swiper.controller.control = this.swiperThumbs
       this.swiperThumbs.controller.control = this.swiper
+      setTimeout(() => this.$store.commit("changeAnimateStatus", false), 500)
     });
 
     this.swiper.on('slideChangeTransitionEnd', this.slideChange);

@@ -49,6 +49,9 @@ export default {
     },
     mounted(){
         this.$store.commit("updatePage","detail")
+        this.$nextTick(() => {
+            setTimeout(() => this.$store.commit("changeAnimateStatus", false), 500)
+        });
         this.checkvideo()
     },
 
@@ -65,7 +68,7 @@ export default {
             }
         },
         animateOn: function(){
-            this.$store.commit("changeAnimateStatus");
+            this.$store.commit("changeAnimateStatus", true);
         }
     } 
 }

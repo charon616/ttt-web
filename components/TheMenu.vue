@@ -48,8 +48,7 @@ export default {
       this.selectedPos = val
     },
     animate: function(val){
-      this.animateMenu = true
-      setTimeout(() => this.animateMenu = false, 1000)
+      this.animateMenu = val
     }
   },
   computed: mapState({
@@ -70,7 +69,7 @@ export default {
     },
     animateOn: function(){
       if(this.$store.state.page != "index"){
-        this.$store.commit("changeAnimateStatus");
+        this.$store.commit("changeAnimateStatus", true);
       }
     }
   }
