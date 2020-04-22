@@ -50,7 +50,7 @@ export default {
       swiperOptionTop: {
         loop: true,
         loopedSlides: 7, // looped slides should be the same
-        spaceBetween: 0,
+        spaceBetween: 100,
         mousewheel: true,
         speed: 600,
         slidesPerView: 1,

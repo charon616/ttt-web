@@ -22,7 +22,7 @@ export default {
       { hid: 'og:image', property: 'og:image', content: '/ogp.jpg' }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/icon2.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/icon.ico" }
     ],
     script: [
       {
@@ -30,10 +30,6 @@ export default {
       }
     ]
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  // loading: '~/components/loading.vue',
   /*
    ** Global CSS
    */
