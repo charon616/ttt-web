@@ -118,10 +118,6 @@ export default {
     isSlideToDefault: function(val){
       this.returnToDefault()
     }
-    // isClose: function(val){
-    //   this.swiper.allowTouchMove = val;
-    //   this.swiperThumbs.allowTouchMove = val;
-    // }
   },
   computed: mapState({
     isSlideToDefault: state => state.isSlideToDefault,
@@ -146,9 +142,6 @@ export default {
     this.swiper.on('slideChangeTransitionEnd', this.slideChange);
     this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
     this.swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
-
-    // this.swiper.allowTouchMove = false;
-    // this.swiperThumbs.allowTouchMove = false;
 
     this.height = window.innerHeight;
     let h = document.getElementById('container');
