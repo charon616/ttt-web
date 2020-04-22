@@ -68,7 +68,7 @@
     "img": ["/wearbo.jpg", "/wearbo_fl.png"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/52F3kIfG0fg",
-    "color": "#000000",
+    "color": "#CCCCCC",
     "videoID": "52F3kIfG0fg"
   }
 }

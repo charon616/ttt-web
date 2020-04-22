@@ -20,7 +20,7 @@ kinesis-container.ttt
       a.link-button(href="http://todaitotexas.com/" target="_blank") TTT OFFICIAL WEB SITE
     .close-button(@click="onClick")
   .message-bg(@click="onClick" v-if="!isClose")
-  .guide
+  .guide(v-if="isClose")
     .icon-scroll 
 
 </template>
@@ -203,18 +203,18 @@ border = 8px
       box-shadow inset 0 0 0 2px bg-color
       border-radius 25px
       background alpha(txt-color, .2)
-    .icon-scroll:before
-      content: ''
-      position absolute
-      width 8px
-      height 8px
-      background bg-color
-      margin-left -4px
-      top 8px
-      border-radius 4px
-      animation-duration 3s
-      animation-iteration-count infinite
-      animation-name scroll
+      &:before
+        content: ''
+        position absolute
+        width 8px
+        height 8px
+        background bg-color
+        margin-left -4px
+        top 8px
+        border-radius 4px
+        animation-duration 3s
+        animation-iteration-count infinite
+        animation-name scroll
 
 @keyframes scroll
   0%
@@ -251,18 +251,21 @@ border = 8px
       text-align center
       width calc(100% - 160px)
       height 100%
-      &__content
-        margin 0
       &.close
         padding 0
         transform translateX(0) translateY(0)
         left 0
         top initial
-        bottom 108px
+        width auto
         height auto
+        bottom 108px
+      &__content
+        margin 0
+        // overflow-y scroll
+        // height 90%
       .close-button
         right 50%
-        top initial 
+        top initial
         bottom 32px
         transform translateX(50%) rotate(90deg)
     .guide
