@@ -152,7 +152,6 @@ export default {
             column-gap 48px
             row-gap 48px
         &__pic
-            padding 32px
             width 100%
             object-fit contain
         &__link
@@ -176,6 +175,7 @@ export default {
                 letter-spacing .15em
 
 +tb()
+
     .container
         .detail
             width 90%
@@ -187,6 +187,8 @@ export default {
 
 +sp()
     .container
+        .main-img
+            height 240px
         .detail
             width 100%
             padding 16px 24px

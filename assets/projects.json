@@ -8,7 +8,7 @@
     "desc_en": "We research and develop robots for plant factories to realize fully automated fruits cultivation to solve food supply and labour shortage problem in the future.<br>We are now focusing on strawberries and developing robots that support pollination and harvesting that are big burden for farmers now.",
     "desc_jp": "私たちのミッションは、食糧問題や宇宙進出といった出来事が予想される未来に、都市や砂漠から宇宙までどこでも美味しい果物を供給し人々を豊かにすることです。その実現の一歩として、私達はいちごの完全自動栽培の実現に取り組んでいます。",
     "main_img": "/harvestx.jpg",
-    "img": ["/harvestx.jpg", "/harvestx_fl.png"],
+    "img": ["/detail/HarvestX1.jpg", "/detail/HarvestX2.jpg","/detail/HarvestX3.jpg","/detail/HarvestX4.jpg"],
     "link": ["https://harvestx.jp/en/"],
     "video": "https://www.youtube.com/embed/cB7Il-HaLpY",
     "color": "#d52c5b",
@@ -16,13 +16,13 @@
   },
   "grubin": {
     "title": "Grubin",
-    "msg_en": "Reimagining Leftovers from Wasting to Feeding with Black Soldier Flies",
+    "msg_en": "From Wasting to Feeding - Reimagining leftovers with Black Soldier Flies.",
     "msg_jp": "\"捨てる\"から\"育てる\"へ<br>アメリカミズアブを用いた次世代食品リサイクル",
     "desc_en": "Grubin is changing the people's mindset toward food in daily life. We utilize the power of Black Soldier Fly larvae to turn food waste into protein  in order to make the continuous food chain starting from what they call \"waste\". Aiming to achieve sustainable society in the near future.",
     "desc_jp": "Grubinとは、暮らしの中の食との向き合い方を変えていくプロジェクトです。アメリカミズアブの幼虫が持つ、生ゴミを高速で分解しタンパク質へと変える力を活用しこれまでただ捨てていた食後の生ゴミを、次の命を育てる食へと変えていきます。来るべき循環型社会を見据えて。",
     "main_img": "/grubin.jpg",
-    "img": ["/grubin.jpg", "/grubin_fl.jpg"],
-    "link": ["https://harvestx.jp/en/"],
+    "img": ["/detail/grubin1.jpg", "/detail/grubin2.jpg", "/detail/grubin3.jpg", "/detail/grubin4.jpg"],
+    "link": ["https://grubin.jp"],
     "color": "#f9c124"
   },
   "genkan": {
@@ -32,7 +32,7 @@
     "desc_en": "GenKan offers insights on pricing, profit/loss management, and productivity improvement for factory managers. It collects production data of factory workers and machines with GenKan IoT sensors. Such data will be automatically calculated and analyzed by GenKan SaaS with the principles of cost accounting.",
     "desc_jp": "IoTセンサを用いて工場の生産データを取得し、労務費や設備費などの財務データと合わせることで、製造物の原価をリアルタイムで取得しDash boardに原価分析情報を表示します。さらに、分析レポートを生成し毎月レポートの解説を行い経営や現場改善に役立ててもらうことができます。",
     "main_img": "/genkan.jpg",
-    "img": ["/genkan.jpg", "/genkan_fl.jpg"],
+    "img": ["/detail/Genkan1.jpg", "/detail/Genkan2.jpg","/detail/Genkan3.jpg","/detail/Genkan4.jpg"],
     "link": ["https://www.koska.jp/"],
     "color": "#0286fe"
   },
@@ -43,8 +43,8 @@
     "desc_en": "Syrinx is a medical device that restores the ability to speak for those who had lost their voice box for medical reasons, such as laryngeal cancer.<br>Syrinx can change your voice by only moving your mouth and generate human-like natural waveform.",
     "desc_jp": "Syrinxはガンなどで喉頭摘出をして声を失った方が声を取り戻すデバイスです。従来用いられている電気式人工喉頭(EL)と違い、ハンズフリーで人に近い声を出して話すことができるので、患者さんからも良いフィードバックを得ています！",
     "main_img": "/syrinx.jpg",
-    "img": ["/syrinx.jpg", "/syrinx_fl.png"],
-    "link": ["https://harvestx.jp/en/"],
+    "img": ["/detail/syrinx1.jpg", "/detail/syrinx2.jpg","/detail/syrinx3.jpg","/detail/syrinx4.jpg"],
+    "link": ["https://syrinx.community/"],
     "color": "#00a8ba"
   },
   "roboxer": {
@@ -54,9 +54,11 @@
     "desc_en": "Do you know boxercise? Boxercise, which combines boxing and fitness has become popular in recent years.<br>However, you need a trainer for boxerciseing. We are making robots to replace trainers. The robot's called Roboxer. Like  this video, the Roboxer autonomously moves.  and the user also moves accordingly.<br>In the near future, roboxer will placed at home and you able to exercise alone.",
     "desc_jp": "ボクササイズをご存知ですか？<br> ボクシングとフィットネスを組み合わせたもので、近年流行っています。しかし、ボクササイズする際にはトレーナーが必要になります。私たちは、トレーナーを代替するロボットを作っています。<br>ロボットの名前はロボクサーと言い、この動画のように、使用者に合わせて、ロボクサーが自律的に動きます。<br>将来的に、ロボクサーは家庭におくことができ、一人でもボクササイズができるようになります。",
     "main_img": "/roboxer.jpg",
-    "img": ["/roboxer.jpg", "/roboxer_fl.jpg"],
-    "link": ["https://harvestx.jp/en/"],
-    "color": "#ff1418"
+    "img": ["/detail/Roboxer1.jpg", "/detail/Roboxer2.jpg","/detail/Roboxer3.jpg","/detail/Roboxer4.png"],
+    "link": ["http://roboxer.net/"],
+    "color": "#ff1418",
+    "video": "https://youtu.be/RqgP0BKFf_M",
+    "videoID": "RqgP0BKFf_M"
   },
   "wearbo": {
     "title": "wearbo",
@@ -65,8 +67,8 @@
     "desc_en": "Wearbo is a wearable keyboard on which you can enter text by tracing characters with fingers just as you write on a notepad. Twelve character-keys made from knitted conductive fiber and a rule-based system translate your handwriting into text.",
     "desc_jp": "布製のバンドを腕に巻いて、その上を指でなぞって手書き入力ができるデバイスです。手書き&皮膚感覚フィードバックによって手元が見えなくても入力が可能で、入力速度が必要な時のためにフリック入力もできます。将来的には服の袖やシールになります。",
     "main_img": "/wearbo.jpg",
-    "img": ["/wearbo.jpg", "/wearbo_fl.png"],
-    "link": ["https://harvestx.jp/en/"],
+    "img": ["/detail/wearbo1.jpg", "/detail/wearbo2.jpg","/detail/wearbo3.jpg","/detail/wearbo4.jpg"],
+    "link": ["https://wearbo.com"],
     "video": "https://www.youtube.com/embed/52F3kIfG0fg",
     "color": "#CCCCCC",
     "videoID": "52F3kIfG0fg"
