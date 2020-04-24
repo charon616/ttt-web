@@ -2,10 +2,11 @@
 .container
     img.main-img(:src="image")
     .detail
-        h1.detail__title {{jsondata[$route.params.project].title}}
-        p.detail__msg(v-html="jsondata[$route.params.project].msg_en")
-        p.detail__msg(v-html="jsondata[$route.params.project].msg_jp")
-
+        h1.detail__title
+            span(:class = "whichProject") {{jsondata[$route.params.project].title}}
+        .detail__msg-wrapper
+            p.detail__msg(v-html="jsondata[$route.params.project].msg_en")
+            p.detail__msg(v-html="jsondata[$route.params.project].msg_jp")
 
         //- video on PC and tablet
         .detail__videobutton.link-button#link-button(v-on:click = "vbuttonClicked" v-if="videotrue") VIDEO
@@ -17,8 +18,9 @@
         .detail__video(v-if="videotrue")
             iframe(width="100%" height="100%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
-        p.detail__desc(v-html="jsondata[$route.params.project].desc_en")
-        p.detail__desc(v-html="jsondata[$route.params.project].desc_jp")
+        .detail__desc-wrapper
+            p.detail__desc(v-html="jsondata[$route.params.project].desc_en")
+            p.detail__desc(v-html="jsondata[$route.params.project].desc_jp")
         
         h3.detail__picheader Gallery
         .detail__picwrapper
@@ -39,13 +41,16 @@ export default {
         return{
             jsondata: jsonfile,
             active: false,
-            videotrue: false,
+            videotrue: false
         }
     },
     computed: {
         image: function(){
             return require("~/assets/project/detail" + this.jsondata[this.$route.params.project].main_img)
-        }   
+        },
+        whichProject: function(){
+            return this.jsondata[this.$route.params.project].title
+        }
     },
     mounted(){
         this.$store.commit("updatePage","detail")
@@ -70,7 +75,7 @@ export default {
         animateOn: function(){
             this.$store.commit("changeAnimateStatus", true);
         }
-    } 
+    }
 }
 
 </script>
@@ -79,7 +84,7 @@ export default {
 .container
     width 100%
     padding-bottom 80px
-    background bg-color
+    background #F0F0F0
     .main-img
         width 100%
         height 320px
@@ -95,15 +100,21 @@ export default {
         &__title, &__msg, &__video
             text-align center
         &__title
-            font-size 40px
+            font-size 64px
             margin-top 16px
-            letter-spacing .05em
-            margin-bottom 32px
-            line-height 40px
+            letter-spacing .08em
+            margin-bottom 48px
+            line-height 64px
+            position relative
+
         &__msg
+            background bg-color
             font-size 16px
             margin-bottom 24px
             line-height 30px
+
+            &-wrapper  
+                margin-bottom 48px
         &__videobutton
             text-align center
             display block
@@ -139,9 +150,12 @@ export default {
         &__video
             display none
         &__desc
-            padding 16px 0 
+            margin-bottom 24px
             letter-spacing .1em
             line-height 24px
+            background bg-color
+            &-wrapper
+                margin-bottom 48px
         &__picheader
             text-align center
             margin 24px 0 32px
@@ -173,7 +187,18 @@ export default {
             &:hover
                 color lightgray
                 letter-spacing .15em
-
+    .HarvestX
+        background: linear-gradient(transparent 60%, colors[0] 60%);
+    .Grubin
+        background: linear-gradient(transparent 60%, colors[1] 60%);
+    .Syrinx
+        background: linear-gradient(transparent 60%, colors[2] 60%);
+    .GenKan
+        background: linear-gradient(transparent 60%, colors[3] 60%);
+    .ROBOXER
+        background: linear-gradient(transparent 60%, colors[4] 60%);
+    .wearbo
+        background: linear-gradient(transparent 60%, colors[5] 60%);
 +tb()
 
     .container
@@ -192,6 +217,8 @@ export default {
         .detail
             width 100%
             padding 16px 24px
+            &__title
+                font-size 40px;
             &__pic
                 width 100%
                 margin 0
