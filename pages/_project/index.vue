@@ -27,7 +27,10 @@
         
         h3.detail__picheader Gallery
         .detail__picwrapper
-            img.detail__pic(v-for="(url, index) in galleryImage" :key="index" :src="url" alt="detail-img")
+            picture(v-for="(url, index) in galleryImage" :key="index")
+                source(:srcset="tbWebpGalleryImage[index]" type="image/webp" media="(max-width: 1024px)")
+                source(:srcset="webpGalleryImage[index]" type="image/webp")
+                img.detail__pic(:src="url" alt="detail-img")
 
         a.detail__link.link-button(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
@@ -62,6 +65,22 @@ export default {
             }
             return array
         },
+        tbWebpGalleryImage: function(){
+            var array = new Array(this.jsondata[this.$route.params.project].img.length);
+            for(let i=0; i<this.jsondata[this.$route.params.project].img.length; i++){
+                let name = this.baseName(this.jsondata[this.$route.params.project].img[i])
+                array[i] = require("~/assets/project/webp/detail/" + name + ".webp")
+            }
+            return array
+        },
+        webpGalleryImage: function(){
+            var array = new Array(this.jsondata[this.$route.params.project].img.length);
+            for(let i=0; i<this.jsondata[this.$route.params.project].img.length; i++){
+                let name = this.baseName(this.jsondata[this.$route.params.project].img[i])
+                array[i] = require("~/assets/project/detail/webp/" + name + ".webp")
+            }
+            return array
+        },
         whichProject: function(){
             return this.jsondata[this.$route.params.project].title
         }
@@ -88,6 +107,12 @@ export default {
         },
         animateOn: function(){
             this.$store.commit("changeAnimateStatus", true);
+        },
+        baseName: function(str){
+            var base = new String(str).substring(str.lastIndexOf('/') + 1); 
+            if(base.lastIndexOf(".") != -1)       
+                base = base.substring(0, base.lastIndexOf("."));
+            return base;
         }
     }
 }

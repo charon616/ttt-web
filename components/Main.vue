@@ -1,10 +1,10 @@
 <template lang="pug">
-kinesis-container.main
+.main
   .title(v-if="$device.isDesktop")
-    kinesis-element.title-element.animated.slideInUp(:strength="8") Todai 
-    kinesis-element.title-element.animated.slideInUp(:strength="16") To 
-    kinesis-element.title-element.animated.slideInUp(:strength="4") Texas 
-    kinesis-element.title-element.animated.slideInUp(:strength="-8") 2020
+    .title-element.animated.slideInUp(:strength="8") Todai 
+    .title-element.animated.slideInUp(:strength="16") To 
+    .title-element.animated.slideInUp(:strength="4") Texas 
+    .title-element.animated.slideInUp(:strength="-8") 2020
   .title(v-else)
     .title-element Todai 
     .title-element To 
@@ -12,24 +12,19 @@ kinesis-container.main
     .title-element 2020
 
   Message
-
   .message-bg(@click="onClick" v-if="!isClose")
   .guide(v-if="isClose")
     .icon-scroll 
-
 </template>
 <script>
 import Artwork from "~/components/Artwork";
 import Message from "~/components/Message.vue";
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 import { mapState } from 'vuex';
 
 export default {
   components: {
     Artwork,
-    Message,
-    KinesisContainer,
-    KinesisElement
+    Message
   },
   computed: mapState({
     isClose: state => state.isClose,

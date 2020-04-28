@@ -142,7 +142,7 @@ border = 8px
                     margin 0
                 &__msg-en
                     font-weight 800
-                    font-family: aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                    font-family aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
                     padding 0
                     margin 0
                 &__msg-jp
