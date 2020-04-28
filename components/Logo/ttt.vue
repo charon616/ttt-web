@@ -1,5 +1,5 @@
 <template>
-  <svg class="ttt" version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+  <svg class="ttt" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
 	 y="0px" viewBox="0 0 453.5 453.5" style="enable-background:new 0 0 453.5 453.5;" xml:space="preserve">
   <path class="st0" d="M56.4,41.6c5.4,0.7,10.1,0.7,15.5,0.7h310.3c14.8,0,14.8,0,14.8,14.1c0,35,0,70.7,0,105.7
     c0,8.8-2.7,12.1-11.4,11.4c-15.5-0.7-30.3-0.7-45.8,0c-8.1,0-10.8-2.7-10.1-10.8c0.7-14.1,0-28.3,0-42.4c0-8.8-3.4-12.1-12.1-12.1

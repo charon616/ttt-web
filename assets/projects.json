@@ -21,7 +21,7 @@
     "desc_en": "Grubin is changing the people's mindset toward food in daily life. We utilize the power of Black Soldier Fly larvae to turn food waste into protein  in order to make the continuous food chain starting from what they call \"waste\". Aiming to achieve sustainable society in the near future.",
     "desc_jp": "日々の食べ残しには、次の食を育てる可能性が秘められています。<br>その可能性を引き出すのがミズアブの幼虫。彼らは高速で食べ残しを分解する能力を持ちます。<br>ミズアブの幼虫は魚にとって高タンパクなエサになり、魚のフンが植物の栄養になる。<br>この性質に注目し、日々の食べ残しをその場で分解し、魚と野菜を育てることができる小型リサイクル装置、Hungry Cubeをつくりました。<br>Hungry Cubeは、1日に約1kgの食べ残しを分解でき、成長したミズアブの幼虫がエサとなり、癒しを届けてくれる観賞魚たちが育ちます。<br>そして魚のフンが水耕栽培のハーブや野菜の肥料となり、日々の食卓に彩りをもたらします。<br>さらに、成長した幼虫の一部が装置の中で成虫になり、次の幼虫の卵を産む仕組みも備わっています。そのため新たな幼虫を追加する必要がなく、循環型の食体験が実現します。<br>私たちGrubinは、ミズアブと人間の共生のカタチの提案を通して、食べ残しへの向き合い方のアップデートに取り組んでいきます。",
     "main_img": "/grubin.jpg",
-    "img": ["/detail/grubin1.jpg", "/detail/grubin2.jpg", "/detail/grubin3.jpg", "/detail/grubin4.jpg"],
+    "img": ["/detail/Grubin1.jpg", "/detail/Grubin2.jpg", "/detail/Grubin3.jpg", "/detail/Grubin4.jpg"],
     "link": ["https://grubin.jp"],
     "color": "#f9c124"
   },
@@ -43,7 +43,7 @@
     "desc_en": "Syrinx is a medical device that restores the ability to speak for those who had lost their voice box for medical reasons, such as laryngeal cancer.<br>Syrinx can change your voice by only moving your mouth and generate human-like natural waveform.",
     "desc_jp": "Syrinxはガンなどで喉頭摘出をして声を失った方が声を取り戻すデバイスです。従来用いられている電気式人工喉頭(EL)と違い、ハンズフリーで人に近い声を出して話すことができるので、患者さんからも良いフィードバックを得ています！",
     "main_img": "/syrinx.jpg",
-    "img": ["/detail/syrinx1.jpg", "/detail/syrinx2.jpg","/detail/syrinx3.jpg","/detail/syrinx4.jpg"],
+    "img": ["/detail/Syrinx1.jpg", "/detail/Syrinx2.jpg","/detail/Syrinx3.jpg","/detail/Syrinx4.jpg"],
     "link": ["https://syrinx.community/"],
     "color": "#00a8ba"
   },

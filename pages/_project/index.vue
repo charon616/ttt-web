@@ -1,6 +1,9 @@
 <template lang="pug">
 .container
-    img.main-img(:src="image")
+    picture
+        source.main-img(media="(max-width: 480px)" :srcset="spimage")
+        source.main-img(media="(max-width: 1024px)" :srcset="tbimage")
+        img.main-img(:src="image" alt="main-img")
     .detail
         h1.detail__title
             span(:class = "whichProject") {{jsondata[$route.params.project].title}}
@@ -24,10 +27,7 @@
         
         h3.detail__picheader Gallery
         .detail__picwrapper
-
-            //- img.detail__pic(v-for="(url, index) in jsondata[$route.params.project].img" :key="index" :src="url")
-            img.detail__pic(v-for="(url, index) in galleryImage" :key="index" :src="url")
-                //- img(:src="url")
+            img.detail__pic(v-for="(url, index) in galleryImage" :key="index" :src="url" alt="detail-img")
 
         a.detail__link.link-button(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
@@ -48,6 +48,12 @@ export default {
     computed: {
         image: function(){
             return require("~/assets/project/detail" + this.jsondata[this.$route.params.project].main_img)
+        },
+        tbimage: function(){
+            return require("~/assets/project/detail/tb" + this.jsondata[this.$route.params.project].main_img)
+        },
+        spimage: function(){
+            return require("~/assets/project/detail/sp" + this.jsondata[this.$route.params.project].main_img)
         },
         galleryImage: function(){
             var array = new Array(this.jsondata[this.$route.params.project].img.length);

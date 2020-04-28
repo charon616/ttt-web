@@ -1,5 +1,5 @@
 <template lang="pug">
-kinesis-container.ttt
+kinesis-container.main
   .title(v-if="$device.isDesktop")
     kinesis-element.title-element.animated.slideInUp(:strength="8") Todai 
     kinesis-element.title-element.animated.slideInUp(:strength="16") To 
@@ -68,7 +68,7 @@ export default {
 <style lang="stylus" scoped>
 border = 8px
 
-.ttt
+.main
   height 100%
   width 100%
   position relative
@@ -147,7 +147,7 @@ border = 8px
     transform: translateY(46px)
 
 +tb()
-  .ttt
+  .main
     margin 0 auto
     .title
       position initial

@@ -1,6 +1,6 @@
 <template lang="pug">
 .container#container
-  .main-gallery    
+  .main-gallery 
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
         MainPage

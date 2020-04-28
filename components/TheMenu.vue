@@ -1,10 +1,10 @@
 <template lang="pug">
 .menus
   .mask(v-bind:class="{ black: animateMenu }")
-    img(src="~assets/logo_wh.svg")
+    img(src="~assets/logo_wh.svg" alt="logo")
   header.menus__main
     nuxt-link.menus__main__logo(to="/" @click.native="resetSlide(); animateOn()")
-      img(src="~assets/logo_bl.svg" )
+      img(src="~assets/logo_bl.svg" alt="logo")
   .menus__sns(v-bind:class="{ hide: isHide }")
     span.main-font SHARE ON:
     a.fb-share-button.link(data-href="https://2020.todaitotexas.com/" data-layout="button" data-size="small" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F2020.todaitotexas.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")

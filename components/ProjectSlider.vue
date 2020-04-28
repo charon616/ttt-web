@@ -4,9 +4,13 @@ kinesis-container.slider-container
         nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
-                    img(:src="image" :key="title" data-swiper-parallax-scale="0.8")
+                    picture
+                        source(:srcset="webpimage" type="image/webp")
+                        img(:srcset="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
                 .box-inner(v-else)
-                    img(:src="image" :key="title" data-swiper-parallax-scale="0.8")
+                    picture
+                        source(:srcset="webpimage" type="image/webp" data-swiper-parallax-scale="0.8")
+                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
                 .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
             h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
@@ -33,6 +37,9 @@ export default{
     computed: {
         image: function(){
             return require("~/assets/project" + this.jsondata[this.title].main_img)
+        },  
+        webpimage: function(){
+            return require("~/assets/project/webp/" + this.title + ".webp")
         }   
     },
     methods: {
