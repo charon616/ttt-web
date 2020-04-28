@@ -9,7 +9,7 @@
             span(:class = "whichProject") {{jsondata[$route.params.project].title}}
         .detail__msg-wrapper
             p.detail__msg(v-html="jsondata[$route.params.project].msg_en")
-            p.detail__msg(v-html="jsondata[$route.params.project].msg_jp")
+            p.detail__msg(lang="ja" v-html="jsondata[$route.params.project].msg_jp")
 
         //- video on PC and tablet
         .detail__videobutton.link-button#link-button(v-on:click = "vbuttonClicked" v-if="videotrue") VIDEO
@@ -23,7 +23,7 @@
 
         .detail__desc-wrapper
             p.detail__desc(v-html="jsondata[$route.params.project].desc_en")
-            p.detail__desc(v-html="jsondata[$route.params.project].desc_jp")
+            p.detail__desc(lang="ja" v-html="jsondata[$route.params.project].desc_jp")
         
         h3.detail__picheader Gallery
         .detail__picwrapper

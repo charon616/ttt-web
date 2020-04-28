@@ -15,7 +15,7 @@ kinesis-container.slider-container
         .textarea
             h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
             p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="jsondata[title].msg_en")
-            p.textarea__msg.textarea__msg-jp(data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
+            p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
                 nuxt-link.link-button(@click.native="animateOn" :to="{ name: 'project', params: { project:title } }") DETAIL
 </template>
