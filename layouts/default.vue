@@ -2,16 +2,19 @@
   .default
     Menu 
     Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
+    //- Message
     nuxt 
 </template>
 
 <script>
 import Menu from '~/components/TheMenu.vue';
 import Artwork from "~/components/Artwork";
+import Message from "~/components/Message.vue";
 export default {
   components: {
     Menu,
-    Artwork
+    Artwork,
+    Message
   },
   mounted() {
     Typekit.load({async: true})

@@ -25,7 +25,8 @@
         h3.detail__picheader Gallery
         .detail__picwrapper
 
-            img.detail__pic(v-for="(url, index) in jsondata[$route.params.project].img" :key="index" :src="url")
+            //- img.detail__pic(v-for="(url, index) in jsondata[$route.params.project].img" :key="index" :src="url")
+            img.detail__pic(v-for="(url, index) in galleryImage" :key="index" :src="url")
                 //- img(:src="url")
 
         a.detail__link.link-button(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
@@ -47,6 +48,13 @@ export default {
     computed: {
         image: function(){
             return require("~/assets/project/detail" + this.jsondata[this.$route.params.project].main_img)
+        },
+        galleryImage: function(){
+            var array = new Array(this.jsondata[this.$route.params.project].img.length);
+            for(let i=0; i<this.jsondata[this.$route.params.project].img.length; i++){
+                array[i] = require("~/assets/project" + this.jsondata[this.$route.params.project].img[i])
+            }
+            return array
         },
         whichProject: function(){
             return this.jsondata[this.$route.params.project].title

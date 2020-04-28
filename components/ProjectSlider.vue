@@ -1,5 +1,5 @@
 <template lang="pug">
-kinesis-container.container
+kinesis-container.slider-container
     .all
         nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
             .box-outer
@@ -46,12 +46,13 @@ export default{
 <style scoped lang="stylus">
 border = 8px
 
-.container
+.slider-container
     position relative
     color txt-color
+    height 100%
+    {flex-center}
     .all
         width content-width
-        height calc(86% * 0.9)
         margin 0 auto
         {flex-center}
         .box
@@ -95,7 +96,7 @@ border = 8px
                 margin 12px 0 4px 0
 
 +tb()
-    .container
+    .slider-container
         .all
             display block
             width 100%
@@ -103,9 +104,8 @@ border = 8px
             .box
                 .box-outer
                     width 100%
-                    height 60%
-                    padding 16px 80px
-                    margin-bottom 16px
+                    height 74%
+                    padding 8px 80px 24px
                     .box-inner
                         width 100%
                         height 100%
@@ -115,46 +115,54 @@ border = 8px
                         width calc(100% - 160px)
                         height calc(100% - 32px)
                         left 96px
-                        top 32px
+                        top 24px
             .textarea
-                height calc(40% - 16px)
+                height 26%
                 width 100%
-                padding 0 80px
+                margin 0 
+                padding 0 24px 32px 24px
                 text-align center
                 line-height initial
+                position relative
+                {flex-center}
+                flex-flow column nowrap
                 &__title
-                    letter-spacing 0
-                    font-size 2rem
                     display none
                 &__msg
                     letter-spacing 0
                     text-align center
                     font-size 16px
+                    margin 0
                 &__msg-en
                     font-weight 800
-                    margin 8px 0 0 0
                     font-family: aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                    padding 0
+                    margin 0
                 &__msg-jp
                     margin 8px 0 
 
 +sp()
-    .container
+    .slider-container
         .all
             .box
                 .box-outer
-                    padding 0 32px
-                    height 40%
+                    padding 16px 32px 8px
+                    height 52%
                     .color
                         width calc(100% - 64px)
-                        height 100%
+                        height calc(100% - 16px)
                         left 48px
-                        top 16px
+                        top 24px
             .textarea
-                padding 32px
-                height 60%
+                // padding 32px
+                height 48%
                 &__msg-en
                     margin 0
                 &__msg-jp
                     margin 4px 0
+                &__button
+                    .link-button
+                        font-size 1em
+                        margin-top 8px
 
 </style>

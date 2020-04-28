@@ -200,8 +200,6 @@ export default {
       height auto
   .menus
     &__main
-      width 120px
-      height 120px
       left 0
       transform initial
       display flex
@@ -210,37 +208,36 @@ export default {
         position initial
         transform initial
         img
-          width 120px
+          width nav-height
     &__sns
-      flex-direction row
-      transform initial
-      justify-content flex-end
-      padding 0
-      top 0
-      right 0
+      transform translateY(-50%)
+      top 50%
       left initial
-      width 120px
-      height 10%
+      padding 8px 0 0 0 
+      flex-direction column
+      width 'calc( %s / 2 )' % nav-height 
+      height 'calc( %s * 1.5 )' % nav-height
       span 
-        display none
+        line-height 'calc( %s / 2 )' % nav-height
+        line-height 'calc( %s / 4 )' % nav-height
+        text-align center
+        margin 0
+        height 'calc( %s / 2 )' % nav-height
       .link
-        margin auto
-        width 120px
-        height 60px
-        .icon
-          font-size 1em
+        width 'calc( %s / 2 )' % nav-height
+        height 'calc( %s / 2 )' % nav-height
     &__pos
       width 200px
-      height 10%
       top 0
       left 50%
       transform translateX(-50%)
+      height nav-height
       &__no
         {flex-center}
         position initial
         padding 0
         transform initial
-        font-size .8rem
+        // font-size .8rem
         width auto
         height auto
         & > p
@@ -260,22 +257,36 @@ export default {
           display none
       &__name
         display initial
-        font-size 1rem
+        // font-size 1rem
 
 +sp()
+  nav-height = nav-height-sp
   .menus
     &__main
-      height 80px
-      width 80px
       &__logo
         img
-          width 80px
+          width nav-height
     &__sns
-      width 80px
+      flex-direction row
+      width nav-height
+      height nav-height
+      padding 0
+      top 0
+      right 0
+      left initial
+      transform initial
+      span 
+        display none
       .link
-        width 80px
-        height 40px
+        width 'calc( %s / 2 )' % nav-height
+        height nav-height
+        padding 0
+        .icon
+          font-size 1em
     &__pos
-      width 120px
-
+      height nav-height
+      &__no
+        font-size .8em
+      &__name
+        font-size 1em
 </style>

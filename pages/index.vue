@@ -259,6 +259,13 @@ export default {
     for num in (0..5)
       .{array[num]}
         fill colors[num]
+    &:hover
+      .ttt
+        fill bg-color
+        background txt-color
+      for num in (0..5)
+        .{array[num]}
+          fill colors[num]
 
 +tb()
   .container
@@ -267,11 +274,15 @@ export default {
     .project-nav
       height 10%
   .swiper 
+    &.gallery-top 
+      top nav-height
     &.gallery-thumbs 
       width 100%
 
 +sp()
   .swiper 
+    &.gallery-top 
+      top nav-height-sp
     &.gallery-thumbs 
       font-size .8em
       &::before 

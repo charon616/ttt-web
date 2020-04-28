@@ -12,14 +12,15 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "Todai to Texas 2020の特設サイトです。"
+        content: "This is the website for the six teams from the Todai To Texas 2020, which was cancelled due to COVID-19. 新型コロナウイルスの影響により出展中止となったTodai To Texas 2020の6チームのための特設サイトです。"
       },
       { hid: 'og:site_name', property: 'og:site_name', content: 'TodaiToTexas2020' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: '' },
       { hid: 'og:title', property: 'og:title', content: 'TodaiToTexas2020' },
-      { hid: 'og:description', property: 'og:description', content: 'Todai to Texas 2020の特設サイトです。' },
-      { hid: 'og:image', property: 'og:image', content: '/ogp.jpg' }
+      { hid: 'og:description', property: 'og:description', content: 'This is the website for the six teams from the Todai To Texas 2020, which was cancelled due to COVID-19. 新型コロナウイルスの影響により出展中止となったTodai To Texas 2020の6チームのための特設サイトです。' },
+      { hid: 'og:image', property: 'og:image', content: '/ogp.jpg' },
+      { hid: 'fb:app_id', content: '706574413483305' }
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/icon.ico" }
