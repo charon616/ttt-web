@@ -90,6 +90,12 @@ export default {
     stylus: ["~assets/stylus/_variables.styl", "~assets/stylus/main.styl"]
   },
   /*
+  ** DevTool
+  */
+  vue: {
+    devtools: true 
+  },
+  /*
    ** Build configuration
    */
   build: {
