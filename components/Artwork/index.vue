@@ -1,7 +1,7 @@
 <template>
   <section class="artwork">
     <canvas class="artwork__canvas" ref="canvas" v-if="$device.isDesktop"></canvas>
-    <div v-if="this.$store.state.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting"></div>
+    <div v-show="this.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting"></div>
   </section>
 </template>
 
@@ -12,9 +12,12 @@ export default {
   name: 'artwork',
   components: {},
   props: [],
-  computed: mapState({
-    page: state => state.page,
-  }),
+  computed: {
+    ...mapState([
+      "page",
+      "swiperPos"
+    ])
+  },
   watch: {
     page: function(newVal, oldVal){
       if(newVal == "index"){
@@ -40,7 +43,7 @@ export default {
     },
     onMouseMove: function(e){
       this.artworkGL.mouseMoved(e.clientX, e.clientY);
-      if(this.$store.state.swiperPos != 0){
+      if(this.swiperPos != 0){
         return;
       }
       let lighting = document.getElementById('lighting');

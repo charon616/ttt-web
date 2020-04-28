@@ -10,16 +10,16 @@
 
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
-  computed: mapState({
-    isClose: state => state.isClose,
-  }),
+  computed: {
+    ...mapState(["isClose"])
+  },
   methods: {
-    onClick: function(){
-      this.$store.commit("changeIsCloseStatus")
-    }
+    ...mapMutations({
+      onClick: "changeIsCloseStatus"
+    })
   }
 }
 </script>

@@ -12,23 +12,23 @@
     .title-element 2020
 
   Message
-  .message-bg(@click="onClick" v-if="!isClose")
-  .guide(v-if="isClose")
+  .message-bg(@click="onClick" v-show="!isClose")
+  .guide(v-show="isClose")
     .icon-scroll 
 </template>
 <script>
 import Artwork from "~/components/Artwork";
 import Message from "~/components/Message.vue";
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
     Artwork,
     Message
   },
-  computed: mapState({
-    isClose: state => state.isClose,
-  }),
+  computed: {
+    ...mapState(["isClose"])
+  },
   data(){
     return{
       swiperOption: {
@@ -53,9 +53,9 @@ export default {
     }
   },
   methods: {
-    onClick: function(){
-      this.$store.commit("changeIsCloseStatus")
-    }
+    ...mapMutations({
+      onClick: "changeIsCloseStatus"
+    })
   }
 }
 </script>

@@ -30,7 +30,7 @@ export default {
     ],
     script: [
       {
-        src: 'https://use.typekit.net/dhy3jso.js'
+        src: 'https://use.typekit.net/dhy3jso.js', defer: true
       }
     ]
   },

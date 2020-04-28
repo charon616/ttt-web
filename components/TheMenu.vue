@@ -12,20 +12,20 @@
     a.tw-share-button.link(href="http://twitter.com/share?url=https://2020.todaitotexas.com/&text=Todai To Texas 2020 special site&hashtags=SXSW" aria-label="share on twitter" target="_blank" rel="noopener noreferrer")
       font-awesome-icon.icon.icon-twitter(:icon="['fab', 'twitter']") 
   .menus__pos
-    .menus__pos__no(v-if="selectedPos != 0")
+    .menus__pos__no(v-show="selectedPos != 0")
       span.normal No.
       transition(name="slide-fade" mode="out-in")
         span.num(:key="selectedPos") {{ selectedPos }}
       .line  
       span.all 6
-    .menus__pos__name(v-if="selectedPos != 0")
+    .menus__pos__name(v-show="selectedPos != 0")
       transition(name="slide-fade2" mode="out-in")
         p.main-font(:key="selectedPos") {{ selectedProject }}
 </template>
 
 <script>
 import jsonfile from '~/assets/projects.json';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data(){
@@ -51,25 +51,32 @@ export default {
       this.animateMenu = val
     }
   },
-  computed: mapState({
-    page: state => state.page,
-    swiperPos: state => state.swiperPos,
-    animate: state => state.animate
-  }),
+  computed: {
+    ...mapState([
+      "page", 
+      "swiperPos", 
+      "animate"
+    ])
+  },
   methods: {
+    ...mapMutations([
+      "updateSwiperPos",
+      "changeIsSlideToDefalutState",
+      "changeAnimateStatus"
+    ]),
     resetSlide: function(){
-      if(this.$store.state.page != "index"){
-        this.$store.commit("updateSwiperPos", 0)
+      if(this.page != "index"){
+        this.updateSwiperPos(0)
       }else{
-        this.$store.commit("changeIsSlideToDefalutState")
+        this.changeIsSlideToDefalutState()
       }
     },
     onclick: function(){
       this.isHide = !this.isHide
     },
     animateOn: function(){
-      if(this.$store.state.page != "index"){
-        this.$store.commit("changeAnimateStatus", true);
+      if(this.page != "index"){
+        this.changeAnimateStatus(true)
       }
     }
   }

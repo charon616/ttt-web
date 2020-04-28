@@ -34,11 +34,12 @@
 
         a.detail__link.link-button(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
-        nuxt-link.detail__back-button(@click.native="animateOn" to="/") ← BACK TO TOP
+        nuxt-link.detail__back-button(@click.native="animateOn(true)" to="/") ← BACK TO TOP
 
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
+import { mapMutations } from "vuex";
 
 export default {
     data(){
@@ -86,14 +87,18 @@ export default {
         }
     },
     mounted(){
-        this.$store.commit("updatePage","detail")
-        this.$nextTick(() => {
-            setTimeout(() => this.$store.commit("changeAnimateStatus", false), 500)
-        });
         this.checkvideo()
+        this.$nextTick(() => {
+            setTimeout(() => this.animateOn(false), 500)
+            this.updatePage("detail")
+        });
     },
 
     methods:{
+        ...mapMutations({
+            animateOn: "changeAnimateStatus",
+            updatePage: "updatePage"
+        }),
         vbuttonClicked: function(){
             this.active = true;
         },
@@ -105,9 +110,9 @@ export default {
                 this.videotrue = true;
             }
         },
-        animateOn: function(){
-            this.$store.commit("changeAnimateStatus", true);
-        },
+        // animateOn: function(){
+        //     this.$store.commit("changeAnimateStatus", true);
+        // },
         baseName: function(str){
             var base = new String(str).substring(str.lastIndexOf('/') + 1); 
             if(base.lastIndexOf(".") != -1)       

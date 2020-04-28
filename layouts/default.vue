@@ -1,20 +1,23 @@
 <template lang="pug">
   .default
     Menu 
-    Artwork.artwork(v-bind:class="{ blur: this.$store.state.swiperPos != 0 }")
-    //- Message
+    Artwork.artwork(v-bind:class="{ blur: this.swiperPos != 0 }")
     nuxt 
 </template>
 
 <script>
 import Menu from '~/components/TheMenu.vue';
 import Artwork from "~/components/Artwork";
-import Message from "~/components/Message.vue";
+import { mapState } from "vuex";
 export default {
   components: {
     Menu,
-    Artwork,
-    Message
+    Artwork
+  },
+  computed: {
+    ...mapState([
+      "swiperPos", 
+    ]),
   },
   mounted() {
     Typekit.load({async: true})

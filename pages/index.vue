@@ -30,7 +30,7 @@ import Pro5 from '~/components/Logo/roboxer.vue';
 import Pro6 from '~/components/Logo/wearbo.vue';
 
 import jsonfile from '~/assets/projects.json';
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -95,24 +95,29 @@ export default {
       selectedPos: ""
     }
   },
-  asyncData (ctx) {
+  asyncData () {
     return { 
       jsondata: jsonfile
     }
   },
   methods: {
+    ...mapMutations([
+      "updateSwiperPos",
+      "updatePage",
+      "changeAnimateStatus",
+      "changeLoadingStatus"
+    ]),
     handleResize: function() {
       this.height = window.innerHeight;
       let h = document.getElementById('container');
       h.style.height = this.height + 'px';
-
       this.swiper.update()
       this.swiperThumbs.update()
     },
     slideChanged: function() {
       this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
       this.selectedPos = this.swiper.realIndex
-      this.$store.commit("updateSwiperPos", this.swiper.realIndex)
+      this.updateSwiperPos(this.swiper.realIndex)
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
@@ -123,36 +128,39 @@ export default {
       this.returnToDefault()
     }
   },
-  computed: mapState({
-    isSlideToDefault: state => state.isSlideToDefault,
-    loading: state => state.loading,
-    isClose: state => state.isClose,
-    animate: state => state.animate,
+  computed: {
+    ...mapState([
+      "isSlideToDefault", 
+      "loading", 
+      "swiperPos"
+    ]),
     swiper(){
       return this.$refs.swiperTop.swiper
     },
     swiperThumbs(){
       return this.$refs.swiperThumbs.swiper
     }
-  }),
+  },
   mounted() {
-    this.$store.commit("updatePage","index")
     this.$nextTick(() => {
+      this.updatePage("index")
       this.swiper.controller.control = this.swiperThumbs
       this.swiperThumbs.controller.control = this.swiper
-      setTimeout(() => this.$store.commit("changeAnimateStatus", false), 500)
+      setTimeout(() => this.changeAnimateStatus(false), 500)
     });
 
-    this.swiper.on('slideChangeTransitionEnd', this.slideChange);
-    this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
-    this.swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
+    this.swiper.on('slideChangeTransitionEnd', this.slideChanged);
+    this.swiper.slideToLoop(this.swiperPos, 1000, false)
+    this.swiperThumbs.slideToLoop(this.swiperPos, 1000, false)
 
     this.height = window.innerHeight;
     let h = document.getElementById('container');
     h.style.height = this.height + 'px';
     window.addEventListener('resize', this.handleResize);
 
-    setTimeout(() => this.$store.commit("changeLoadingStatus"), 3000)
+    if(this.loading){
+      setTimeout(() => this.$store.commit("changeLoadingStatus"), 3000)
+    }
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);

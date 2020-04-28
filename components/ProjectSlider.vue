@@ -1,27 +1,29 @@
 <template lang="pug">
 kinesis-container.slider-container
     .all
-        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
+        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn(true)")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
                         source(:srcset="webpimage" type="image/webp")
-                        img(:srcset="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
+                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
                 .box-inner(v-else)
                     picture
                         source(:srcset="webpimage" type="image/webp" data-swiper-parallax-scale="0.8")
                         img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
+
                 .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
             h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
             p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="jsondata[title].msg_en")
             p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                nuxt-link.link-button(@click.native="animateOn" :to="{ name: 'project', params: { project:title } }") DETAIL
+                nuxt-link.link-button(@click.native="animateOn(true)" :to="{ name: 'project', params: { project:title } }") DETAIL
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
+import { mapMutations } from 'vuex';
 
 export default{
     props: ['title'],
@@ -43,9 +45,12 @@ export default{
         }   
     },
     methods: {
-        animateOn: function(){
-            this.$store.commit("changeAnimateStatus", true);
-        }
+        ...mapMutations({
+            animateOn: "changeAnimateStatus"
+        })
+        // animateOn: function(){
+        //     this.$store.commit("changeAnimateStatus", true);
+        // }
     }
 }
 
