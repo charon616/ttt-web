@@ -7,9 +7,9 @@
       img(src="~assets/logo_bl.svg" alt="logo")
   .menus__sns(v-bind:class="{ hide: isHide }")
     span.main-font SHARE ON:
-    a.fb-share-button.link(data-href="https://2020.todaitotexas.com/" data-layout="button" data-size="small" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F2020.todaitotexas.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
+    a.fb-share-button.link(data-href="https://2020.todaitotexas.com/" aria-label="share on facebook" data-layout="button" data-size="small" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F2020.todaitotexas.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
       font-awesome-icon.icon.icon-facebook(:icon="['fab', 'facebook-f']")
-    a.tw-share-button.link(href="http://twitter.com/share?url=https://2020.todaitotexas.com/&text=Todai To Texas 2020 special site&hashtags=SXSW" target="_blank")
+    a.tw-share-button.link(href="http://twitter.com/share?url=https://2020.todaitotexas.com/&text=Todai To Texas 2020 special site&hashtags=SXSW" aria-label="share on twitter" target="_blank" rel="noopener noreferrer")
       font-awesome-icon.icon.icon-twitter(:icon="['fab', 'twitter']") 
   .menus__pos
     .menus__pos__no(v-if="selectedPos != 0")

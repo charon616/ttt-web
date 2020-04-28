@@ -5,7 +5,7 @@
     p SXSW2020, where Todai To Texas was supposed to exhibit, has been cancelled due to COVID-19. There were six teams participating in TTT2020. We wanted to leave a mark on them, so we've created this special site as one of the opportunities to do so. While the future is still unclear, each of us is starting to make progress towards the next opportunities, including SXSW2021. I hope you will continue to support TTT and its participants in their challenges.
     br
     p Todai To Texasが出展を予定していたSXSW2020が、新型コロナウイルスの影響により中止となりました。TTT2020には6つのチームが参加していましたが、彼らの足跡を少しでも残したいと思い、その場の１つとして、この特設サイトを用意しました。先行きはまだまだ不透明ですが、SXSW2021を含む次の機会へ向けて、それぞれが進み始めています。TTTとその参加者のチャレンジを引き続き応援していただければ幸いです。
-    a.link-button(href="http://todaitotexas.com/" target="_blank") TTT OFFICIAL WEB SITE
+    a.link-button(href="http://todaitotexas.com/" target="_blank" rel="noopener noreferrer") TTT OFFICIAL WEB SITE
   .close-button(@click="onClick")
 
 </template>

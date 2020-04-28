@@ -57,13 +57,15 @@ export default {
         centeredSlides: true,
         direction: 'vertical',
         parallax: true,
+        passiveListeners: false,
         breakpoints: {
           1024: {
             spaceBetween: 200,
             resistanceRatio: 0.3,
             speed: 800,
             touchAngle: 90,
-            preloadImages: false
+            preloadImages: false,
+            passiveListeners: true,
           }
         }
       },
@@ -79,9 +81,11 @@ export default {
         slideToClickedSlide: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
+        passiveListeners: false,
         breakpoints: {
           1024: {
             slidesPerView: 4,
+            passiveListeners: true
           }
         }
       },
