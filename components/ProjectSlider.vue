@@ -1,7 +1,7 @@
 <template lang="pug">
 kinesis-container.slider-container
     .all
-        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="changeAnimateStatus(true)")
+        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="changeAnimateStatus(true)" aria-label="go to detail")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
@@ -40,7 +40,7 @@ kinesis-container.slider-container
             p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="info.msg_en")
             p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="info.msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }") DETAIL
+                nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }" aria-label="go to detail") DETAIL
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
