@@ -20,7 +20,7 @@ export default {
       },
       { hid: 'og:site_name', property: 'og:site_name', content: 'TodaiToTexas2020' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'https://todaitotexas2020.netlify.app/' },
+      { hid: 'og:url', property: 'og:url', content: 'https://2020.todaitotexas.com/' },
       { hid: 'og:title', property: 'og:title', content: 'TodaiToTexas2020' },
       { hid: 'og:description', property: 'og:description', content: 'This is the website for the six teams from the Todai To Texas 2020, which was cancelled due to COVID-19. 新型コロナウイルスの影響により出展中止となったTodai To Texas 2020の6チームのための特設サイトです。' },
       { hid: 'og:image', property: 'og:image', content: '~/assets/ogp.jpg' },
@@ -29,7 +29,7 @@ export default {
       { hid: 'twitter:site', name:'twitter:site' ,content: '@todaitotexas' }
     ],
     link: [
-      { rel: 'canonical', href: 'https://todaitotexas2020.netlify.app/'},
+      { rel: 'canonical', href: 'https://2020.todaitotexas.com/'},
       { rel: "icon", type: "image/x-icon", href: "/icon.ico" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }
     ],
