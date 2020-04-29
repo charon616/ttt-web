@@ -162,7 +162,7 @@ export default {
       bottom 108px
     &__content
       margin 0
-      overflow scroll
+      overflow-y scroll
       position relative
       height 84%
       h2 
