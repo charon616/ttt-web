@@ -52,6 +52,7 @@ export default {
     this.$nextTick(() => {
       this.changeLoadingStatus
     });
+    Typekit.load({async: true})
   }
 }
 

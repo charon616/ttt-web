@@ -150,7 +150,6 @@ export default {
 
     this.height = window.innerHeight;
     window.addEventListener('resize', this.handleResize);
-    Typekit.load({async: true})
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);
