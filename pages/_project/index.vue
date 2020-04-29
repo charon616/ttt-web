@@ -126,6 +126,15 @@ export default {
                 base = base.substring(0, base.lastIndexOf("."));
             return base;
         }
+    },
+
+    head() {
+        return {
+            title: "TodaiToTexas2020 " + this.jsondata[this.$route.params.project].title,
+            meta: [
+                { hid: 'og:title', property: 'og:title', content: 'TodaiToTexas2020' + this.jsondata[this.$route.params.project].title }
+            ]
+        }
     }
 }
 
