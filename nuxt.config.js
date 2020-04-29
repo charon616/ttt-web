@@ -71,6 +71,14 @@ export default {
     "nuxt-webfontloader"
   ],
   /*
+   ** load settings
+  */
+  loadingIndicator: {
+    name: 'cube-grid',
+    color: '#fff',
+    background: '#000'
+  },
+  /*
    ** Fontawesome
    */
   fontawesome: {

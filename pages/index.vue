@@ -4,16 +4,15 @@
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
         MainPage
-      swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
+      swiper-slide(v-for="(ttl, index) in titles" :key="index")
         ProjectSlider(:title="ttl" v-slot:detail)
 
   .project-nav
     swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
       swiper-slide
         Pro0
-      swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
+      swiper-slide(v-for="(ttl, index) in titles" :key="index")
         component(v-bind:is="projects[index]")
-  .load(v-if="loading")
 
 </template>
 <script>
@@ -90,12 +89,8 @@ export default {
       height: window.innerHeight,
       projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
       selectedProject: "",
-      selectedPos: ""
-    }
-  },
-  asyncData () {
-    return { 
-      jsondata: jsonfile
+      selectedPos: "",
+      titles: jsonfile.projects_title
     }
   },
   methods: {
@@ -103,7 +98,6 @@ export default {
       "updateSwiperPos",
       "updatePage",
       "changeAnimateStatus",
-      "changeLoadingStatus"
     ]),
     handleResize: function() {
       this.height = window.innerHeight;
@@ -112,7 +106,7 @@ export default {
     },
     slideChanged: function() {
       let id = this.swiper.realIndex
-      this.selectedProject = this.jsondata.projects_real_title[id-1]
+      this.selectedProject = this.titles[id-1]
       this.selectedPos = id
       this.updateSwiperPos(id)
     },
@@ -128,7 +122,6 @@ export default {
   computed: {
     ...mapState([
       "isSlideToDefault", 
-      "loading", 
       "swiperPos"
     ]),
     swiper(){
@@ -152,10 +145,7 @@ export default {
 
     this.height = window.innerHeight;
     window.addEventListener('resize', this.handleResize);
-
-    if(this.loading){
-      setTimeout(() => this.$store.commit("changeLoadingStatus"), 3000)
-    }
+    Typekit.load({async: true})
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);
@@ -166,52 +156,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.white
-  background white
-
-.load
-  position fixed
-  top 0
-  left 0
-  width 100%
-  height 100%
-  background txt-color
-  z-index 9999
-  animation byeShutter 3s forwards
-  &::before
-    content ''
-    position absolute
-    top 0
-    left 0
-    bottom 0
-    margin auto
-    background-color bg-color
-    width 0
-    height 2px
-    animation shutterOpen 3s forwards
-
-@keyframes byeShutter 
-  60% 
-    opacity 1
-  100% 
-    opacity 0
-    display none
-    z-index -1
-
-@keyframes shutterOpen 
-  0% 
-    width 0
-    height 2px
-  50% 
-    width 100%
-    height 2px
-  90% 
-    width 100%
-    height 100%
-  100% 
-    width 100%
-    height 100%
-
 .container
   width 100%
   height 100vh

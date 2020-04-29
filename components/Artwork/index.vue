@@ -1,7 +1,7 @@
 <template>
   <section class="artwork">
-    <canvas class="artwork__canvas" ref="canvas" v-if="$device.isDesktop"></canvas>
-    <div v-show="this.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting" :style="{ transform: 'translate(' + this.mx + 'px, ' + this.my + 'px)' }" ></div>
+    <canvas class="artwork__canvas" ref="canvas"></canvas>
+    <div class="lighting" id="lighting" ref="lighting" :style="{ transform: 'translate(' + this.mx + 'px, ' + this.my + 'px)' }" ></div>
   </section>
 </template>
 

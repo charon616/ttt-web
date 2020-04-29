@@ -1,8 +1,9 @@
 <template lang="pug">
   .default
     Menu 
-    Artwork(v-show="this.swiperPos == 0")
+    Artwork(v-if="$device.isDesktop" v-show="this.swiperPos == 0")
     nuxt 
+    .load(v-if="loading")
 </template>
 
 <script>
@@ -14,65 +15,109 @@ export default {
     Menu,
     Artwork
   },
+  data(){
+    return{
+      loading: true
+    }
+  },
   computed: {
     ...mapState([
       "swiperPos", 
     ]),
   },
+  methods: {
+    changeLoadingStatus: function(){
+      this.loading = false
+    }
+  },
   mounted() {
-    Typekit.load({async: true})
+    this.$nextTick(() => {
+      this.changeLoadingStatus
+    });
   }
 }
 
 </script>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 14px;
-  word-spacing: 1px;
-  line-height: 21px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-  overflow-y: scroll;
-}
+<style lang="stylus">
+html 
+  font-family 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+  font-size 14px
+  word-spacing 1px
+  line-height 21px
+  -ms-text-size-adjust 100%
+  -webkit-text-size-adjust 100%
+  -moz-osx-font-smoothing grayscale
+  -webkit-font-smoothing antialiased
+  box-sizing border-box
+  overflow-y scroll
 
-html.index, html.index>body {
-  -ms-scroll-chaining: none;
-  overscroll-behavior: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+html.index, html.index>body 
+  -ms-scroll-chaining none
+  overscroll-behavior none
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  width 100%
+  height 100%
+  overflow hidden
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+*, *:before, *:after 
+  box-sizing border-box
+  margin 0
 
-a{
-  text-decoration: none;
-  cursor: pointer;
-}
+a
+  text-decoration none
+  cursor pointer
 
-h1, .main-font{
-  font-family: aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
+h1, .main-font
+  font-family aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
 
-p{
-  font-family: a-otf-gothic-bbb-pr6n, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
+p
+  font-family a-otf-gothic-bbb-pr6n, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+
+.load
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background txt-color
+  z-index 9999
+  animation byeShutter 3s forwards
+  &::before
+    content ''
+    position absolute
+    top 0
+    left 0
+    bottom 0
+    margin auto
+    background-color bg-color
+    width 0
+    height 2px
+    animation shutterOpen 3s forwards
+
+@keyframes byeShutter 
+  60% 
+    opacity 1
+  100% 
+    opacity 0
+    display none
+    z-index -1
+
+@keyframes shutterOpen 
+  0% 
+    width 0
+    height 2px
+  50% 
+    width 100%
+    height 2px
+  90% 
+    width 100%
+    height 100%
+  100% 
+    width 100%
+    height 100%
 </style>

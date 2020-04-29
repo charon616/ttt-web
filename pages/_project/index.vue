@@ -6,24 +6,24 @@
         img.main-img(:src="image" alt="main-img")
     .detail
         h1.detail__title
-            span(:class = "whichProject") {{jsondata[$route.params.project].title}}
+            span(:class = "whichProject") {{info.title}}
         .detail__msg-wrapper
-            p.detail__msg(v-html="jsondata[$route.params.project].msg_en")
-            p.detail__msg(lang="ja" v-html="jsondata[$route.params.project].msg_jp")
+            p.detail__msg(v-html="info.msg_en")
+            p.detail__msg(lang="ja" v-html="info.msg_jp")
 
         //- video on PC and tablet
         .detail__videobutton.link-button#link-button(v-on:click = "vbuttonClicked" v-if="videotrue") VIDEO
 
         .detail__modal-wrapper#modal-wrapper(v-on:click = "modalClicked" v-if="active")
-            youtube(:video-id="jsondata[$route.params.project].videoID")
+            youtube(:video-id="info.videoID")
 
         //- video on mobile
         .detail__video(v-if="videotrue")
-            iframe(width="100%" height="100%" :src="jsondata[$route.params.project].video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+            iframe(width="100%" height="100%" :src="info.video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
         .detail__desc-wrapper
-            p.detail__desc(v-html="jsondata[$route.params.project].desc_en")
-            p.detail__desc(lang="ja" v-html="jsondata[$route.params.project].desc_jp")
+            p.detail__desc(v-html="info.desc_en")
+            p.detail__desc(lang="ja" v-html="info.desc_jp")
         
         h3.detail__picheader Gallery
         .detail__picwrapper
@@ -32,7 +32,7 @@
                 source(:srcset="webpGalleryImage[index]" type="image/webp")
                 img.detail__pic(:src="url" alt="detail-img")
 
-        a.detail__link.link-button(v-for="(link, index) in jsondata[$route.params.project].link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
+        a.detail__link.link-button(v-for="(link, index) in info.link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
         nuxt-link.detail__back-button(@click.native="animateOn(true)" to="/") ← BACK TO TOP
 
@@ -44,46 +44,46 @@ import { mapMutations } from "vuex";
 export default {
     data(){
         return{
-            jsondata: jsonfile,
             active: false,
-            videotrue: false
+            videotrue: false,
+            info: jsonfile[this.$route.params.project]
         }
     },
     computed: {
         image: function(){
-            return require("~/assets/project/detail" + this.jsondata[this.$route.params.project].main_img)
+            return require("~/assets/project/detail" + this.info.main_img)
         },
         tbimage: function(){
-            return require("~/assets/project/detail/tb" + this.jsondata[this.$route.params.project].main_img)
+            return require("~/assets/project/detail/tb" + this.info.main_img)
         },
         spimage: function(){
-            return require("~/assets/project/detail/sp" + this.jsondata[this.$route.params.project].main_img)
+            return require("~/assets/project/detail/sp" + this.info.main_img)
         },
         galleryImage: function(){
-            var array = new Array(this.jsondata[this.$route.params.project].img.length);
-            for(let i=0; i<this.jsondata[this.$route.params.project].img.length; i++){
-                array[i] = require("~/assets/project" + this.jsondata[this.$route.params.project].img[i])
+            var array = new Array(this.info.img.length);
+            for(let i=0; i< this.info.img.length; i++){
+                array[i] = require("~/assets/project" + this.info.img[i])
             }
             return array
         },
         tbWebpGalleryImage: function(){
-            var array = new Array(this.jsondata[this.$route.params.project].img.length);
-            for(let i=0; i<this.jsondata[this.$route.params.project].img.length; i++){
-                let name = this.baseName(this.jsondata[this.$route.params.project].img[i])
+            var array = new Array(this.info.img.length);
+            for(let i=0; i<this.info.img.length; i++){
+                let name = this.baseName(this.info.img[i])
                 array[i] = require("~/assets/project/webp/detail/" + name + ".webp")
             }
             return array
         },
         webpGalleryImage: function(){
-            var array = new Array(this.jsondata[this.$route.params.project].img.length);
-            for(let i=0; i<this.jsondata[this.$route.params.project].img.length; i++){
-                let name = this.baseName(this.jsondata[this.$route.params.project].img[i])
+            var array = new Array(this.info.img.length);
+            for(let i=0; i<this.info.img.length; i++){
+                let name = this.baseName(this.info.img[i])
                 array[i] = require("~/assets/project/detail/webp/" + name + ".webp")
             }
             return array
         },
         whichProject: function(){
-            return this.jsondata[this.$route.params.project].title
+            return this.info.title
         }
     },
     mounted(){
@@ -92,6 +92,7 @@ export default {
             setTimeout(() => this.animateOn(false), 500)
             this.updatePage("detail")
         });
+        Typekit.load({async: true})
     },
 
     methods:{
@@ -106,7 +107,7 @@ export default {
             this.active = false;
         },
         checkvideo: function(){
-            if (this.jsondata[this.$route.params.project].video){
+            if (this.info.video){
                 this.videotrue = true;
             }
         },

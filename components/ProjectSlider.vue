@@ -6,17 +6,17 @@ kinesis-container.slider-container
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
                         source(:srcset="webpimage" type="image/webp")
-                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
+                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
                 .box-inner(v-else)
                     picture
                         source(:srcset="webpimage" type="image/webp" data-swiper-parallax-scale="0.8")
-                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
+                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
 
-                .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
+                .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
-            h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
-            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="jsondata[title].msg_en")
-            p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
+            h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="info.title")
+            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="info.msg_en")
+            p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="info.msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
                 nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }") DETAIL
 </template>
@@ -33,16 +33,16 @@ export default{
     },
     data() {
         return{
-            jsondata: jsonfile, 
+            info: jsonfile[this.title]
         }  
     },
     computed: {
         image: function(){
-            return require("~/assets/project" + this.jsondata[this.title].main_img)
+            return require("~/assets/project" + this.info.main_img)
         },  
         webpimage: function(){
             return require("~/assets/project/webp/" + this.title + ".webp")
-        }   
+        }
     },
     methods: {
         ...mapMutations(["changeAnimateStatus"])

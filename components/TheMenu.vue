@@ -32,17 +32,12 @@ export default {
     return{
       selectedProject: "",
       selectedPos: "",
-      jsondata: jsonfile
-    }
-  },
-  asyncData () {
-    return{
-      jsondata: jsonfile
+      titles: jsonfile.projects_real_title
     }
   },
   watch: {
     swiperPos: function(val){
-      this.selectedProject = this.jsondata.projects_real_title[val-1]
+      this.selectedProject = this.titles[val-1]
       this.selectedPos = val
     }
   },
