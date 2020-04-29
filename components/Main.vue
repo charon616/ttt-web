@@ -1,17 +1,19 @@
 <template lang="pug">
 .main
   .title
-    .title-element.animated.slideInUp Todai 
-    .title-element.animated.slideInUp To 
-    .title-element.animated.slideInUp Texas 
-    .title-element.animated.slideInUp 2020
+    .title-element.slideInUp Todai 
+    .title-element.slideInUp To 
+    .title-element.slideInUp Texas 
+    .title-element.slideInUp 2020
   Message(v-if="!$device.isMobile")
 </template>
 <script>
-import Message from "~/components/Message.vue";
+// import Message from "~/components/Message.vue";
 export default {
+  name: "Main",
   components: {
-    Message
+    // Message
+    'Message' : () => import('~/components/Message.vue'),
   }
 }
 </script>
@@ -50,6 +52,25 @@ export default {
       for num in (2..4)
         &:nth-child({num})
           animation-delay num * .2s 
+
+.slideInUp {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: slideInUp;
+}
+
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 +tb()
   .main

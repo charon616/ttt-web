@@ -1,7 +1,7 @@
 <template lang="pug">
 .menus
   .mask(v-bind:class="{ black: animate }")
-    img(src="~assets/logo_wh.svg" alt="logo")
+    img(src="~assets/logo_wh.svg" alt="logo" v-show="animate")
   header.menus__main
     nuxt-link.menus__main__logo(to="/" @click.native="resetSlide(); animateOn()")
       img(src="~assets/logo_bl.svg" alt="logo")
@@ -82,13 +82,8 @@ export default {
   img 
     width 420px
     height 420px
-    display none
-    opacity 0
   &.black
     height 100%
-    img 
-      opacity 1
-      display initial
 
 .menus
   &__main

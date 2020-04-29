@@ -6,11 +6,11 @@ kinesis-container.slider-container
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
                         source(:srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
-                        img(:src="image" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
+                        img(:src="image1x" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
                 .box-inner(v-else)
                     picture
                         source(:srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
-                        img(:src="image" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
+                        img(:src="image1x" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
 
                 .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
@@ -26,6 +26,7 @@ import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 import { mapMutations } from 'vuex';
 
 export default{
+    name: "ProjectSlider",
     props: ['title'],
     components: {
         KinesisContainer,

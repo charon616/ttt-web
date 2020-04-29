@@ -17,6 +17,7 @@
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+  name: "Message",
   computed: {
     ...mapState(["isClose"])
   },

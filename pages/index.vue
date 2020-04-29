@@ -16,31 +16,40 @@
 
 </template>
 <script>
-import MainPage from '~/components/Main.vue';
+// import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
 
-import Pro0 from '~/components/Logo/ttt.vue';
-import Pro1 from '~/components/Logo/harvestx.vue';
-import Pro2 from '~/components/Logo/grubin.vue';
-import Pro3 from '~/components/Logo/syrinx.vue';
-import Pro4 from '~/components/Logo/genkan.vue';
-import Pro5 from '~/components/Logo/roboxer.vue';
-import Pro6 from '~/components/Logo/wearbo.vue';
+// import Pro0 from '~/components/Logo/ttt.vue';
+// import Pro1 from '~/components/Logo/harvestx.vue';
+// import Pro2 from '~/components/Logo/grubin.vue';
+// import Pro3 from '~/components/Logo/syrinx.vue';
+// import Pro4 from '~/components/Logo/genkan.vue';
+// import Pro5 from '~/components/Logo/roboxer.vue';
+// import Pro6 from '~/components/Logo/wearbo.vue';
 
 import jsonfile from '~/assets/projects.json';
 import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
-    MainPage,
+    'MainPage' : () => import('~/components/Main.vue'),
+    // 'ProjectSlider' : () => import('~/components/ProjectSlider.vue'),
+    'Pro0' : () => import('~/components/Logo/ttt.vue'),
+    'Pro1' : () => import('~/components/Logo/harvestx.vue'),
+    'Pro2' : () => import('~/components/Logo/grubin.vue'),
+    'Pro3' : () => import('~/components/Logo/syrinx.vue'),
+    'Pro4' : () => import('~/components/Logo/genkan.vue'),
+    'Pro5' : () => import('~/components/Logo/roboxer.vue'),
+    'Pro6' : () => import('~/components/Logo/wearbo.vue'),
+    // MainPage,
     ProjectSlider,
-    Pro0,
-    Pro1,
-    Pro2,
-    Pro3,
-    Pro4,
-    Pro5,
-    Pro6
+    // Pro0,
+    // Pro1,
+    // Pro2,
+    // Pro3,
+    // Pro4,
+    // Pro5,
+    // Pro6
   },
   data() {
     return {
