@@ -8,12 +8,11 @@
   Message(v-if="!$device.isMobile")
 </template>
 <script>
-// import Message from "~/components/Message.vue";
+import Message from "~/components/Message.vue";
 export default {
   name: "Main",
   components: {
-    // Message
-    'Message' : () => import('~/components/Message.vue'),
+    Message
   }
 }
 </script>

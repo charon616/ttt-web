@@ -9,19 +9,16 @@
 </template>
 
 <script>
-// import Menu from '~/components/TheMenu.vue';
-// import Message from "~/components/Message.vue";
-// import Artwork from "~/components/Artwork";
+import Menu from '~/components/TheMenu.vue';
+import Message from "~/components/Message.vue";
+import Artwork from "~/components/Artwork";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    // Menu,
-    // Message,
-    // Artwork
-    'Menu' : () => import('~/components/TheMenu.vue'),
-    'Message' : () => import('~/components/Message.vue'),
-    'Artwork' : () => import('~/components/Artwork'),
+    Menu,
+    Message,
+    Artwork
   },
   data(){
     return{
