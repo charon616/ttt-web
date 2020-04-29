@@ -27,10 +27,9 @@
         
         h3.detail__picheader Gallery
         .detail__picwrapper
-            picture(v-for="(url, index) in galleryImage" :key="index")
-                source(:srcset="tbWebpGalleryImage[index]" type="image/webp" media="(max-width: 1024px)")
-                source(:srcset="webpGalleryImage[index]" type="image/webp")
-                img.detail__pic(:src="url" alt="detail-img")
+            picture(v-for="(url, index) in galleryImagepc" :key="index")
+                source(:srcset="`${webpGalleryImagetb[index]} 1024w, ${webpGalleryImagepc[index]}`" type="image/webp")
+                img.detail__pic(:src="url" :srcset="`${galleryImagetb[index]} 1024w, ${galleryImagepc[index]}`" alt="detail-img")
 
         a.detail__link.link-button(v-for="(link, index) in info.link" :key="index" :href="link" target="_blank" rel="noopener noreferrer") VISIT WEBSITE
 
@@ -46,39 +45,47 @@ export default {
         return{
             active: false,
             videotrue: false,
-            info: jsonfile[this.$route.params.project]
+            info: jsonfile[this.$route.params.project],
         }
     },
     computed: {
         image: function(){
-            return require("~/assets/project/detail" + this.info.main_img)
+            return require("~/assets/project/detail/top-pc" + this.info.main_img)
         },
         tbimage: function(){
-            return require("~/assets/project/detail/tb" + this.info.main_img)
+            return require("~/assets/project/detail/top-tb" + this.info.main_img)
         },
         spimage: function(){
-            return require("~/assets/project/detail/sp" + this.info.main_img)
+            return require("~/assets/project/detail/top-sp" + this.info.main_img)
         },
-        galleryImage: function(){
+        galleryImagepc: function(){
             var array = new Array(this.info.img.length);
             for(let i=0; i< this.info.img.length; i++){
-                array[i] = require("~/assets/project" + this.info.img[i])
+                array[i] = require("~/assets/project/detail" + this.info.img[i])
             }
             return array
         },
-        tbWebpGalleryImage: function(){
+        galleryImagetb: function(){
             var array = new Array(this.info.img.length);
-            for(let i=0; i<this.info.img.length; i++){
+            for(let i=0; i< this.info.img.length; i++){
                 let name = this.baseName(this.info.img[i])
-                array[i] = require("~/assets/project/webp/detail/" + name + ".webp")
+                array[i] = require("~/assets/project/detail/tb" + this.info.img[i])
             }
             return array
         },
-        webpGalleryImage: function(){
+        webpGalleryImagepc: function(){
             var array = new Array(this.info.img.length);
             for(let i=0; i<this.info.img.length; i++){
                 let name = this.baseName(this.info.img[i])
-                array[i] = require("~/assets/project/detail/webp/" + name + ".webp")
+                array[i] = require("~/assets/project/detail/" + name + ".webp")
+            }
+            return array
+        },
+        webpGalleryImagetb: function(){
+            var array = new Array(this.info.img.length);
+            for(let i=0; i<this.info.img.length; i++){
+                let name = this.baseName(this.info.img[i])
+                array[i] = require("~/assets/project/detail/tb/" + name + ".webp")
             }
             return array
         },

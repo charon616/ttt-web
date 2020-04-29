@@ -5,12 +5,12 @@ kinesis-container.slider-container
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
-                        source(:srcset="webpimage" type="image/webp")
-                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
+                        source(:srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+                        img(:src="image" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
                 .box-inner(v-else)
                     picture
-                        source(:srcset="webpimage" type="image/webp" data-swiper-parallax-scale="0.8")
-                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
+                        source(:srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+                        img(:src="image" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
 
                 .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
@@ -37,11 +37,17 @@ export default{
         }  
     },
     computed: {
-        image: function(){
-            return require("~/assets/project" + this.info.main_img)
+        image1x: function(){
+            return require("~/assets/project/1x" + this.info.main_img)
         },  
-        webpimage: function(){
-            return require("~/assets/project/webp/" + this.title + ".webp")
+        image2x: function(){
+            return require("~/assets/project/2x" + this.info.main_img)
+        },  
+        webpimage1x: function(){
+            return require("~/assets/project/1x/" + this.title + ".webp")
+        },
+        webpimage2x: function(){
+            return require("~/assets/project/2x/" + this.title + ".webp")
         }
     },
     methods: {
