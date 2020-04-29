@@ -12,6 +12,7 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#000000" },
       {
         hid: "description",
         name: "description",
@@ -29,18 +30,19 @@ export default {
     ],
     link: [
       { rel: 'canonical', href: 'https://todaitotexas2020.netlify.app/'},
-      { rel: "icon", type: "image/x-icon", href: "/icon.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/icon.ico" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }
     ],
     script: [
       {
-        src: 'https://use.typekit.net/dhy3jso.js'
+        src: 'https://use.typekit.net/dhy3jso.js', defer: true
       }
     ]
   },
   /*
    ** Global CSS
    */
-  css: ["swiper/dist/css/swiper.css", "animate.css/animate.min.css"],
+  css: ["swiper/dist/css/swiper.css"],
   /*
    ** Plugins to load before mounting the App
    */
@@ -72,6 +74,14 @@ export default {
     "nuxt-webfontloader"
   ],
   /*
+   ** load settings
+  */
+  loadingIndicator: {
+    name: 'cube-grid',
+    color: '#fff',
+    background: '#000'
+  },
+  /*
    ** Fontawesome
    */
   fontawesome: {
@@ -91,6 +101,12 @@ export default {
    */
   styleResources: {
     stylus: ["~assets/stylus/_variables.styl", "~assets/stylus/main.styl"]
+  },
+  /*
+  ** DevTool
+  */
+  vue: {
+    devtools: true 
   },
   /*
    ** Build configuration

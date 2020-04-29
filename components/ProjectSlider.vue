@@ -1,29 +1,54 @@
 <template lang="pug">
 kinesis-container.slider-container
     .all
-        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn")
+        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="changeAnimateStatus(true)" aria-label="go to detail")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
-                        source(:srcset="webpimage" type="image/webp")
-                        img(:srcset="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
+                        source(:data-srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+                        img.swiper-lazy(:data-src="image1x" :data-srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" alt="")
+                        .custom-swiper-lazy-preloader
+                            .sk-cube-grid
+                                .sk-cube.sk-cube1
+                                .sk-cube.sk-cube2
+                                .sk-cube.sk-cube3
+                                .sk-cube.sk-cube4
+                                .sk-cube.sk-cube5
+                                .sk-cube.sk-cube6
+                                .sk-cube.sk-cube7
+                                .sk-cube.sk-cube8
+                                .sk-cube.sk-cube9
                 .box-inner(v-else)
                     picture
-                        source(:srcset="webpimage" type="image/webp" data-swiper-parallax-scale="0.8")
-                        img(:src="image" :key="title" data-swiper-parallax-scale="0.8" :alt="this.jsondata[this.title].main_img")
-                .color(v-bg="jsondata[title].color" v-bind:key="title" data-swiper-parallax-scale="0.8")
+                        source(:data-srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+                        img.swiper-lazy(:data-src="image1x" :data-srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" alt="")
+                        .custom-swiper-lazy-preloader
+                            .sk-cube-grid
+                                .sk-cube.sk-cube1
+                                .sk-cube.sk-cube2
+                                .sk-cube.sk-cube3
+                                .sk-cube.sk-cube4
+                                .sk-cube.sk-cube5
+                                .sk-cube.sk-cube6
+                                .sk-cube.sk-cube7
+                                .sk-cube.sk-cube8
+                                .sk-cube.sk-cube9
+
+                .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
-            h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="jsondata[title].title")
-            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="jsondata[title].msg_en")
-            p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
+            h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="info.title")
+            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="info.msg_en")
+            p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="info.msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                nuxt-link.link-button(@click.native="animateOn" :to="{ name: 'project', params: { project:title } }") DETAIL
+                nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }" aria-label="go to detail") DETAIL
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
+import { mapMutations } from 'vuex';
 
 export default{
+    name: "ProjectSlider",
     props: ['title'],
     components: {
         KinesisContainer,
@@ -31,21 +56,25 @@ export default{
     },
     data() {
         return{
-            jsondata: jsonfile, 
+            info: jsonfile[this.title]
         }  
     },
     computed: {
-        image: function(){
-            return require("~/assets/project" + this.jsondata[this.title].main_img)
+        image1x: function(){
+            return require("~/assets/project/1x" + this.info.main_img)
         },  
-        webpimage: function(){
-            return require("~/assets/project/webp/" + this.title + ".webp")
-        }   
+        image2x: function(){
+            return require("~/assets/project/2x" + this.info.main_img)
+        },  
+        webpimage1x: function(){
+            return require("~/assets/project/1x/" + this.title + ".webp")
+        },
+        webpimage2x: function(){
+            return require("~/assets/project/2x/" + this.title + ".webp")
+        }
     },
     methods: {
-        animateOn: function(){
-            this.$store.commit("changeAnimateStatus", true);
-        }
+        ...mapMutations(["changeAnimateStatus"])
     }
 }
 
@@ -102,6 +131,48 @@ border = 8px
             &__msg-jp
                 margin 12px 0 4px 0
 
+.custom-swiper-lazy-preloader
+    background black
+    width 100%
+    height 100%
+    {flex-center}
+
+.sk-cube-grid 
+    width 40px
+    height 40px
+    margin 100px auto
+    .sk-cube 
+        width 33%
+        height 33%
+        background-color white
+        float left
+        animation sk-cubeGridScaleDelay 1.3s infinite ease-in-out
+
+    .sk-cube1 
+        animation-delay 0.2s
+    .sk-cube2
+        animation-delay 0.3s
+    .sk-cube3
+        animation-delay 0.4s
+    .sk-cube4
+        animation-delay 0.1s
+    .sk-cube5
+        animation-delay 0.2s
+    .sk-cube6
+        animation-delay 0.3s
+    .sk-cube7
+        animation-delay 0s
+    .sk-cube8
+        animation-delay 0.1s
+    .sk-cube9
+        animation-delay 0.2s
+
+@keyframes sk-cubeGridScaleDelay 
+    0%, 70%, 100% 
+        transform scale3D(1, 1, 1)
+    35% 
+        transform scale3D(0, 0, 1)
+
 +tb()
     .slider-container
         .all
@@ -142,7 +213,7 @@ border = 8px
                     margin 0
                 &__msg-en
                     font-weight 800
-                    font-family: aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                    font-family aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
                     padding 0
                     margin 0
                 &__msg-jp
@@ -161,7 +232,6 @@ border = 8px
                         left 48px
                         top 24px
             .textarea
-                // padding 32px
                 height 48%
                 &__msg-en
                     margin 0
@@ -171,5 +241,4 @@ border = 8px
                     .link-button
                         font-size 1em
                         margin-top 8px
-
 </style>

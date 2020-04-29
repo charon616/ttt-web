@@ -1,7 +1,7 @@
 <template>
   <section class="artwork">
-    <canvas class="artwork__canvas" ref="canvas" v-if="$device.isDesktop"></canvas>
-    <div v-if="this.$store.state.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting"></div>
+    <canvas class="artwork__canvas" ref="canvas"></canvas>
+    <div class="lighting" id="lighting" ref="lighting" :style="{ transform: 'translate(' + this.mx + 'px, ' + this.my + 'px)' }" ></div>
   </section>
 </template>
 
@@ -12,9 +12,12 @@ export default {
   name: 'artwork',
   components: {},
   props: [],
-  computed: mapState({
-    page: state => state.page,
-  }),
+  computed: {
+    ...mapState([
+      "page",
+      "swiperPos"
+    ])
+  },
   watch: {
     page: function(newVal, oldVal){
       if(newVal == "index"){
@@ -22,6 +25,12 @@ export default {
       }else{
         this.artworkGL.pause;
       }
+    }
+  },
+  data() {
+    return{
+      mx: 0,
+      my: 0
     }
   },
   mounted () {
@@ -39,12 +48,10 @@ export default {
       this.artworkGL.changeSize(window.innerWidth, window.innerHeight, window.devicePixelRatio)
     },
     onMouseMove: function(e){
-      this.artworkGL.mouseMoved(e.clientX, e.clientY);
-      if(this.$store.state.swiperPos != 0){
-        return;
+      if(this.swiperPos == 0){
+        this.mx = e.clientX;
+        this.my = e.clientY;
       }
-      let lighting = document.getElementById('lighting');
-      lighting.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
     }
   },
   destroyed() {
@@ -77,5 +84,4 @@ export default {
   background radial-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
   mix-blend-mode overlay
   filter blur(16px)
-
 </style>

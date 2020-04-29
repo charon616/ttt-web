@@ -1,7 +1,5 @@
 import * as THREE from "three";
-import OrbitControls from "three-orbitcontrols";
 
-//　three.jsの処理を書いていく
 export default class ArtworkGL {
   constructor(props) {
     this.props = props;
@@ -10,7 +8,6 @@ export default class ArtworkGL {
     let timedelta = 0;
     let timetotal = 0;
 
-    this.mouse = new THREE.Vector2(0, 0);
     this.pause = false;
   }
 
@@ -27,12 +24,8 @@ export default class ArtworkGL {
     });
 
     this.renderer.setPixelRatio(window.devicePixelRatio);
-
-    // this.renderer.setClearColor(0x111111, 1);
     this.renderer.setClearColor(0xFFFFFF, 1);
     this.renderer.setSize(this.size.windowW, this.size.windowH);
-    // レンダラー：シャドウを有効にする
-    // this.renderer.shadowMap.enabled = true;
 
     // Camera
     const fov = 45;
@@ -46,9 +39,7 @@ export default class ArtworkGL {
       dist * 2
     );
     this.camera.position.set(0, 1, 10);
-    // this.camera.position.z = dist; // カメラを遠ざける
-
-    // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    // this.camera.position.z = dist;
 
     const wrap = new THREE.Group();
     const images = ['roboxer.jpg', 'wearbo.jpg', 'genkan.jpg', 'grubin.jpg', 'syrinx.jpg', 'harvestx.jpg'];
@@ -77,24 +68,10 @@ export default class ArtworkGL {
     const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.6);
     directionalLight.position.set(0, 10, 3);
     directionalLight.intensity = 0.8;
-    // directionalLight.castShadow = true;
     this.scene.add(directionalLight);
 
     const ambient = new THREE.AmbientLight(0xFFFFFF, 0.2);
     this.scene.add(ambient);
-
-    // スポットライト光源を作成
-    // const spot = new THREE.SpotLight(0xFFFFFF, 1, 30, Math.PI / 6, 1, 0.5);
-    // spot.position.set(0, 8, 6);
-    // this.scene.add(spot);
-
-    // const spot2 = new THREE.SpotLight(0xFFFF00, 1, 30, Math.PI / 6, 1, 0.5);
-    // spot2.position.set(10, 8, 6);
-    // this.scene.add(spot2);
-
-    // const spot3 = new THREE.SpotLight(0x0000FF, 1, 30, Math.PI / 6, 1, 0.5);
-    // spot3.position.set(-10, 8, 6);
-    // this.scene.add(spot3);
 
     const ambientLight = new THREE.AmbientLight(0xFFFFFF);
     ambientLight.position.set(800, 800, 800);
@@ -154,7 +131,6 @@ export default class ArtworkGL {
     plane.position.x = x;
     plane.position.z = -1;
     plane.castShadow = true;
-    // plane.position.set(0, 0);
     wrap.add(plane);
   }
 
@@ -174,11 +150,6 @@ export default class ArtworkGL {
     plane.rotation.set(-Math.PI / 2, 0, 0);
     plane.castShadow = true;
     wrap.add(plane);
-  }
-
-  mouseMoved(x, y) {
-    this.mouse.x = x - (this.size.windowW / 2); // 原点を中心に持ってくる
-    this.mouse.y = -y + (this.size.windowH / 2); // 軸を反転して原点を中心に持ってくる
   }
 
   pause(){

@@ -1,75 +1,65 @@
 <template lang="pug">
 .menus
-  .mask(v-bind:class="{ black: animateMenu }")
-    img(src="~assets/logo_wh.svg" alt="logo")
+  .mask(v-bind:class="{ black: animate }")
+    img(src="~assets/logo_wh.svg" alt="logo" v-show="animate")
   header.menus__main
     nuxt-link.menus__main__logo(to="/" @click.native="resetSlide(); animateOn()")
       img(src="~assets/logo_bl.svg" alt="logo")
-  .menus__sns(v-bind:class="{ hide: isHide }")
+  .menus__sns
     span.main-font SHARE ON:
     a.fb-share-button.link(data-href="https://2020.todaitotexas.com/" aria-label="share on facebook" data-layout="button" data-size="small" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F2020.todaitotexas.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
       font-awesome-icon.icon.icon-facebook(:icon="['fab', 'facebook-f']")
     a.tw-share-button.link(href="http://twitter.com/share?url=https://2020.todaitotexas.com/&text=Todai To Texas 2020 special site&hashtags=SXSW" aria-label="share on twitter" target="_blank" rel="noopener noreferrer")
       font-awesome-icon.icon.icon-twitter(:icon="['fab', 'twitter']") 
   .menus__pos
-    .menus__pos__no(v-if="selectedPos != 0")
+    .menus__pos__no(v-show="selectedPos != 0")
       span.normal No.
       transition(name="slide-fade" mode="out-in")
         span.num(:key="selectedPos") {{ selectedPos }}
       .line  
       span.all 6
-    .menus__pos__name(v-if="selectedPos != 0")
+    .menus__pos__name(v-show="selectedPos != 0")
       transition(name="slide-fade2" mode="out-in")
         p.main-font(:key="selectedPos") {{ selectedProject }}
 </template>
 
 <script>
 import jsonfile from '~/assets/projects.json';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data(){
     return{
-      isHide: false,
-      animateMenu: false,
       selectedProject: "",
       selectedPos: "",
-      jsondata: jsonfile
-    }
-  },
-  asyncData () {
-    return{
-      jsondata: jsonfile
+      titles: jsonfile.projects_real_title
     }
   },
   watch: {
     swiperPos: function(val){
-      this.selectedProject = this.jsondata.projects_real_title[val-1]
+      this.selectedProject = this.titles[val-1]
       this.selectedPos = val
-    },
-    animate: function(val){
-      this.animateMenu = val
     }
   },
-  computed: mapState({
-    page: state => state.page,
-    swiperPos: state => state.swiperPos,
-    animate: state => state.animate
-  }),
+  computed: {
+    ...mapState([ "page", "swiperPos", "animate" ])
+  },
   methods: {
+    ...mapMutations([ 
+      "updateSwiperPos",
+      "changeIsSlideToDefalutState",
+      "changeAnimateStatus"
+    ]),
     resetSlide: function(){
-      if(this.$store.state.page != "index"){
-        this.$store.commit("updateSwiperPos", 0)
+      if(this.page != "index"){
+        this.updateSwiperPos(0)
       }else{
-        this.$store.commit("changeIsSlideToDefalutState")
+        this.changeIsSlideToDefalutState()
       }
     },
-    onclick: function(){
-      this.isHide = !this.isHide
-    },
     animateOn: function(){
-      if(this.$store.state.page != "index"){
-        this.$store.commit("changeAnimateStatus", true);
+      if(this.page != "index"){
+        this.changeAnimateStatus(true)
       }
     }
   }
@@ -92,13 +82,8 @@ export default {
   img 
     width 420px
     height 420px
-    display none
-    opacity 0
   &.black
     height 100%
-    img 
-      opacity 1
-      display initial
 
 .menus
   &__main
@@ -237,12 +222,9 @@ export default {
         position initial
         padding 0
         transform initial
-        // font-size .8rem
         width auto
         height auto
-        & > p
-          display initial
-        .normal
+        & > p, .normal
           display initial
         .num
           justify-content center
@@ -251,13 +233,10 @@ export default {
           width auto
           height auto
           position relative
-        .line
-          display none
-        .all
+        .line, .all
           display none
       &__name
         display initial
-        // font-size 1rem
 
 +sp()
   nav-height = nav-height-sp

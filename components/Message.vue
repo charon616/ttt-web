@@ -1,41 +1,44 @@
 <template lang="pug">
-.message(v-bind:class="{ close: isClose }")
-  .message__content
-    h2(v-bind:class="{ 'link-button': isClose }" @click="onClick") WHY THIS SITE?
-    p SXSW2020, where Todai To Texas was supposed to exhibit, has been cancelled due to COVID-19. There were six teams participating in TTT2020. We wanted to leave a mark on them, so we've created this special site as one of the opportunities to do so. While the future is still unclear, each of us is starting to make progress towards the next opportunities, including SXSW2021. I hope you will continue to support TTT and its participants in their challenges.
-    br
-    p Todai To Texasが出展を予定していたSXSW2020が、新型コロナウイルスの影響により中止となりました。TTT2020には6つのチームが参加していましたが、彼らの足跡を少しでも残したいと思い、その場の１つとして、この特設サイトを用意しました。先行きはまだまだ不透明ですが、SXSW2021を含む次の機会へ向けて、それぞれが進み始めています。TTTとその参加者のチャレンジを引き続き応援していただければ幸いです。
-    a.link-button(href="http://todaitotexas.com/" target="_blank" rel="noopener noreferrer") TTT OFFICIAL WEB SITE
-  .close-button(@click="onClick")
+.message-container
+  .message(v-bind:class="{ close: isClose }")
+    .message__content
+      h2(v-bind:class="{ 'link-button': isClose }" @click="changeIsCloseStatus") WHY THIS SITE?
+      p SXSW2020, where Todai To Texas was supposed to exhibit, has been cancelled due to COVID-19. There were six teams participating in TTT2020. We wanted to leave a mark on them, so we've created this special site as one of the opportunities to do so. While the future is still unclear, each of us is starting to make progress towards the next opportunities, including SXSW2021. I hope you will continue to support TTT and its participants in their challenges.
+      br
+      p Todai To Texasが出展を予定していたSXSW2020が、新型コロナウイルスの影響により中止となりました。TTT2020には6つのチームが参加していましたが、彼らの足跡を少しでも残したいと思い、その場の１つとして、この特設サイトを用意しました。先行きはまだまだ不透明ですが、SXSW2021を含む次の機会へ向けて、それぞれが進み始めています。TTTとその参加者のチャレンジを引き続き応援していただければ幸いです。
+      a.link-button(href="http://todaitotexas.com/" target="_blank" rel="noopener noreferrer") TTT OFFICIAL WEB SITE
+    .close-button(@click="changeIsCloseStatus")
+  .message-bg(@click="changeIsCloseStatus" v-show="!isClose")
+  .guide(v-show="isClose")
+    .icon-scroll 
 
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
-  computed: mapState({
-    isClose: state => state.isClose,
-  }),
+  name: "Message",
+  computed: {
+    ...mapState(["isClose"])
+  },
   methods: {
-    onClick: function(){
-      this.$store.commit("changeIsCloseStatus")
-    }
+    ...mapMutations(["changeIsCloseStatus"])
   }
 }
 </script>
 <style lang="stylus" scoped>
+
 .message
   position absolute
   left calc(50% - 120px)
   top 50%
   transform translateY(-50%)
   text-align left
-  width 720px
   width 'calc(%s * 0.6)' % content-width
   padding 0
   z-index 1
   border 1px solid txt-color
-  backdrop-filter blur(16px) brightness(150%)
+  backdrop-filter blur(8px) brightness(150%)
   background alpha(bg-color, .8)
   &__content
     margin 32px 108px 32px 32px
@@ -99,8 +102,48 @@ export default {
         display none
     .close-button
       display none
+.message-bg
+  position fixed
+  width 100%
+  height 100%
+.guide
+  text-align center
+  padding 32px
+  position relative
+  position absolute 
+  left 50%
+  top 50%
+  transform translateX(-50%)
+  .icon-scroll
+    width 40px
+    height 70px
+    margin-top -35px
+    box-shadow inset 0 0 0 2px bg-color
+    border-radius 25px
+    background alpha(txt-color, .2)
+    &:before
+      content: ''
+      position absolute
+      width 8px
+      height 8px
+      background bg-color
+      margin-left -4px
+      top 8px
+      border-radius 4px
+      animation 3s scroll infinite
+@keyframes scroll
+  0%
+    opacity: 1
+  60%
+    opacity: 0
+    transform: translateY(46px)
+  100%
+    opacity: 0
+    transform: translateY(46px)
 
 +tb()
+  .message-bg, .guide
+    display none
   .message
     top 50%
     left 50%
@@ -120,7 +163,7 @@ export default {
       bottom 108px
     &__content
       margin 0
-      overflow scroll
+      overflow-y scroll
       position relative
       height 84%
       h2 
@@ -153,16 +196,22 @@ export default {
   .message
     width 100%
     height 100%
-    border none
     top 0
     transform translateX(-50%) translateY(0)
-    padding 0 24px 24px
+    padding 80px 24px 0
+    z-index 80
+    border 8px solid txt-color
     &__content
       height calc(100% - 80px)
-      p 
-        font-size 12px
-        line-height 18px
+      padding-bottom 24px
+      padding-top 24px
       .link-button
         font-size 1em
         margin-top 8px
+    .close-button
+      height 40px
+      &::before, &::after
+        transform rotate(25deg) translateY(-50%)
+      &::after
+        transform rotate(-25deg) translateY(-50%)
 </style>

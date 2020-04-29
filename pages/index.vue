@@ -1,26 +1,23 @@
 <template lang="pug">
-.container#container
+.container(:style="{ height: this.height + 'px'}")
   .main-gallery 
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
         MainPage
-      swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
+      swiper-slide(v-for="(ttl, index) in titles" :key="index")
         ProjectSlider(:title="ttl" v-slot:detail)
 
   .project-nav
     swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
       swiper-slide
         Pro0
-      swiper-slide(v-for="(ttl, index) in jsondata.projects_title" :key="index")
+      swiper-slide(v-for="(ttl, index) in titles" :key="index")
         component(v-bind:is="projects[index]")
-  .load(v-if="loading")
 
 </template>
 <script>
-import Artwork from "~/components/Artwork";
 import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
-
 import Pro0 from '~/components/Logo/ttt.vue';
 import Pro1 from '~/components/Logo/harvestx.vue';
 import Pro2 from '~/components/Logo/grubin.vue';
@@ -30,11 +27,10 @@ import Pro5 from '~/components/Logo/roboxer.vue';
 import Pro6 from '~/components/Logo/wearbo.vue';
 
 import jsonfile from '~/assets/projects.json';
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
-    Artwork,
     MainPage,
     ProjectSlider,
     Pro0,
@@ -58,10 +54,13 @@ export default {
         direction: 'vertical',
         parallax: true,
         passiveListeners: false,
+        preloadImages: false,
+        lazy: {
+          loadPrevNext: true
+        },
         breakpoints: {
           1024: {
             spaceBetween: 200,
-            resistanceRatio: 0.3,
             speed: 800,
             touchAngle: 90,
             preloadImages: false,
@@ -77,7 +76,6 @@ export default {
         mousewheel: true,
         centeredSlides: true,
         slidesPerView: 7,
-        touchRatio: 0.2,
         slideToClickedSlide: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
@@ -92,27 +90,26 @@ export default {
       height: window.innerHeight,
       projects: ["Pro1", "Pro2", "Pro3", "Pro4", "Pro5", "Pro6"],
       selectedProject: "",
-      selectedPos: ""
-    }
-  },
-  asyncData (ctx) {
-    return { 
-      jsondata: jsonfile
+      selectedPos: "",
+      titles: jsonfile.projects_title
     }
   },
   methods: {
+    ...mapMutations([
+      "updateSwiperPos",
+      "updatePage",
+      "changeAnimateStatus",
+    ]),
     handleResize: function() {
       this.height = window.innerHeight;
-      let h = document.getElementById('container');
-      h.style.height = this.height + 'px';
-
       this.swiper.update()
       this.swiperThumbs.update()
     },
     slideChanged: function() {
-      this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
-      this.selectedPos = this.swiper.realIndex
-      this.$store.commit("updateSwiperPos", this.swiper.realIndex)
+      let id = this.swiper.realIndex
+      this.selectedProject = this.titles[id-1]
+      this.selectedPos = id
+      this.updateSwiperPos(id)
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
@@ -123,91 +120,43 @@ export default {
       this.returnToDefault()
     }
   },
-  computed: mapState({
-    isSlideToDefault: state => state.isSlideToDefault,
-    loading: state => state.loading,
-    isClose: state => state.isClose,
-    animate: state => state.animate,
+  computed: {
+    ...mapState([
+      "isSlideToDefault", 
+      "swiperPos"
+    ]),
     swiper(){
       return this.$refs.swiperTop.swiper
     },
     swiperThumbs(){
       return this.$refs.swiperThumbs.swiper
     }
-  }),
+  },
   mounted() {
-    this.$store.commit("updatePage","index")
     this.$nextTick(() => {
+      this.updatePage("index")
       this.swiper.controller.control = this.swiperThumbs
       this.swiperThumbs.controller.control = this.swiper
-      setTimeout(() => this.$store.commit("changeAnimateStatus", false), 500)
+      setTimeout(() => this.changeAnimateStatus(false), 500)
     });
 
-    this.swiper.on('slideChangeTransitionEnd', this.slideChange);
-    this.swiper.slideToLoop(this.$store.state.swiperPos, 1000, false)
-    this.swiperThumbs.slideToLoop(this.$store.state.swiperPos, 1000, false)
+    this.swiper.on('slideChangeTransitionEnd', this.slideChanged);
+    this.swiper.slideToLoop(this.swiperPos, 1000, false)
+    this.swiperThumbs.slideToLoop(this.swiperPos, 1000, false)
 
     this.height = window.innerHeight;
-    let h = document.getElementById('container');
-    h.style.height = this.height + 'px';
     window.addEventListener('resize', this.handleResize);
-
-    setTimeout(() => this.$store.commit("changeLoadingStatus"), 3000)
+    Typekit.load({async: true})
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);
+    this.swiper.detachEvents();
   }
 }
 
 </script>
 
 <style scoped lang="stylus">
-.white
-  background white
-
-.load
-  position fixed
-  top 0
-  left 0
-  width 100%
-  height 100%
-  background txt-color
-  z-index 9999
-  animation byeShutter 3s forwards
-  &::before
-    content ''
-    position absolute
-    top 0
-    left 0
-    bottom 0
-    margin auto
-    background-color bg-color
-    width 0
-    height 2px
-    animation shutterOpen 3s forwards
-
-@keyframes byeShutter 
-  60% 
-    opacity 1
-  100% 
-    opacity 0
-    display none
-    z-index -1
-
-@keyframes shutterOpen 
-  0% 
-    width 0
-    height 2px
-  50% 
-    width 100%
-    height 2px
-  90% 
-    width 100%
-    height 100%
-  100% 
-    width 100%
-    height 100%
-
 .container
   width 100%
   height 100vh

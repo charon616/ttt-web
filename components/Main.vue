@@ -1,73 +1,23 @@
 <template lang="pug">
-kinesis-container.main
-  .title(v-if="$device.isDesktop")
-    kinesis-element.title-element.animated.slideInUp(:strength="8") Todai 
-    kinesis-element.title-element.animated.slideInUp(:strength="16") To 
-    kinesis-element.title-element.animated.slideInUp(:strength="4") Texas 
-    kinesis-element.title-element.animated.slideInUp(:strength="-8") 2020
-  .title(v-else)
-    .title-element Todai 
-    .title-element To 
-    .title-element Texas 
-    .title-element 2020
-
-  Message
-
-  .message-bg(@click="onClick" v-if="!isClose")
-  .guide(v-if="isClose")
-    .icon-scroll 
-
+.main
+  .title
+    .title-element.slideInUp Todai 
+    .title-element.slideInUp To 
+    .title-element.slideInUp Texas 
+    .title-element.slideInUp 2020
+  Message(v-if="!$device.isMobile")
 </template>
 <script>
-import Artwork from "~/components/Artwork";
 import Message from "~/components/Message.vue";
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
-import { mapState } from 'vuex';
-
 export default {
+  name: "Main",
   components: {
-    Artwork,
-    Message,
-    KinesisContainer,
-    KinesisElement
-  },
-  computed: mapState({
-    isClose: state => state.isClose,
-  }),
-  data(){
-    return{
-      swiperOption: {
-        loop: false,
-        spaceBetween: 200,
-        speed: 800,
-        centeredSlides: true,
-        pagination: { //ページネーション設定
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        }
-      },
-    }
-  },
-  asyncData (ctx) {
-    return { 
-      strength: (ctx.isDesktop) ? 8 : 0
-    }
-  },
-  methods: {
-    onClick: function(){
-      this.$store.commit("changeIsCloseStatus")
-    }
+    Message
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-border = 8px
-
 .main
   height 100%
   width 100%
@@ -101,50 +51,25 @@ border = 8px
       for num in (2..4)
         &:nth-child({num})
           animation-delay num * .2s 
-  .message-bg
-    z-index -1
-    position fixed
-    top 0
-    left 0
-    width 100%
-    height 100%
-    {flex-center}
-  .guide
-    text-align center
-    padding 32px
-    position relative
-    position absolute 
-    left 50%
-    top 50%
-    transform translateX(-50%)
-    .icon-scroll
-      width 40px
-      height 70px
-      margin-top -35px
-      box-shadow inset 0 0 0 2px bg-color
-      border-radius 25px
-      background alpha(txt-color, .2)
-      &:before
-        content: ''
-        position absolute
-        width 8px
-        height 8px
-        background bg-color
-        margin-left -4px
-        top 8px
-        border-radius 4px
-        animation-duration 3s
-        animation-iteration-count infinite
-        animation-name scroll
-@keyframes scroll
-  0%
-    opacity: 1
-  60%
-    opacity: 0
-    transform: translateY(46px)
-  100%
-    opacity: 0
-    transform: translateY(46px)
+
+.slideInUp {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: slideInUp;
+}
+
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 +tb()
   .main
@@ -162,8 +87,4 @@ border = 8px
           &:nth-child({num})
             &::after
               background sxsw[ num - 1]
-    .message-bg
-      display none
-    .guide
-      display none
 </style>
