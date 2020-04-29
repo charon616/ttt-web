@@ -54,6 +54,10 @@ export default {
         direction: 'vertical',
         parallax: true,
         passiveListeners: false,
+        preloadImages: false,
+        lazy: {
+          loadPrevNext: true
+        },
         breakpoints: {
           1024: {
             spaceBetween: 200,

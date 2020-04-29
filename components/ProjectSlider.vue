@@ -5,12 +5,34 @@ kinesis-container.slider-container
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
-                        source(:srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
-                        img(:src="image1x" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
+                        source(:data-srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+                        img.swiper-lazy(:data-src="image1x" :data-srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" alt="")
+                        .custom-swiper-lazy-preloader
+                            .sk-cube-grid
+                                .sk-cube.sk-cube1
+                                .sk-cube.sk-cube2
+                                .sk-cube.sk-cube3
+                                .sk-cube.sk-cube4
+                                .sk-cube.sk-cube5
+                                .sk-cube.sk-cube6
+                                .sk-cube.sk-cube7
+                                .sk-cube.sk-cube8
+                                .sk-cube.sk-cube9
                 .box-inner(v-else)
                     picture
-                        source(:srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
-                        img(:src="image1x" :srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" :alt="info.main_img")
+                        source(:data-srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+                        img.swiper-lazy(:data-src="image1x" :data-srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" alt="")
+                        .custom-swiper-lazy-preloader
+                            .sk-cube-grid
+                                .sk-cube.sk-cube1
+                                .sk-cube.sk-cube2
+                                .sk-cube.sk-cube3
+                                .sk-cube.sk-cube4
+                                .sk-cube.sk-cube5
+                                .sk-cube.sk-cube6
+                                .sk-cube.sk-cube7
+                                .sk-cube.sk-cube8
+                                .sk-cube.sk-cube9
 
                 .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
         .textarea
@@ -108,6 +130,48 @@ border = 8px
                 margin 20px 0 0 0
             &__msg-jp
                 margin 12px 0 4px 0
+
+.custom-swiper-lazy-preloader
+    background black
+    width 100%
+    height 100%
+    {flex-center}
+
+.sk-cube-grid 
+    width 40px
+    height 40px
+    margin 100px auto
+    .sk-cube 
+        width 33%
+        height 33%
+        background-color white
+        float left
+        animation sk-cubeGridScaleDelay 1.3s infinite ease-in-out
+
+    .sk-cube1 
+        animation-delay 0.2s
+    .sk-cube2
+        animation-delay 0.3s
+    .sk-cube3
+        animation-delay 0.4s
+    .sk-cube4
+        animation-delay 0.1s
+    .sk-cube5
+        animation-delay 0.2s
+    .sk-cube6
+        animation-delay 0.3s
+    .sk-cube7
+        animation-delay 0s
+    .sk-cube8
+        animation-delay 0.1s
+    .sk-cube9
+        animation-delay 0.2s
+
+@keyframes sk-cubeGridScaleDelay 
+    0%, 70%, 100% 
+        transform scale3D(1, 1, 1)
+    35% 
+        transform scale3D(0, 0, 1)
 
 +tb()
     .slider-container
