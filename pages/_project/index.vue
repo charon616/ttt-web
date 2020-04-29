@@ -89,6 +89,15 @@ export default {
         animateOn: function(){
             this.$store.commit("changeAnimateStatus", true);
         }
+    },
+
+    head() {
+        return {
+            title: "TodaiToTexas2020 " + this.jsondata[this.$route.params.project].title,
+            meta: [
+                { hid: 'og:title', property: 'og:title', content: 'TodaiToTexas2020' + this.jsondata[this.$route.params.project].title }
+            ]
+        }
     }
 }
 
