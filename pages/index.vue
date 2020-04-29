@@ -58,7 +58,6 @@ export default {
         breakpoints: {
           1024: {
             spaceBetween: 200,
-            resistanceRatio: 0.3,
             speed: 800,
             touchAngle: 90,
             preloadImages: false,
@@ -74,7 +73,6 @@ export default {
         mousewheel: true,
         centeredSlides: true,
         slidesPerView: 7,
-        touchRatio: 0.2,
         slideToClickedSlide: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
