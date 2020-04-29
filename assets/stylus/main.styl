@@ -67,11 +67,20 @@ tb()
     letter-spacing .2em
 
 .link-button-wh
-  @extend .link-button
+  transition all .4s main-transition
+  text-decoration none
+  font-weight bold
+  font-size 1.2em
+  letter-spacing .1em
+  padding 14px 22px
+  margin-top 16px
+  display inline-block
   color txt-color
   background bg-color
   border 1px solid bg-color
   &:hover
+    transition all .3s main-transition
+    letter-spacing .2em
     background alpha(txt-color, 1)
     color bg-color
 

@@ -93,11 +93,13 @@ export default {
             return this.info.title
         }
     },
+    created(){
+        this.updatePage("detail")
+    },
     mounted(){
         this.checkvideo()
         this.$nextTick(() => {
             setTimeout(() => this.animateOn(false), 500)
-            this.updatePage("detail")
         });
         Typekit.load({async: true})
     },
@@ -169,6 +171,7 @@ export default {
             display block
             width 240px
             margin 48px auto 32px
+            cursor pointer
         &__modal
             &-wrapper
                 display flex

@@ -5,7 +5,8 @@
       swiper-slide
         MainPage
       swiper-slide(v-for="(ttl, index) in titles" :key="index")
-        ProjectSlider(:title="ttl" v-slot:detail)
+        ProjectSlider(:title="ttl" v-slot:detail v-if="$device.isDesktop")
+        ProjectSlider_mobile(:title="ttl" v-slot:detail v-else)
 
   .project-nav
     swiper.swiper.gallery-thumbs(:options="swiperOptionThumbs" ref="swiperThumbs")
@@ -18,6 +19,7 @@
 <script>
 import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
+import ProjectSlider_mobile from '~/components/ProjectSlider_mobile.vue';
 import Pro0 from '~/components/Logo/ttt.vue';
 import Pro1 from '~/components/Logo/harvestx.vue';
 import Pro2 from '~/components/Logo/grubin.vue';
@@ -33,6 +35,7 @@ export default {
   components: {
     MainPage,
     ProjectSlider,
+    ProjectSlider_mobile,
     Pro0,
     Pro1,
     Pro2,
@@ -45,7 +48,7 @@ export default {
     return {
       swiperOptionTop: {
         loop: true,
-        loopedSlides: 7, // looped slides should be the same
+        loopedSlides: 7, 
         spaceBetween: 100,
         mousewheel: true,
         speed: 600,
@@ -70,7 +73,7 @@ export default {
       },
       swiperOptionThumbs: {
         loop: true,
-        loopedSlides: 7, // looped slides should be the same
+        loopedSlides: 7, 
         spaceBetween: 0,
         speed: 600,
         mousewheel: true,
@@ -132,15 +135,16 @@ export default {
       return this.$refs.swiperThumbs.swiper
     }
   },
+  created() {
+    this.updatePage("index")
+  },
   mounted() {
     this.$nextTick(() => {
-      this.updatePage("index")
       this.swiper.controller.control = this.swiperThumbs
       this.swiperThumbs.controller.control = this.swiper
       setTimeout(() => this.changeAnimateStatus(false), 500)
     });
 
-    this.swiper.on('slideChangeTransitionEnd', this.slideChanged);
     this.swiper.slideToLoop(this.swiperPos, 1000, false)
     this.swiperThumbs.slideToLoop(this.swiperPos, 1000, false)
 
@@ -150,7 +154,6 @@ export default {
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);
-    this.swiper.detachEvents();
   }
 }
 
@@ -167,9 +170,6 @@ export default {
     height 14%
 
 .swiper
-  .swiper-slide 
-    background-size cover
-    background-position center
   &.gallery-top 
     width 100%
     height 90%
@@ -194,31 +194,31 @@ export default {
       height 12px
       margin auto
       background-color txt-color
-  &.gallery-thumbs .swiper-slide 
-    {flex-center}
-    transition all .6s main-transition
-    svg
-      transition transform .6s main-transition
-      fill txt-color
-      padding 4px
-    &:hover
-      cursor pointer
+    .swiper-slide 
+      {flex-center}
+      transition all .6s main-transition
       svg
-        fill lightgray
-  &.gallery-thumbs .swiper-slide-active 
-    .ttt
-      fill bg-color
-      background txt-color
-    for num in (0..5)
-      .{array[num]}
-        fill colors[num]
-    &:hover
+        transition transform .6s main-transition
+        fill txt-color
+        padding 4px
+      &:hover
+        cursor pointer
+        svg
+          fill lightgray
+    .swiper-slide-active 
       .ttt
         fill bg-color
         background txt-color
       for num in (0..5)
         .{array[num]}
           fill colors[num]
+      &:hover
+        .ttt
+          fill bg-color
+          background txt-color
+        for num in (0..5)
+          .{array[num]}
+            fill colors[num]
 
 +tb()
   .container
@@ -240,8 +240,8 @@ export default {
       font-size .8em
       &::before 
         height 8px
-    &.gallery-thumbs .swiper-slide 
-      &:hover
-        font-size 1em
+      .swiper-slide 
+        &:hover
+          font-size 1em
 
 </style>

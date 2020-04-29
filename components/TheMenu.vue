@@ -12,15 +12,15 @@
     a.tw-share-button.link(href="http://twitter.com/share?url=https://2020.todaitotexas.com/&text=Todai To Texas 2020 special site&hashtags=SXSW" aria-label="share on twitter" target="_blank" rel="noopener noreferrer")
       font-awesome-icon.icon.icon-twitter(:icon="['fab', 'twitter']") 
   .menus__pos
-    .menus__pos__no(v-show="selectedPos != 0")
+    .menus__pos__no(v-show="swiperPos != 0")
       span.normal No.
       transition(name="slide-fade" mode="out-in")
-        span.num(:key="selectedPos") {{ selectedPos }}
+        span.num(:key="swiperPos") {{ swiperPos }}
       .line  
       span.all 6
-    .menus__pos__name(v-show="selectedPos != 0")
+    .menus__pos__name(v-show="swiperPos != 0")
       transition(name="slide-fade2" mode="out-in")
-        p.main-font(:key="selectedPos") {{ selectedProject }}
+        p.main-font(:key="swiperPos") {{ selectedProject }}
 </template>
 
 <script>
@@ -31,14 +31,12 @@ export default {
   data(){
     return{
       selectedProject: "",
-      selectedPos: "",
       titles: jsonfile.projects_real_title
     }
   },
   watch: {
     swiperPos: function(val){
       this.selectedProject = this.titles[val-1]
-      this.selectedPos = val
     }
   },
   computed: {

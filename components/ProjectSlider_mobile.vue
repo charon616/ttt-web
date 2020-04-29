@@ -1,43 +1,39 @@
 <template lang="pug">
-kinesis-container.slider-container
-    .all
-        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="changeAnimateStatus(true)" aria-label="go to detail")
-            .box-outer
-                kinesis-element.box-inner(:strength="8" type="depth")
-                    picture
-                        source(:data-srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
-                        img.swiper-lazy(:data-src="image1x" :data-srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" alt="")
-                        .custom-swiper-lazy-preloader
-                            .sk-cube-grid
-                                .sk-cube.sk-cube1
-                                .sk-cube.sk-cube2
-                                .sk-cube.sk-cube3
-                                .sk-cube.sk-cube4
-                                .sk-cube.sk-cube5
-                                .sk-cube.sk-cube6
-                                .sk-cube.sk-cube7
-                                .sk-cube.sk-cube8
-                                .sk-cube.sk-cube9
-                .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
-        .textarea
-            h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="info.title")
-            p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="info.msg_en")
-            p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="info.msg_jp")
-            .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }" aria-label="go to detail") DETAIL
+.slider-container
+  .all
+    nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="changeAnimateStatus(true)" aria-label="go to detail")
+      .box-outer
+        .box-inner
+          picture
+            source(:data-srcset="`${webpimage1x} 1x, ${webpimage2x} 2x`" type="image/webp")
+            img.swiper-lazy(:data-src="image1x" :data-srcset="`${image1x} 1x, ${image2x} 2x`" :key="title" data-swiper-parallax-scale="0.8" alt="")
+            .custom-swiper-lazy-preloader
+              .sk-cube-grid
+                .sk-cube.sk-cube1
+                .sk-cube.sk-cube2
+                .sk-cube.sk-cube3
+                .sk-cube.sk-cube4
+                .sk-cube.sk-cube5
+                .sk-cube.sk-cube6
+                .sk-cube.sk-cube7
+                .sk-cube.sk-cube8
+                .sk-cube.sk-cube9
+
+        .color(v-bg="info.color" v-bind:key="title" data-swiper-parallax-scale="0.8")
+    .textarea
+      h1.textarea__title(:key="title" data-swiper-parallax-x="-200" data-swiper-parallax-duration="500" v-html="info.title")
+      p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="info.msg_en")
+      p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="info.msg_jp")
+      .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
+        nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }" aria-label="go to detail") DETAIL
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 import { mapMutations } from 'vuex';
 
 export default{
     name: "ProjectSlider",
     props: ['title'],
-    components: {
-        KinesisContainer,
-        KinesisElement
-    },
     data() {
         return{
             info: jsonfile[this.title]

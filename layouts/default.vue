@@ -88,7 +88,6 @@ html.index, html.index>body
 
 a
   text-decoration none
-  cursor pointer
 
 h1, .main-font
   font-family aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
