@@ -12,6 +12,7 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#000000" },
       {
         hid: "description",
         name: "description",
@@ -26,7 +27,8 @@ export default {
       { hid: 'fb:app_id', content: '706574413483305' }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/icon.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/icon.ico" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }
     ],
     script: [
       {

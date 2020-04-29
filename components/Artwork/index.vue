@@ -1,7 +1,7 @@
 <template>
   <section class="artwork">
     <canvas class="artwork__canvas" ref="canvas" v-if="$device.isDesktop"></canvas>
-    <div v-show="this.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting"></div>
+    <div v-show="this.swiperPos == 0 && $device.isDesktop" class="lighting" id="lighting" ref="lighting" :style="{ transform: 'translate(' + this.mx + 'px, ' + this.my + 'px)' }" ></div>
   </section>
 </template>
 
@@ -27,6 +27,12 @@ export default {
       }
     }
   },
+  data() {
+    return{
+      mx: 0,
+      my: 0
+    }
+  },
   mounted () {
     this.artworkGL = new ArtworkGL({
       $canvas: this.$refs.canvas
@@ -42,12 +48,10 @@ export default {
       this.artworkGL.changeSize(window.innerWidth, window.innerHeight, window.devicePixelRatio)
     },
     onMouseMove: function(e){
-      this.artworkGL.mouseMoved(e.clientX, e.clientY);
-      if(this.swiperPos != 0){
-        return;
+      if(this.swiperPos == 0){
+        this.mx = e.clientX;
+        this.my = e.clientY;
       }
-      let lighting = document.getElementById('lighting');
-      lighting.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
     }
   },
   destroyed() {
@@ -80,5 +84,4 @@ export default {
   background radial-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
   mix-blend-mode overlay
   filter blur(16px)
-
 </style>

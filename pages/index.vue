@@ -1,5 +1,5 @@
 <template lang="pug">
-.container#container
+.container(:style="{ height: this.height + 'px'}")
   .main-gallery 
     swiper.swiper.gallery-top(:options="swiperOptionTop" ref="swiperTop" @slide-change="slideChanged")
       swiper-slide
@@ -17,7 +17,6 @@
 
 </template>
 <script>
-import Artwork from "~/components/Artwork";
 import MainPage from '~/components/Main.vue';
 import ProjectSlider from '~/components/ProjectSlider.vue';
 
@@ -34,7 +33,6 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
-    Artwork,
     MainPage,
     ProjectSlider,
     Pro0,
@@ -109,15 +107,14 @@ export default {
     ]),
     handleResize: function() {
       this.height = window.innerHeight;
-      let h = document.getElementById('container');
-      h.style.height = this.height + 'px';
       this.swiper.update()
       this.swiperThumbs.update()
     },
     slideChanged: function() {
-      this.selectedProject = this.jsondata.projects_real_title[this.swiper.realIndex-1]
-      this.selectedPos = this.swiper.realIndex
-      this.updateSwiperPos(this.swiper.realIndex)
+      let id = this.swiper.realIndex
+      this.selectedProject = this.jsondata.projects_real_title[id-1]
+      this.selectedPos = id
+      this.updateSwiperPos(id)
     },
     returnToDefault: function() {
       this.swiper.slideToLoop(0, 1000, false)
@@ -154,8 +151,6 @@ export default {
     this.swiperThumbs.slideToLoop(this.swiperPos, 1000, false)
 
     this.height = window.innerHeight;
-    let h = document.getElementById('container');
-    h.style.height = this.height + 'px';
     window.addEventListener('resize', this.handleResize);
 
     if(this.loading){
@@ -164,6 +159,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize);
+    this.swiper.detachEvents();
   }
 }
 

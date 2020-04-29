@@ -1,11 +1,11 @@
 <template lang="pug">
 .menus
-  .mask(v-bind:class="{ black: animateMenu }")
+  .mask(v-bind:class="{ black: animate }")
     img(src="~assets/logo_wh.svg" alt="logo")
   header.menus__main
     nuxt-link.menus__main__logo(to="/" @click.native="resetSlide(); animateOn()")
       img(src="~assets/logo_bl.svg" alt="logo")
-  .menus__sns(v-bind:class="{ hide: isHide }")
+  .menus__sns
     span.main-font SHARE ON:
     a.fb-share-button.link(data-href="https://2020.todaitotexas.com/" aria-label="share on facebook" data-layout="button" data-size="small" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F2020.todaitotexas.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
       font-awesome-icon.icon.icon-facebook(:icon="['fab', 'facebook-f']")
@@ -30,8 +30,6 @@ import { mapState, mapMutations } from 'vuex';
 export default {
   data(){
     return{
-      isHide: false,
-      animateMenu: false,
       selectedProject: "",
       selectedPos: "",
       jsondata: jsonfile
@@ -46,20 +44,13 @@ export default {
     swiperPos: function(val){
       this.selectedProject = this.jsondata.projects_real_title[val-1]
       this.selectedPos = val
-    },
-    animate: function(val){
-      this.animateMenu = val
     }
   },
   computed: {
-    ...mapState([
-      "page", 
-      "swiperPos", 
-      "animate"
-    ])
+    ...mapState([ "page", "swiperPos", "animate" ])
   },
   methods: {
-    ...mapMutations([
+    ...mapMutations([ 
       "updateSwiperPos",
       "changeIsSlideToDefalutState",
       "changeAnimateStatus"
@@ -70,9 +61,6 @@ export default {
       }else{
         this.changeIsSlideToDefalutState()
       }
-    },
-    onclick: function(){
-      this.isHide = !this.isHide
     },
     animateOn: function(){
       if(this.page != "index"){
@@ -244,12 +232,9 @@ export default {
         position initial
         padding 0
         transform initial
-        // font-size .8rem
         width auto
         height auto
-        & > p
-          display initial
-        .normal
+        & > p, .normal
           display initial
         .num
           justify-content center
@@ -258,13 +243,10 @@ export default {
           width auto
           height auto
           position relative
-        .line
-          display none
-        .all
+        .line, .all
           display none
       &__name
         display initial
-        // font-size 1rem
 
 +sp()
   nav-height = nav-height-sp

@@ -110,9 +110,6 @@ export default {
                 this.videotrue = true;
             }
         },
-        // animateOn: function(){
-        //     this.$store.commit("changeAnimateStatus", true);
-        // },
         baseName: function(str){
             var base = new String(str).substring(str.lastIndexOf('/') + 1); 
             if(base.lastIndexOf(".") != -1)       

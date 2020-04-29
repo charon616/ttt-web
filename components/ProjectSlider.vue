@@ -1,7 +1,7 @@
 <template lang="pug">
 kinesis-container.slider-container
     .all
-        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="animateOn(true)")
+        nuxt-link.box(:to="{ name: 'project', params: { project:title } }" @click.native="changeAnimateStatus(true)")
             .box-outer
                 kinesis-element(:strength="8" type="depth" v-if="$device.isDesktop").box-inner
                     picture
@@ -18,7 +18,7 @@ kinesis-container.slider-container
             p.textarea__msg.textarea__msg-en(data-swiper-parallax-x="-200" data-swiper-parallax-duration="550" v-html="jsondata[title].msg_en")
             p.textarea__msg.textarea__msg-jp(lang="ja" data-swiper-parallax-x="-200" data-swiper-parallax-duration="600" v-html="jsondata[title].msg_jp")
             .textarea__button(data-swiper-parallax-x="-200" data-swiper-parallax-duration="650")
-                nuxt-link.link-button(@click.native="animateOn(true)" :to="{ name: 'project', params: { project:title } }") DETAIL
+                nuxt-link.link-button(@click.native="changeAnimateStatus(true)" :to="{ name: 'project', params: { project:title } }") DETAIL
 </template>
 <script>
 import jsonfile from '~/assets/projects.json';
@@ -45,12 +45,7 @@ export default{
         }   
     },
     methods: {
-        ...mapMutations({
-            animateOn: "changeAnimateStatus"
-        })
-        // animateOn: function(){
-        //     this.$store.commit("changeAnimateStatus", true);
-        // }
+        ...mapMutations(["changeAnimateStatus"])
     }
 }
 
@@ -166,7 +161,6 @@ border = 8px
                         left 48px
                         top 24px
             .textarea
-                // padding 32px
                 height 48%
                 &__msg-en
                     margin 0
@@ -176,5 +170,4 @@ border = 8px
                     .link-button
                         font-size 1em
                         margin-top 8px
-
 </style>

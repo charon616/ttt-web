@@ -1,7 +1,7 @@
 <template lang="pug">
   .default
     Menu 
-    Artwork.artwork(v-bind:class="{ blur: this.swiperPos != 0 }")
+    Artwork(v-show="this.swiperPos == 0")
     nuxt 
 </template>
 
@@ -74,13 +74,5 @@ h1, .main-font{
 p{
   font-family: a-otf-gothic-bbb-pr6n, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.artwork{
-  transform: scale(1.1);
-}
-
-.blur{
-  display: none;
 }
 </style>
