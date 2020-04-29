@@ -3,21 +3,38 @@
     Menu 
     Artwork(v-if="$device.isDesktop" v-show="this.swiperPos == 0")
     nuxt 
+    transition(name="fade")
+      Message(v-if="$device.isMobile" v-show="show")
     .load(v-if="loading")
 </template>
 
 <script>
 import Menu from '~/components/TheMenu.vue';
+import Message from "~/components/Message.vue";
 import Artwork from "~/components/Artwork";
 import { mapState } from "vuex";
+
 export default {
   components: {
     Menu,
+    Message,
     Artwork
   },
   data(){
     return{
-      loading: true
+      loading: true,
+      show: true
+    }
+  },
+  watch: {
+    swiperPos: function(val){
+      if(val==0){
+        setTimeout(() => {
+          this.show = true
+        }, 500);
+      }else{
+        this.show = false
+      }
     }
   },
   computed: {

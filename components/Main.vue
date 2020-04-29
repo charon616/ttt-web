@@ -5,7 +5,7 @@
     .title-element.animated.slideInUp To 
     .title-element.animated.slideInUp Texas 
     .title-element.animated.slideInUp 2020
-  Message
+  Message(v-if="!$device.isMobile")
 </template>
 <script>
 import Message from "~/components/Message.vue";

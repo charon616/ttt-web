@@ -26,13 +26,13 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+
 .message
   position absolute
   left calc(50% - 120px)
   top 50%
   transform translateY(-50%)
   text-align left
-  width 720px
   width 'calc(%s * 0.6)' % content-width
   padding 0
   z-index 1
@@ -195,16 +195,22 @@ export default {
   .message
     width 100%
     height 100%
-    border none
     top 0
     transform translateX(-50%) translateY(0)
-    padding 0 24px 24px
+    padding 80px 24px 0
+    z-index 80
+    border 8px solid txt-color
     &__content
       height calc(100% - 80px)
-      p 
-        font-size 12px
-        line-height 18px
+      padding-bottom 24px
+      padding-top 24px
       .link-button
         font-size 1em
         margin-top 8px
+    .close-button
+      height 40px
+      &::before, &::after
+        transform rotate(25deg) translateY(-50%)
+      &::after
+        transform rotate(-25deg) translateY(-50%)
 </style>
