@@ -4,7 +4,7 @@
     Artwork(v-if="$device.isDesktop" v-show="this.swiperPos == 0")
     nuxt 
     transition(name="fade")
-      Message(v-if="$device.isMobile" v-show="show")
+      Message(v-if="$device.isMobile && page=='index'" v-show="show")
     .load(v-if="loading")
 </template>
 
@@ -40,6 +40,7 @@ export default {
   computed: {
     ...mapState([
       "swiperPos", 
+      "page"
     ]),
   },
   methods: {
