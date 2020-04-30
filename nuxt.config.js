@@ -23,7 +23,7 @@ export default {
       { hid: 'og:url', property: 'og:url', content: 'https://2020.todaitotexas.com/' },
       { hid: 'og:title', property: 'og:title', content: 'TodaiToTexas2020' },
       { hid: 'og:description', property: 'og:description', content: 'This is the website for the six teams from the Todai To Texas 2020, which was cancelled due to COVID-19. 新型コロナウイルスの影響により出展中止となったTodai To Texas 2020の6チームのための特設サイトです。' },
-      { hid: 'og:image', property: 'og:image', content: '~/assets/ogp.jpg' },
+      { hid: 'og:image', property: 'og:image', content: '/ogp.jpg' },
       { hid: 'fb:app_id', property: 'fb:app_id', content: '706574413483305' },
       { hid: 'twitter:card', name:'twitter:card', content: 'summary_large_image'},
       { hid: 'twitter:site', name:'twitter:site' ,content: '@todaitotexas' }
